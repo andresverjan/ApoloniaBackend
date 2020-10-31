@@ -1,0 +1,38 @@
+type Mascara {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input MascaraInput {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input MascaraInputUpdate {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input MascaraInputDelete {
+  id: String!  
+}
+
+input MascaraFilter {
+  nombre: String
+  descripcion: String
+  active: String
+  createdBy: String
+}  
+
+type Query {
+  mascaras: [Mascara!]
+}

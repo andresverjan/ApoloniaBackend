@@ -1,0 +1,37 @@
+type TipoCampo {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input TipoCampoInput {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input TipoCampoInputUpdate {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+}
+
+input TipoCampoInputDelete {
+  id: String!  
+}
+
+input TipoCampoFilter {
+  nombre: String!
+  active: String
+  createdBy: String
+}  
+
+type Query {
+  tipocampos: [TipoCampo!]
+}
