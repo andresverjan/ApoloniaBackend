@@ -1,0 +1,79 @@
+"""
+Type de Additions, representa una adicion del sistema;
+"""
+type Additions {
+  _id: ID!
+  name: String!
+  img: String!
+  value: String!
+  active: String!
+  description: String
+}
+
+type AdditionDetailsInput2 {
+  addition: Additions
+  value: String!
+}
+
+input AdditionsInput {
+  name: String!
+  value: String!
+  img: String!
+  active: String!
+  description: String!
+}
+
+input AdditionsFilter {
+  name: String
+  active: String
+  description: String
+}
+
+input AditionsOrderBy {
+  name: String
+  active: String
+  description: String
+}
+
+input AdditionsInputUpdate {
+  _id: ID!
+  name: String!
+  img: String!
+  value: String!
+  active: String!
+  description: String
+}
+
+input AdditionsInputDelete {
+  _id: ID!
+}
+
+type Query {
+  """
+  Listado de  Additions  del sistema.
+  """
+  additions(
+    "Permite Filtrar el resultado del listado."
+    filter: AdditionsFilter
+
+    "Objeto para ordernar los elementos del resultado. ASC/DESC"
+    order: AditionsOrderBy
+  ): [Additions!]
+}
+
+type Mutation {
+  """
+  Permite Agregar Adidiones al Sistema
+  """
+  createAddition(addition: AdditionsInput): Additions
+
+  """
+  Permite actualizar una adicio al sistema, Requiere el _id de la adicion a actualizar
+  """
+  updateAddition(addition: AdditionsInputUpdate): Additions
+
+  """
+  Permite eliminar una adicion del sistema, Requiere el _id de la adicion a eliminar
+  """
+  deleteAddition(addition: AdditionsInputDelete): Additions
+}
