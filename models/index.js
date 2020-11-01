@@ -19,5 +19,6 @@ db.sequelize = sequelize;
 db.tutorials = require("../models/tutorial")(sequelize, Sequelize);
 db.etiquetas = require("../models/etiquetas")(sequelize, Sequelize);
 db.tipocampos = require("../models/tipocampos")(sequelize, Sequelize);
-db.mascara = require("../models/mascara")(sequelize, Sequelize);
+db.mascara     = require("../models/mascara")(sequelize, Sequelize);
+db.application = require("../models/applications")(sequelize, Sequelize);
 module.exports = db;
