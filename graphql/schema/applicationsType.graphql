@@ -1,0 +1,26 @@
+scalar Date
+type Application {
+  id: String!
+  nombre: String!
+  nombreTabla: String
+  active: Boolean
+  createdBy: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+input ApplicationFilter {
+  nombre: String
+  nombreTabla: String
+  active: Boolean
+}
+
+input ApplicationOrderBy {
+  nombre: String
+  nombreTabla: String
+  createdAt: Date
+}
+
+type Query {
+  applications(filter:ApplicationFilter, order:ApplicationOrderBy): [Application!]
+}
