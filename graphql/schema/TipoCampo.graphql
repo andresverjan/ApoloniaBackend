@@ -39,7 +39,31 @@ input TipoCampoOrderBy {
   createdAt: Date
 }
 
+type Table {  
+  TABLE_NAME: String  
+}
+
+type Campo {  
+  COLUMN_NAME: String
+  DATA_TYPE: String
+  COLUMN_TYPE: String
+  CHARACTER_MAXIMUM_LENGTH: String  
+}
+
+input TableCampo {
+  TABLE_NAME: String
+}
 
 type Query {
   tipocampos(filter: TipoCampoFilter, order: TipoCampoOrderBy): [TipoCampo!]
+
+  """
+  Listado de  TABLAS del sistema.
+  """
+  listaTables:[Table]
+
+  """
+  Listado de CAMPOS De una TABLA
+  """
+  listaCamposTable(filter: TableCampo):[Campo]
 }
