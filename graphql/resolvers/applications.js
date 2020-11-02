@@ -6,19 +6,13 @@ module.exports = {
     applications: async (args) => {
         try {
             let where = {};
-
             if (args.filter != null && args.filter != undefined) {
-                where = helpers.getFilterFormObject(args.filter);
+                where = helpers.getFilterFromObject(args.filter);
             }
-
-            let sort = ['nombre', 'ASC'];
             if (args.order != null && args.order != undefined) {
-                sort = helpers.getOrderFromObject(args.order);
-            }
-            
-            const list = await Application.findAll({where: where, order: [sort]});
-            return list;
-            
+                where.order = helpers.getOrderFromObject(args.order);
+            }            
+            return list = await Application.findAll(where);
         } catch (error) {
             throw error;
         }
