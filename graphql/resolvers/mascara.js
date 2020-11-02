@@ -1,6 +1,7 @@
 const db = require("../../models");
 const Mascara = db.mascara;
 const Op = db.Sequelize.Op;
+const helpers = require("../../helpers");
 
 module.exports = {
     mascaras: async (args) => {
@@ -8,13 +9,12 @@ module.exports = {
         try {
             let where = {};
             if (args.filter != null && args.filter != undefined) {
-                where = helpers.getFilterFormObject(args.filter);
+                where = helpers.getFilterFromObject(args.filter);
             }
-            let sort = { name: "1" };
             if (args.order != null && args.order != undefined) {
-                sort = helpers.getOrderFromObject(args.order);
+                where.order = helpers.getOrderFromObject(args.order);
             }
-            return list = await Mascara.findAll();
+            return list = await Mascara.findAll( where );
         } catch (error) {
             throw error;
         }

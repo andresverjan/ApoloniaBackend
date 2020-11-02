@@ -28,10 +28,18 @@ input TipoCampoInputDelete {
 
 input TipoCampoFilter {
   nombre: String!
+  descripcion: String
   active: String
-  createdBy: String
 }  
+input TipoCampoOrderBy {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdAt: Date
+}
+
 
 type Query {
-  tipocampos: [TipoCampo!]
+  tipocampos(filter: TipoCampoFilter, order: TipoCampoOrderBy): [TipoCampo!]
 }

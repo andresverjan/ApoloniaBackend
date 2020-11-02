@@ -32,7 +32,14 @@ input MascaraFilter {
   active: String
   createdBy: String
 }  
+input MascaraOrderBy {
+  nombre: String
+  descripcion: String
+  active: String
+  createdBy: String
+  createdAt: String
+} 
 
 type Query {
-  mascaras: [Mascara!]
+  mascaras(filter: MascaraFilter, order: MascaraOrderBy): [Mascara!]
 }
