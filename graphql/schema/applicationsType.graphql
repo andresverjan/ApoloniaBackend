@@ -9,6 +9,31 @@ type Application {
   updatedAt: Date
 }
 
+input ApplicationInput {
+  id: String!
+}
+
+input CampoInput {
+  nombre: String!
+  tipoDato: String!
+  tipoCampo: String!
+  requerido: Boolean
+  visible: Boolean
+  orden: String
+  mascara: Date
+  minLength: Int
+  maxLength: Int
+  buscador: Boolean
+  verList: Boolean
+  createdAt: Date
+  updatedAt: Date 
+}
+
+input ApplicationCampos {
+  application: ApplicationInput
+  campos: [CampoInput]
+}
+
 input ApplicationFilter {
   nombre: String
   nombreTabla: String
@@ -23,4 +48,8 @@ input ApplicationOrderBy {
 
 type Query {
   applications(filter:ApplicationFilter, order:ApplicationOrderBy): [Application!]
+}
+
+type Mutation {
+  saveAppFields(application: ApplicationCampos): Application
 }
