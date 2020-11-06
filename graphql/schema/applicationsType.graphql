@@ -10,23 +10,22 @@ type Application {
 }
 
 input ApplicationInput {
-  id: String!
+  nombre: String!
+  nombreTabla: String
 }
 
 input CampoInput {
   nombre: String!
   tipoDato: String!
-  tipoCampo: String!
+  tipoCampoId: Int!
   requerido: Boolean
   visible: Boolean
   orden: String
-  mascara: Date
+  mascaraId: Int!
   minLength: Int
   maxLength: Int
   buscador: Boolean
   verList: Boolean
-  createdAt: Date
-  updatedAt: Date 
 }
 
 input ApplicationCampos {
