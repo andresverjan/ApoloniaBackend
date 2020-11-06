@@ -23,10 +23,6 @@ module.exports = {
     listaTables: async (args) => {
         console.log("INGRESO A listaTables");
         try {
-            /*sequelize
-            .query('CALL login (:email, :pwd, :device)', 
-                  {replacements: { email: "me@jsbot.io", pwd: 'pwd', device: 'android', }})
-            .then(v=>console.log(v));*/
             return list = await db.sequelize.query('CALL listTables ()');
         } catch (error) {
             throw error;
@@ -37,10 +33,8 @@ module.exports = {
         console.log("INGRESO A listaCamposTable");
         const {TABLE_NAME} = args.filter;
         try {
-            console.log(TABLE_NAME);
             return list = await db.sequelize.query('CALL listColumnas (:TABLE_INPUT)', 
                          {replacements: { TABLE_INPUT: TABLE_NAME }});
-                          //.then(v => console.log(v));
         } catch (error) {
             throw error;
         }
