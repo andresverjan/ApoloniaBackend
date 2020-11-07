@@ -11,7 +11,6 @@ type CampoValorOutput {
   valor: String
 }
 
-
 input CampoValor {
   id: Int!
   nombre: String!
