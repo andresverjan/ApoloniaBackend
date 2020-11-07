@@ -13,13 +13,6 @@ module.exports = (sequelize, Sequelize) => {
       tipoDato: {
         type: Sequelize.STRING
       },
-      /*tipoCampoId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: TiposCampos,
-          key: 'id'
-        }
-      },*/
       requerido: {
         type: Sequelize.BOOLEAN
       },
@@ -27,15 +20,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.BOOLEAN
       },
       orden: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      /*mascaraId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: Mascara,
-          key: 'id'
-        }
-      },*/
       minLength: {
         type: Sequelize.INTEGER
       },
@@ -47,7 +33,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       verlist: {
         type: Sequelize.BOOLEAN
-      }
+      },
+      mascaraId: {
+        type: Sequelize.INTEGER
+      },
+
     });
 
     return Campo;

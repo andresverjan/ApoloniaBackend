@@ -32,16 +32,17 @@ db.application  = require("../models/applications")(sequelize, Sequelize);
 db.campos       = require("../models/applicationFieldsConfig")(sequelize, Sequelize);
 
 db.application.hasMany(db.campos, { as: "fields" });
+
 db.campos.belongsTo(db.application, {
   foreignKey: "applicationId",
   as: "application",
 });
 
 db.tipocampos.hasMany(db.campos, { as: "fields" });
-db.campos.belongsTo(db.tipocampos, {
-  foreignKey: "tipocamposId",
+/*db.campos.belongsTo(db.tipocampos, {
+  foreignKey: "tipoCampoId",
   as: "tipocampos",
-});
+});*/
 
 db.mascara.hasMany(db.campos, { as: "fields" });
 db.campos.belongsTo(db.mascara, {

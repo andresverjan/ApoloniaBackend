@@ -21,7 +21,7 @@ input CampoInput {
   tipoCampoId: Int!
   requerido: Boolean
   visible: Boolean
-  orden: String
+  orden: Int
   mascaraId: Int!
   minLength: Int
   maxLength: Int
