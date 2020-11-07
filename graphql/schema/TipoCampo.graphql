@@ -44,10 +44,8 @@ type Table {
 }
 
 type Campo {  
-  COLUMN_NAME: String
-  DATA_TYPE: String
-  COLUMN_TYPE: String
-  CHARACTER_MAXIMUM_LENGTH: String  
+  nombre: String
+  tipoDato: String
 }
 
 input TableCampo {

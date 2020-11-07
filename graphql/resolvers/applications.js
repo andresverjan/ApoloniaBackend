@@ -2,6 +2,7 @@ const db = require("../../models");
 const helpers = require("../../helpers");
 const Application = db.application;
 const Campo = db.campos;
+const Op = db.Sequelize.Op;
 
 module.exports = {
     applications: async (args) => {
@@ -53,7 +54,9 @@ module.exports = {
             console.log(args);
             const appId = args.applicationId;
             console.log("el  valor es: " + appId);
-            const list = await Campo.findAll({ applicationId: { $eq: appId } });
+            const list = await Campo.findAll({ applicationId: {[Op.$eq]: appId } });
+
+            
             
             if (!list) {
                 throw new Error('not found');

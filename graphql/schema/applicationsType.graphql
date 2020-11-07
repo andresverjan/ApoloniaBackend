@@ -1,7 +1,7 @@
 scalar Date
 type Application {
   id: Int!
-  nombre: String
+  nombre: String!
   nombreTabla: String
   active: Boolean
   createdBy: String
@@ -34,6 +34,7 @@ input ApplicationInput {
 
 input CampoInput {
   nombre: String!
+  nombreUi: String!
   tipoDato: String!
   tipoCampoId: Int!
   requerido: Boolean

@@ -39,7 +39,7 @@ db.campos.belongsTo(db.application, {
 
 db.tipocampos.hasMany(db.campos, { as: "fields" });
 db.campos.belongsTo(db.tipocampos, {
-  foreignKey: "tipocamposId",
+  foreignKey: "tipoCampoId",
   as: "tipocampos",
 });
 
