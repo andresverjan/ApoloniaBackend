@@ -17,6 +17,9 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/graphql/resolvers/dist/*
+/models/dist/*
+/dist/*
 
 # Ignore uploaded files in development
 /storage/*
