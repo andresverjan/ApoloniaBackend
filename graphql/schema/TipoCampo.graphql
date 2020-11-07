@@ -45,7 +45,7 @@ type Table {
 
 type Campo {  
   nombre: String
-  tipoCampo: String
+  tipoDato: String
 }
 
 input TableCampo {
