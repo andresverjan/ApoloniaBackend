@@ -12,12 +12,8 @@
 /yarn-error.log
 /package-lock.json
 
-
 # Ignore all logfiles and tempfiles.
 /log/*
-/graphql/resolvers/dist/*
-/models/dist/*
-/dist/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
@@ -38,4 +34,3 @@
 # Ignore env vars in development
 .env
 .envrc
-
