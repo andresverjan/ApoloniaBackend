@@ -31,13 +31,16 @@ db.mascara      = require("../models/mascara")(sequelize, Sequelize);
 db.application  = require("../models/applications")(sequelize, Sequelize);
 db.campos       = require("../models/applicationFieldsConfig")(sequelize, Sequelize);
 
-db.application.hasMany(db.campos, { as: "fields" });
+db.application.hasMany(db.campos, { onDelete: 'CASCADE',
+                                    as: "fields" });
+
 db.campos.belongsTo(db.application, {
   foreignKey: "applicationId",
+  onDelete: 'CASCADE',
   as: "application",
 });
 
-db.tipocampos.hasMany(db.campos, { as: "fields" });
+/*db.tipocampos.hasMany(db.campos, { as: "fields" });*/
 db.campos.belongsTo(db.tipocampos, {
   foreignKey: "tipoCampoId",
   as: "tipocampos",

@@ -22,10 +22,10 @@ module.exports = {
 
     saveAppFields: async (args) => {
         try {
-            const { application, campos } = args.application
-
+            const { application, campos } = args.application;
+            let  applicationId = 0;
             await Application.create(application).then((_app) => {
-                
+                applicationId = _app.id;
                 let newFields = campos.map(field => {
                     return {
                         ...field,
@@ -33,16 +33,14 @@ module.exports = {
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     }
-                });
-        
-              Campo.bulkCreate(newFields, { validate: true })
-                .then(() => {
-                    return { ..._app.doc };
+                });        
+                Campo.bulkCreate(newFields, { validate: true }).then(() => {
                 })
                 .catch((err) => {
                     throw err;
                 });
               });
+              return await Application.findOne( { where : { id:  applicationId}});
         } catch (error) {
             throw error;
         }
@@ -50,29 +48,51 @@ module.exports = {
 
     getFieldsByAppId: async args => {
         try {
-            console.log("argumentos ");
-            console.log(args);
             const appId = args.applicationId;
             console.log("el  valor es: " + appId);
-            const list = await Campo.findAll({ applicationId: {[Op.$eq]: appId } });
+            const list = await Campo.findAll({ where: {applicationId: appId }});
 
-            
-            
             if (!list) {
                 throw new Error('not found');
             }
-            return list;/*.map(item => {
-                return {
-                    ...item._doc,
-                    _id: item.id,
-                    details: details,
-                    createdAt: item._doc.createdAt ? new Date(item._doc.createdAt).toISOString() : new Date().toISOString(),
-                    updatedAt: item._doc.updatedAt ? new Date(item._doc.updatedAt).toISOString() : new Date().toISOString()
-                }
-            })*/
+            return list;
         }
         catch (error) {
             throw error
         }
     },
+
+    deleteAppField: async args => {
+        try {
+            const appId = args.applicationId
+            let x = false;
+            console.log("applicationId += ", args.applicationId);
+            
+            await Application.destroy({ where: { id: appId } }).then(num => {
+                if (num == 1) {
+                    Campo.destroy({ where : { applicationId:  appId }}).then(() => {        
+                        console.log("Campos were deleted successfully!");
+                        
+                    })
+                    .catch((err) => {
+                        console.log("Campos were deleted NAAa");
+                        throw err;
+                    });
+                    x = true;
+                    console.log("App's were deleted successfully!");
+                } else {
+                    console.log(`Cannot delete Fields with id=${appId}. Maybe Application was not found!`);
+                }
+            })
+            .catch(err => {
+                    console.log("Could not delete Application with id=" + appId);
+            });
+            
+            return x;
+        }
+        catch (error) {
+            console.log("error_applicationId =", args.applicationId);
+            throw error
+        }
+    }
 };
