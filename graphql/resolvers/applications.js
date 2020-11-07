@@ -23,7 +23,7 @@ module.exports = {
         try {
             const { application, campos } = args.application
 
-            const _app = await Application.create(application).then((_app) => {
+            await Application.create(application).then((_app) => {
                 
                 let newFields = campos.map(field => {
                     return {
@@ -36,16 +36,40 @@ module.exports = {
         
               Campo.bulkCreate(newFields, { validate: true })
                 .then(() => {
-                  
+                    return { ..._app.doc };
                 })
                 .catch((err) => {
                     throw err;
                 });
               });
-
-            return true;
         } catch (error) {
             throw error;
         }
-    }
+    },
+
+    getFieldsByAppId: async args => {
+        try {
+            console.log("argumentos ");
+            console.log(args);
+            const appId = args.applicationId;
+            console.log("el  valor es: " + appId);
+            const list = await Campo.findAll({ applicationId: { $eq: appId } });
+            
+            if (!list) {
+                throw new Error('not found');
+            }
+            return list;/*.map(item => {
+                return {
+                    ...item._doc,
+                    _id: item.id,
+                    details: details,
+                    createdAt: item._doc.createdAt ? new Date(item._doc.createdAt).toISOString() : new Date().toISOString(),
+                    updatedAt: item._doc.updatedAt ? new Date(item._doc.updatedAt).toISOString() : new Date().toISOString()
+                }
+            })*/
+        }
+        catch (error) {
+            throw error
+        }
+    },
 };

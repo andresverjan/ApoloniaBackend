@@ -1,12 +1,30 @@
 scalar Date
 type Application {
-  id: String!
-  nombre: String!
+  id: Int!
+  nombre: String
   nombreTabla: String
   active: Boolean
   createdBy: String
   createdAt: Date
   updatedAt: Date
+}
+
+type Campo {
+  id: Int!
+  nombre: String!
+  tipoDato: String!
+  tipoCampoId: Int!
+  requerido: Boolean
+  visible: Boolean
+  orden: String
+  mascaraId: Int!
+  minLength: Int
+  maxLength: Int
+  buscador: Boolean
+  verList: Boolean
+  createdAt: Date
+  updatedAt: Date
+  applicationId: Int!
 }
 
 input ApplicationInput {
@@ -47,6 +65,7 @@ input ApplicationOrderBy {
 
 type Query {
   applications(filter:ApplicationFilter, order:ApplicationOrderBy): [Application!]
+  getFieldsByAppId(applicationId:Int!): [Campo!]
 }
 
 type Mutation {
