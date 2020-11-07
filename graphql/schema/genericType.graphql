@@ -1,0 +1,33 @@
+scalar Date
+
+type genericApplication {
+  application: Application
+  campos: [CampoValor]
+}
+
+type CampoValor implements CampoInput{
+  valor: String
+}
+
+input genericApplicationCampos {
+  application: Application
+  campos: [CampoValor]
+}
+
+input genericApplicationInput {
+  id : int!
+}
+
+input genericApplicationOrderBy {
+  id : int!
+}
+
+type Query {
+  genericList(filter:genericApplicationInput, order:genericApplicationOrderBy): [genericApplication!]
+}
+
+type Mutation {
+  genericSave(application: genericApplicationCampos)  : genericApplication
+  genericUpdate(application: genericApplicationCampos): genericApplication
+  genericDelete(application: genericApplicationCampos): genericApplication
+}
