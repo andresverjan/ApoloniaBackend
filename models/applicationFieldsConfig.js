@@ -31,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
       buscador: {
         type: Sequelize.BOOLEAN
       },
-      verlist: {
+      verList: {
         type: Sequelize.BOOLEAN
       },
       mascaraId: {
