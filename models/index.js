@@ -38,11 +38,11 @@ db.campos.belongsTo(db.application, {
   as: "application",
 });
 
-db.tipocampos.hasMany(db.campos, { as: "fields" });
-/*db.campos.belongsTo(db.tipocampos, {
+/*db.tipocampos.hasMany(db.campos, { as: "fields" });*/
+db.campos.belongsTo(db.tipocampos, {
   foreignKey: "tipoCampoId",
   as: "tipocampos",
-});*/
+});
 
 db.mascara.hasMany(db.campos, { as: "fields" });
 db.campos.belongsTo(db.mascara, {
