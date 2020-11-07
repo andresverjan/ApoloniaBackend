@@ -21,10 +21,10 @@ module.exports = {
 
     saveAppFields: async (args) => {
         try {
-            const { application, campos } = args.application
-
-            const _app = await Application.create(application).then((_app) => {
-                
+            const { application, campos } = args.application;
+            let  applicationId = 0;
+            await Application.create(application).then((_app) => {
+                applicationId = _app.id;
                 let newFields = campos.map(field => {
                     return {
                         ...field,
@@ -32,18 +32,14 @@ module.exports = {
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     }
-                });
-        
-              Campo.bulkCreate(newFields, { validate: true })
-                .then(() => {
-                  
+                });        
+                Campo.bulkCreate(newFields, { validate: true }).then(() => {
                 })
                 .catch((err) => {
                     throw err;
                 });
               });
-
-            return true;
+              return await Application.findOne( { where : { id:  applicationId}});
         } catch (error) {
             throw error;
         }

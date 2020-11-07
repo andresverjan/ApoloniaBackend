@@ -4,8 +4,13 @@ module.exports = {
     PASSWORD: "9863130Peresoso3130$",
     DB: "ApoloniaOE",
     dialect: "mysql",
+    dialectOptions: {
+      options: {
+        requestTimeout: 3000
+      }
+    },
     pool: {
-      max: 5,
+      max: 50,
       min: 0,
       acquire: 300000,
       idle: 300000
