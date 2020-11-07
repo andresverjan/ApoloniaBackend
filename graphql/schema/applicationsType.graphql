@@ -28,6 +28,7 @@ type Campo {
 }
 
 input ApplicationInput {
+  id : Int
   nombre: String!
   nombreTabla: String
 }

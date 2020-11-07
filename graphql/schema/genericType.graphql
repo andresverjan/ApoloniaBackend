@@ -2,32 +2,44 @@ scalar Date
 
 type genericApplication {
   application: Application
-  campos: [CampoValor]
+  campos: [CampoValorOutput]
 }
 
-type CampoValor implements CampoInput{
+type CampoValorOutput {
+  id: Int!
+  nombre: String!
+  valor: String
+}
+
+
+input CampoValor {
+  id: Int!
+  nombre: String!
   valor: String
 }
 
 input genericApplicationCampos {
-  application: Application
+  application: ApplicationInput #Ya definido en Applications.
   campos: [CampoValor]
 }
 
 input genericApplicationInput {
-  id : int!
+  id: Int!
 }
 
 input genericApplicationOrderBy {
-  id : int!
+  id: Int!
 }
 
 type Query {
-  genericList(filter:genericApplicationInput, order:genericApplicationOrderBy): [genericApplication!]
+  genericList(
+    filter: genericApplicationInput,
+    order: genericApplicationOrderBy
+  ): [genericApplication!]
 }
 
 type Mutation {
-  genericSave(application: genericApplicationCampos)  : genericApplication
+  genericSave(application: genericApplicationCampos): genericApplication
   genericUpdate(application: genericApplicationCampos): genericApplication
   genericDelete(application: genericApplicationCampos): genericApplication
 }
