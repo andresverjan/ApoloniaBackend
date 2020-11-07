@@ -16,6 +16,7 @@ input ApplicationInput {
 
 input CampoInput {
   nombre: String!
+  nombreUi: String!
   tipoDato: String!
   tipoCampoId: Int!
   requerido: Boolean
