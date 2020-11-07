@@ -1,6 +1,6 @@
 scalar Date
 type Application {
-  id: String!
+  id: Int!
   nombre: String!
   nombreTabla: String
   active: Boolean
