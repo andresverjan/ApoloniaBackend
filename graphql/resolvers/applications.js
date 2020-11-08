@@ -46,6 +46,58 @@ module.exports = {
         }
     },
 
+    updateAppField: async (args) => {
+        try {
+            const { application, campos } = args.application;
+            let  applicationId = 0;
+
+            const app = new Application({
+                id:     application.id,
+                nombre: application.nombre,
+                updatedAt: new Date().toISOString(),
+            });
+
+            await Application.findOne({ where: { id : application.id }})
+                .then(() => {
+                    applicationId = application.id;
+                    let newFields = campos.map(field => {
+                        return {
+                            ...field,
+                            applicationId: application.id,
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        }
+                    });
+                
+                Application.update({ app }, {   
+                    where: { id: application.id },
+                    returning: true,
+                    plain: true })
+                .then(() => {
+                    
+                    Campo.destroy({ where : { applicationId: application.id }}).then(() => {
+
+                        Campo.bulkCreate(newFields, { validate: true }).then(() => {})
+                        .catch((err) => {
+                            throw err;
+                        });
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
+                }).catch(err => {
+                    throw err;
+                });
+            }).catch(err => {
+                throw err;
+            });
+              
+            return await Application.findOne( { where : { id:  applicationId}});
+        } catch (error) {
+            throw error;
+        }
+    },
+
     getFieldsByAppId: async args => {
         try {
             const appId = args.applicationId;
