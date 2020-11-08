@@ -12,6 +12,7 @@ type Application {
 type FieldsApplication {
   id: Int!
   nombre: String!
+  nombreUi: String!
   tipoDato: String!
   tipoCampoId: Int!
   requerido: Boolean
