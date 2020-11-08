@@ -32,6 +32,11 @@ input ApplicationInput {
   nombreTabla: String
 }
 
+input AppUpdateInput {
+  id: Int!
+  nombre: String!
+}
+
 input CampoInput {
   nombre: String!
   nombreUi: String!
@@ -49,6 +54,11 @@ input CampoInput {
 
 input ApplicationCampos {
   application: ApplicationInput
+  campos: [CampoInput]
+}
+
+input AppFieldsUpd {
+  application: AppUpdateInput
   campos: [CampoInput]
 }
 
@@ -71,5 +81,6 @@ type Query {
 
 type Mutation {
   saveAppFields(application: ApplicationCampos): Application
+  updateAppField(application: AppFieldsUpd): Application
   deleteAppField(applicationId:Int!): Boolean
 }
