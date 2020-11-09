@@ -1,8 +1,13 @@
 scalar Date
 
 type genericApplication {
-  application: Application
+  application: Application 
   campos: [String]
+}
+
+type genericResponse {
+  success: Boolean!
+  message: String
 }
 
 type CampoValorOutput {
@@ -31,14 +36,11 @@ input genericApplicationOrderBy {
 }
 
 type Query {
-  genericList(
-    filter: genericApplicationInput,
-    order: genericApplicationOrderBy
-  ): [genericApplication!]
+  genericList( filter: genericApplicationInput, order: genericApplicationOrderBy): [genericApplication!]
 }
 
 type Mutation {
-  genericSave(application: genericApplicationCampos): genericApplication
-  genericUpdate(application: genericApplicationCampos): genericApplication
-  genericDelete(application: genericApplicationCampos): genericApplication
+  genericSave(application: genericApplicationCampos)   : genericResponse
+  genericUpdate(application: genericApplicationCampos) : genericApplication
+  genericDelete(application: genericApplicationCampos) : genericApplication
 }
