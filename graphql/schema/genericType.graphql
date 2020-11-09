@@ -8,6 +8,7 @@ type genericApplication {
 type genericResponse {
   success: Boolean!
   message: String
+  internalMessage: String
 }
 
 type CampoValorOutput {

@@ -44,22 +44,19 @@ module.exports = {
                     v => {
                         let genericResponse = {
                             success: true,
-                            message: ""
+                            message: "",
+                            internalMessage: ""
                         }
                         return genericResponse;
                     }
                 ).catch(function (err) {
-                    console.log("ERROR EN LLAMADA PROCEDURE");
-                    console.log(err);
                     let genericResponse = {
                         success: false,
-                        message: "Problemas Guardando Intente Nuevamente.. "
+                        message: "Problemas Guardando Intente Nuevamente.. ",
+                        internalMessage: err.original.sqlMessage
                     }
-                    console.log("WILL RETURN ");
-                    console.log(genericResponse);
                     return genericResponse;
                 });
-            console.log (result);
             return result;
         } catch (error) {
             console.log("ENTRO A THROW ERROR!");
