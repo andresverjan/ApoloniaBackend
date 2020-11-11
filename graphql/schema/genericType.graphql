@@ -1,0 +1,47 @@
+scalar Date
+
+type genericApplication {
+  application: Application 
+  campos: [String]
+}
+
+type genericResponse {
+  success: Boolean!
+  message: String
+  internalMessage: String
+}
+
+type CampoValorOutput {
+  id: Int!
+  nombre: String!
+  valor: String
+}
+
+input CampoValor {
+  id: Int!
+  nombre: String!
+  valor: String
+}
+
+input genericApplicationCampos {
+  application: ApplicationInput #Ya definido en Applications.
+  campos: [CampoValor]
+}
+
+input genericApplicationInput {
+  id: Int!
+}
+
+input genericApplicationOrderBy {
+  id: Int!
+}
+
+type Query {
+  genericList( filter: genericApplicationInput, order: genericApplicationOrderBy): [genericApplication!]
+}
+
+type Mutation {
+  genericSave(application: genericApplicationCampos)   : genericResponse
+  genericUpdate(application: genericApplicationCampos) : genericApplication
+  genericDelete(application: genericApplicationCampos) : genericApplication
+}

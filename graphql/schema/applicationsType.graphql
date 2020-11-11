@@ -9,9 +9,10 @@ type Application {
   updatedAt: Date
 }
 
-type Campo {
+type FieldsApplication {
   id: Int!
   nombre: String!
+  nombreUi: String!
   tipoDato: String!
   tipoCampoId: Int!
   requerido: Boolean
@@ -28,6 +29,7 @@ type Campo {
 }
 
 input ApplicationInput {
+  id : Int
   nombre: String!
   nombreTabla: String
 }
@@ -76,7 +78,7 @@ input ApplicationOrderBy {
 
 type Query {
   applications(filter:ApplicationFilter, order:ApplicationOrderBy): [Application!]
-  getFieldsByAppId(applicationId:Int!): [Campo!]
+  getFieldsByAppId(applicationId:Int!): [FieldsApplication!]
 }
 
 type Mutation {
