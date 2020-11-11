@@ -51,12 +51,6 @@ module.exports = {
             const { application, campos } = args.application;
             let  applicationId = 0;
 
-            const app = new Application({
-                id:     application.id,
-                nombre: application.nombre,
-                updatedAt: new Date().toISOString(),
-            });
-
             await Application.findOne({ where: { id : application.id }})
                 .then(() => {
                     applicationId = application.id;
@@ -69,10 +63,8 @@ module.exports = {
                         }
                     });
                 
-                Application.update({ app }, {   
-                    where: { id: application.id },
-                    returning: true,
-                    plain: true })
+                Application.update({ nombre: application.nombre, updatedAt: new Date().toISOString()}, {   
+                    where: { id: application.id }})
                 .then(() => {
                     
                     Campo.destroy({ where : { applicationId: application.id }}).then(() => {
