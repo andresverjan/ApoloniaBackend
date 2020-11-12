@@ -39,5 +39,5 @@ type Etiquetas{
 }
 
 type Query {
-  login(username:String! , password:String!): User!
+  login(username:String! , password:String!): User
 }
