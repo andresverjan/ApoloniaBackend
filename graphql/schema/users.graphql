@@ -1,0 +1,34 @@
+scalar Date
+type User {
+  ID: Int!
+  USUARIO_NOMBRE: String!
+  USUARIO_APELLIDO: String
+  USUARIO_CORREO: String
+  USUARIO_TELEFONO: String
+  USUARIO_ACTIVO: Boolean
+  USUARIO_LOGIN: String!
+  USUARIO_NOMBRE: String
+  EMPRESA_ID: String
+  URL_FOTO_PERFIL: String
+  STATUS_ONLINE: String
+  IDIOMA_ID: String
+  ROL_ID: String
+  PERMISOS: [Menu]
+  IDIOMA: Idioma
+}
+
+Type Idioma{
+  ID: Id
+  NOMBRE_IDIOMA: String
+  SHORT_NAME: String
+  BANDERA: String
+}
+
+type Menu {
+  id: Int!
+  nombre: String!
+}
+
+type Query {
+  login(username:String! , password:String!): [Menu!]
+}

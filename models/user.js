@@ -51,6 +51,9 @@ module.exports = (sequelize, Sequelize) => {
         IDIOMA_ID: {
             type: Sequelize.INTEGER,
         },
+        ROL_ID: {
+            type: Sequelize.INTEGER,
+        },
         NUMERO_INTENTOS: {
             type: Sequelize.INTEGER,
         },
