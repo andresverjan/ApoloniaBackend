@@ -16,6 +16,24 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+console.log("****************************");
+console.log("Runing some Querys!....");
+const TIME_OUT = "SET GLOBAL connect_timeout=60000;";
+const INTERACTIVE_TIME_OUT = "SET GLOBAL interactive_timeout=28800;";
+const WAIT_TIME_OUT = "SET GLOBAL wait_timeout=28800;";
+const SHOW_VARIABLES = "SHOW VARIABLES;";
+
+sequelize.query(TIME_OUT);
+sequelize.query(INTERACTIVE_TIME_OUT);
+sequelize.query(WAIT_TIME_OUT);
+
+sequelize.query(SHOW_VARIABLES).then(function(result){
+  console.log(result);
+});
+console.log("DONE");
+console.log("****************************");
+
 db.tutorials = require("../models/tutorial")(sequelize, Sequelize);
 db.comment = require("../models/comment")(sequelize, Sequelize);
 
@@ -26,6 +44,8 @@ db.comment.belongsTo(db.tutorials, {
 });
 
 db.etiquetas    = require("../models/etiquetas")(sequelize, Sequelize);
+db.users       = require("../models/user")(sequelize, Sequelize);
+db.idiomas       = require("../models/idioma")(sequelize, Sequelize);
 db.tipocampos   = require("../models/tipocampos")(sequelize, Sequelize);
 db.mascara      = require("../models/mascara")(sequelize, Sequelize);
 db.application  = require("../models/applications")(sequelize, Sequelize);

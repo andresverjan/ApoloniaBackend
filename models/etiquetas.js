@@ -1,15 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
   const Etiquetas = sequelize.define("etiquetas", {
-    nombre: {
+    NOMBRE: {
       type: Sequelize.STRING
     },
-    descripcion: {
+    DESCRIPCION: {
       type: Sequelize.STRING
     },
-    label: {
+    LABEL: {
       type: Sequelize.BOOLEAN
     },
-    idioma_id: {
+    IDIOMA_ID: {
       type: Sequelize.BOOLEAN
     }
   });

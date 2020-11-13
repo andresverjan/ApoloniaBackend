@@ -1,53 +1,65 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
-const userSchema = new Schema({
-   name: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: false
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    phoneNumber: {
-        type: String,
-        required: false
-    },
-    latlng: {
-        type: String,
-        required: false
-    },
-    jwt: {
-        type: String,
-        required: false
-    },
-    urlPhoto: {
-        type: String,
-        required: false
-    },
-    comercioId: {
-        type: Number,
-        required: false
-    },
-    online: {
-        type: Boolean,
-        required: false
-    },
-    rol_id: {
-        type: Number,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-}, { timestamps: true })
-module.exports = mongoose.model('User', userSchema)
+module.exports = (sequelize, Sequelize) => {
+    const UserSchema = sequelize.define("usuarios", {
+        USUARIO_NOMBRE: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_APELLIDO: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_CORREO: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_TELEFONO: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_ACTIVO: {
+            type: Sequelize.BOOLEAN,
+        },
+        USUARIO_LOGIN: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_PASSWORD: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_ELIMINADO: {
+            type: Sequelize.BOOLEAN,
+        },
+        EMPRESA_ID: {
+            type: Sequelize.INTEGER,
+        },
+        PUNTO_ID: {
+            type: Sequelize.INTEGER,
+        },
+        CIUDAD_ID: {
+            type: Sequelize.INTEGER,
+        },
+        FECHA_CREACION: {
+            type: Sequelize.STRING,
+        },
+        URL_FOTO_PERFIL: {
+            type: Sequelize.STRING,
+        },
+        STATUS_ONLINE: {
+            type: Sequelize.STRING,
+        },
+        LATITUD: {
+            type: Sequelize.STRING,
+        },
+        LONGITUD: {
+            type: Sequelize.STRING,
+        },
+        IDIOMA_ID: {
+            type: Sequelize.INTEGER,
+        },
+        ROL_ID: {
+            type: Sequelize.INTEGER,
+        },
+        NUMERO_INTENTOS: {
+            type: Sequelize.INTEGER,
+        },
+        MCA_BLOQUEADO_INTENTOS: {
+            type: Sequelize.STRING,
+        },
+    });
+    return UserSchema;
+};
