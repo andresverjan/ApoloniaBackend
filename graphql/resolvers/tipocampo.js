@@ -24,7 +24,7 @@ module.exports = {
         console.log("INGRESO A listaTables");
         let TABLE_NAME = "";
         if (args.filter != null && args.filter != undefined){
-            TABLE_NAME = args.filter;
+            TABLE_NAME = args.filter.TABLE_NAME;
         }
         try {
             return list = await db.sequelize.query('CALL listTables (:TABLE_INPUT)', 
