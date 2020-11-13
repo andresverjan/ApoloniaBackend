@@ -77,7 +77,7 @@ input ApplicationOrderBy {
 }
 
 type Query {
-  applications(filter:ApplicationFilter, order:ApplicationOrderBy): [Application!]
+  applications(filter: ApplicationFilter, order: ApplicationOrderBy): [Application!]
   getFieldsByAppId(applicationId:Int!): [FieldsApplication!]
 }
 
