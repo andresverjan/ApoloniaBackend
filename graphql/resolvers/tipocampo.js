@@ -22,7 +22,10 @@ module.exports = {
 
     listaTables: async (args) => {
         console.log("INGRESO A listaTables");
-        const {TABLE_NAME} = args.filter;
+        let TABLE_NAME = "";
+        if (args.filter != null && args.filter != undefined){
+            TABLE_NAME = args.filter;
+        }
         try {
             return list = await db.sequelize.query('CALL listTables (:TABLE_INPUT)', 
                  {replacements: { TABLE_INPUT: TABLE_NAME }});
