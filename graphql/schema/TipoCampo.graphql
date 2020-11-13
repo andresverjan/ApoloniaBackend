@@ -52,13 +52,15 @@ input TableCampo {
   TABLE_NAME: String
 }
 
+
+
 type Query {
   tipocampos(filter: TipoCampoFilter, order: TipoCampoOrderBy): [TipoCampo!]
 
   """
   Listado de  TABLAS del sistema.
-  """
-  listaTables:[Table]
+  """  
+  listaTables(filter: TableCampo): [Table]
 
   """
   Listado de CAMPOS De una TABLA
