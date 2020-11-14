@@ -94,8 +94,7 @@ module.exports = {
         try {
             const appId = args.applicationId;
             console.log("el  valor es: " + appId);
-            //TODO: Agregar ordenamiento segun ORDEN.
-            const list = await Campo.findAll({ 
+            const list = await Campo.findAll({ where: {applicationId: appId },
                 order: [
                     ['order', 'ASC']
                 ]
