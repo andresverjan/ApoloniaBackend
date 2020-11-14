@@ -94,9 +94,10 @@ module.exports = {
         try {
             const appId = args.applicationId;
             console.log("el  valor es: " + appId);
-            const list = await Campo.findAll({ where: {applicationId: appId },
+            const list = await Campo.findAll({ 
+                where: {applicationId: appId },
                 order: [
-                    ['order', 'ASC']
+                    ['orden', 'ASC']
                 ]
             });
 
