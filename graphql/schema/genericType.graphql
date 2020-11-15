@@ -1,7 +1,8 @@
 scalar Date
 
 type genericApplication {
-  application: Application 
+  id : Int
+  application: Application
   campos: [String]
 }
 
