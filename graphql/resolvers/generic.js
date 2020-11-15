@@ -63,6 +63,79 @@ module.exports = {
             throw error;
         }
     },
+    genericUpdate: async (args) => {
+        console.log("INGRESO A genericUpdate");
+        const { id, application, campos } = args.application;
+        try {
+            let columnas = campos.map(field => {
+                return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";
+            }).join();
+            const result = await db.sequelize.query("CALL genericUpdate ( :ROW_ID, :APPLICATION_ID, :COLUMNAS )",
+                { replacements: { ROW_ID: id, APPLICATION_ID: application.id, COLUMNAS: columnas } })
+                .then(
+                    v => {
+                        let genericResponse = {
+                            success: true,
+                            message: "",
+                            internalMessage: ""
+                        }
+                        return genericResponse;
+                    }
+                ).catch(function (err) {
+                    let genericResponse = {
+                        success: false,
+                        message: "Problemas Actualizando intente nuevamente.. ",
+                        internalMessage: err.original.sqlMessage
+                    }
+                    return genericResponse;
+                });
+            return result;
+        } catch (error) {
+            console.log("ENTRO A THROW ERROR!");
+            throw error;
+        }
+    },
+
+    genericDelete: async (args) => {
+        console.log("INGRESO A genericDelete");
+        const { id, application } = args.application;
+
+        let genericResponse = {
+            success: false,
+            message: "Problemas Eliminando intente nuevamente.. ",
+            internalMessage: err.original.sqlMessage
+        };
+
+        try {
+            if (id != 0 && application != null && application.id != 0) {
+                const result = await db.sequelize.query("CALL genericDelete ( :ROW_ID, :APPLICATION_ID )",
+                    { replacements: { ROW_ID: id, APPLICATION_ID: application.id, COLUMNAS: columnas } })
+                    .then(
+                        v => {
+                            let genericResponse = {
+                                success: true,
+                                message: "",
+                                internalMessage: ""
+                            }
+                            return genericResponse;
+                        }
+                    ).catch(function (err) {
+                        genericResponse = {
+                            success: false,
+                            message: "Problemas Eliminando intente nuevamente.. ",
+                            internalMessage: err.original.sqlMessage
+                        }
+                        return genericResponse;
+                    });
+                return result;
+            } else {
+                return genericResponse;
+            }
+        } catch (error) {
+            console.log("ENTRO A THROW ERROR!");
+            throw error;
+        }
+    },
 
 
 
