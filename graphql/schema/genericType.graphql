@@ -24,6 +24,7 @@ input CampoValor {
 }
 
 input genericApplicationCampos {
+  id : Int
   application: ApplicationInput #Ya definido en Applications.
   campos: [CampoValor]
 }
@@ -42,6 +43,6 @@ type Query {
 
 type Mutation {
   genericSave(application: genericApplicationCampos)   : genericResponse
-  genericUpdate(application: genericApplicationCampos) : genericApplication
-  genericDelete(application: genericApplicationCampos) : genericApplication
+  genericUpdate(application: genericApplicationCampos) : genericResponse
+  genericDelete(application: genericApplicationCampos) : genericResponse
 }
