@@ -14,7 +14,7 @@ module.exports = {
                 { replacements: { APPLICATION_ID: id } });
 
             let newFields = result.map(field => {
-                if (field.createdAt){
+                if (field.createdAt || field.createdAt){
                     field.createdAt = helpers.convertDateTimeIsoToString(field.createdAt);
                 }
                 return JSON.stringify(field);
@@ -73,7 +73,7 @@ module.exports = {
                     field.valor = field.valor == "true" ? 1 : 0;
                 }
                 if (field.nombre == "createdAt" || field.nombre == "updatedAt"){
-                    field.valor = field.valor.toString().replace("T", " ").replace(".000Z", "");
+                    field.valor = helpers.convertDateTimeIsoToString(field.valor);
                 }
                 return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";
             }).join();
