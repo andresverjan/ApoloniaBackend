@@ -14,9 +14,9 @@ module.exports = {
                 { replacements: { APPLICATION_ID: id } });
 
             let newFields = result.map(field => {
-                /*if (field.createdAt){
-                    field.createdAt = field.createdAt.toString().replace("T", "").replace(".000Z", "");
-                }*/
+                if (field.createdAt){
+                    field.createdAt = helpers.convertDateTimeIsoToString(field.createdAt);
+                }
                 return JSON.stringify(field);
             });
             const r = {

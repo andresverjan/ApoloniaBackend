@@ -9,6 +9,13 @@ const getCurrentDateTime = () => {
   return `${date} ${time}`;
 };
 
+const convertDateTimeIsoToString = (isoDate) => {
+  const d = new Date();
+  const date = isoDate.toISOString().split("T")[0];
+  const time = isoDate.toTimeString().split(" ")[0];
+  return `${date} ${time}`;
+};
+
 const getNearestShop = (arrComercios, userCoord) => {
   const EARTH_RADIUS = 6371;
   let minDistance = Number.MAX_SAFE_INTEGER;
@@ -124,5 +131,6 @@ module.exports = {
   getCurrentDateTime,
   getFilterFromObject,
   getOrderFromObject,
-  getFilterFormObjectMongo
+  getFilterFormObjectMongo,
+  convertDateTimeIsoToString
 };
