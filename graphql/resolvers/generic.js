@@ -103,13 +103,13 @@ module.exports = {
         let genericResponse = {
             success: false,
             message: "Problemas Eliminando intente nuevamente.. ",
-            internalMessage: err.original.sqlMessage
+            internalMessage: ''
         };
 
         try {
             if (id != 0 && application != null && application.id != 0) {
                 const result = await db.sequelize.query("CALL genericDelete ( :ROW_ID, :APPLICATION_ID )",
-                    { replacements: { ROW_ID: id, APPLICATION_ID: application.id, COLUMNAS: columnas } })
+                    { replacements: { ROW_ID: id, APPLICATION_ID: application.id } })
                     .then(
                         v => {
                             let genericResponse = {
