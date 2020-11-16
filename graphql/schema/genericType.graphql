@@ -22,9 +22,16 @@ input CampoValor {
   id: Int!
   nombre: String!
   valor: String
+  tipoCampoId: Int!
 }
 
 input genericApplicationCampos {
+  id : Int
+  application: ApplicationInput #Ya definido en Applications.
+  campos: [CampoValor]
+}
+
+input genericApplicationCamposUpdate {
   id : Int
   application: ApplicationInput #Ya definido en Applications.
   campos: [CampoValor]
@@ -49,6 +56,6 @@ type Query {
 
 type Mutation {
   genericSave(application: genericApplicationCampos)   : genericResponse
-  genericUpdate(application: genericApplicationCampos) : genericResponse
+  genericUpdate(application: genericApplicationCamposUpdate) : genericResponse
   genericDelete(application: genericApplicationCamposDelete) : genericResponse
 }
