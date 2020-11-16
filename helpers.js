@@ -10,9 +10,9 @@ const getCurrentDateTime = () => {
 };
 
 const convertDateTimeIsoToString = (isoDate) => {
-  const d = new Date();
-  const date = isoDate.toISOString().split("T")[0];
-  const time = isoDate.toTimeString().split(" ")[0];
+  const d = new Date(isoDate);
+  const date = d.toISOString().split("T")[0];
+  const time = d.toTimeString().split(" ")[0];
   return `${date} ${time}`;
 };
 
