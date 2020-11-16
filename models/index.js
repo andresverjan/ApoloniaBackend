@@ -46,6 +46,7 @@ db.comment.belongsTo(db.tutorials, {
 db.etiquetas    = require("../models/etiquetas")(sequelize, Sequelize);
 db.users       = require("../models/user")(sequelize, Sequelize);
 db.idiomas       = require("../models/idioma")(sequelize, Sequelize);
+db.iconos       = require("../models/icono")(sequelize, Sequelize);
 db.tipocampos   = require("../models/tipocampos")(sequelize, Sequelize);
 db.mascara      = require("../models/mascara")(sequelize, Sequelize);
 db.application  = require("../models/applications")(sequelize, Sequelize);
