@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
     nombreTabla: {
       type: Sequelize.STRING
     },
+    icono: {
+      type: Sequelize.STRING
+    },
     active: {
       type: Sequelize.BOOLEAN
     },
