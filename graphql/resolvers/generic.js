@@ -14,6 +14,9 @@ module.exports = {
                 { replacements: { APPLICATION_ID: id } });
 
             let newFields = result.map(field => {
+                if (field.createdAt || field.createdAt){
+                    field.createdAt = helpers.convertDateTimeIsoToString(field.createdAt);
+                }
                 return JSON.stringify(field);
             });
             const r = {
@@ -36,8 +39,6 @@ module.exports = {
             let values = campos.map(field => {
                 return "'" + field.valor + "'";
             }).join();
-            console.log(columnas);
-            console.log(values);
             const result = await db.sequelize.query("CALL genericSave (:APPLICATION_ID, :COLUMNAS, :VALUES )",
                 { replacements: { APPLICATION_ID: application.id, COLUMNAS: columnas, VALUES: values } })
                 .then(
@@ -68,8 +69,15 @@ module.exports = {
         const { id, application, campos } = args.application;
         try {
             let columnas = campos.map(field => {
+                if (field.tipoCampoId == 4) {
+                    field.valor = field.valor == "true" ? 1 : 0;
+                }
+                if (field.nombre == "createdAt" || field.nombre == "updatedAt"){
+                    field.valor = helpers.convertDateTimeIsoToString(field.valor);
+                }
                 return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";
             }).join();
+            console.log(columnas);
             const result = await db.sequelize.query("CALL genericUpdate ( :ROW_ID, :APPLICATION_ID, :COLUMNAS )",
                 { replacements: { ROW_ID: id, APPLICATION_ID: application.id, COLUMNAS: columnas } })
                 .then(
@@ -103,13 +111,13 @@ module.exports = {
         let genericResponse = {
             success: false,
             message: "Problemas Eliminando intente nuevamente.. ",
-            internalMessage: err.original.sqlMessage
+            internalMessage: ''
         };
 
         try {
             if (id != 0 && application != null && application.id != 0) {
                 const result = await db.sequelize.query("CALL genericDelete ( :ROW_ID, :APPLICATION_ID )",
-                    { replacements: { ROW_ID: id, APPLICATION_ID: application.id, COLUMNAS: columnas } })
+                    { replacements: { ROW_ID: id, APPLICATION_ID: application.id } })
                     .then(
                         v => {
                             let genericResponse = {

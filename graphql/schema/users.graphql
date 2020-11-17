@@ -30,6 +30,7 @@ type Menu {
   descripcion: String
   url_menu:String
   icon:String
+  applicationId:Int
 }
 
 type Etiquetas{

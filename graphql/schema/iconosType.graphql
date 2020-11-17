@@ -1,0 +1,18 @@
+scalar Date
+type Icono {
+  nombre: String!
+} 
+
+input IconoFilter {
+  nombre: String
+}
+
+input IconoOrderBy {
+  nombre: String
+}
+
+type Query {
+  iconos(filter:IconoFilter, order:IconoOrderBy): [Icono!]  
+}
+
+ 
