@@ -14,7 +14,7 @@ module.exports = {
                 { replacements: { APPLICATION_ID: id } });
 
             let newFields = result.map(field => {
-                if (field.createdAt || field.createdAt){
+                if (field.createdAt){
                     field.createdAt = helpers.convertDateTimeIsoToString(field.createdAt);
                 }
                 return JSON.stringify(field);
@@ -31,12 +31,19 @@ module.exports = {
     genericSave: async (args) => {
         console.log("INGRESO A genericSave");
         const { application, campos } = args.application;
-
         try {
             let columnas = campos.map(field => {
                 return "`" + field.nombre + "`";
             }).join();
             let values = campos.map(field => {
+                if (field.nombre == "createdAt" || field.nombre == "updatedAt"){
+                     if(field.valor!= ""){
+                        field.valor = helpers.convertDateTimeIsoToString(field.valor);
+                     }else{
+                        let d = new Date();
+                        field.valor = helpers.convertDateTimeIsoToString(d);
+                     }
+                }
                 return "'" + field.valor + "'";
             }).join();
             const result = await db.sequelize.query("CALL genericSave (:APPLICATION_ID, :COLUMNAS, :VALUES )",
