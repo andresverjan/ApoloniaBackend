@@ -22,7 +22,7 @@ input CampoValor {
   id: Int!
   nombre: String!
   valor: String
-  tipoCampoId: Int!
+  tipoCampoId: Int
 }
 
 input genericApplicationCampos {
