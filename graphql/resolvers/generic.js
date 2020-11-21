@@ -36,6 +36,9 @@ module.exports = {
                 return "`" + field.nombre + "`";
             }).join();
             let values = campos.map(field => {
+                if (field.tipoCampoId == 4) {
+                    field.valor = field.valor == "true" ? 1 : 0;
+                }
                 if (field.nombre == "createdAt" || field.nombre == "updatedAt"){
                      if(field.valor!= ""){
                         field.valor = helpers.convertDateTimeIsoToString(field.valor);
