@@ -8,7 +8,6 @@ module.exports = {
   genericList: async (args) => {
     console.log("INGRESO A genericList");
     const { id, campos } = args.filter;
-    console.log(campos);
     try {
       let condicion = "";
       condicion = campos
@@ -21,7 +20,9 @@ module.exports = {
         })
         .join();
 
-      condicion = condicion.replace(",", "");
+      //REPLACEALL NO ESTÁ SOPORTADO AÚN
+      condicion = condicion.split(",").join(" ");
+
       const application = await Application.findOne({ where: { id: id } });
       const result = await db.sequelize.query(
         "CALL genericList (:APPLICATION_ID, :CONDICION)",
@@ -39,7 +40,6 @@ module.exports = {
         campos: newFields,
       };
 
-      console.log(r);
       return [r];
     } catch (error) {
       throw error;
