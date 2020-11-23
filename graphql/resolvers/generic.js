@@ -8,17 +8,20 @@ module.exports = {
   genericList: async (args) => {
     console.log("INGRESO A genericList");
     const { id, campos } = args.filter;
+
     try {
       let condicion = "";
       condicion = campos
-        .map((field, i) => {
-          if (i == 0) {
-            return ` ${field.nombre} like '%${field.valor}%'  `;
-          } else {
-            return `and ${field.nombre} like '%${field.valor}%' `;
-          }
-        })
-        .join();
+        ? campos
+            .map((field, i) => {
+              if (i == 0) {
+                return ` ${field.nombre} like '%${field.valor}%'  `;
+              } else {
+                return `and ${field.nombre} like '%${field.valor}%' `;
+              }
+            })
+            .join()
+        : "";
 
       //REPLACEALL NO ESTÁ SOPORTADO AÚN
       condicion = condicion.split(",").join(" ");
