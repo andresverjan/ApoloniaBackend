@@ -51,8 +51,8 @@ db.tipocampos   = require("../models/tipocampos")(sequelize, Sequelize);
 db.mascara      = require("../models/mascara")(sequelize, Sequelize);
 db.application  = require("../models/applications")(sequelize, Sequelize);
 db.campos       = require("../models/applicationFieldsConfig")(sequelize, Sequelize);
-db.rol        = require("../models/rol")(sequelize, Sequelize);
-db.permiso     = require("../models/permiso")(sequelize, Sequelize);
+db.rol          = require("../models/rol")(sequelize, Sequelize);
+db.permiso      = require("../models/permiso")(sequelize, Sequelize);
 
 db.application.hasMany(db.campos, { onDelete: 'CASCADE',
                                     as: "fields" });
@@ -78,15 +78,18 @@ db.campos.belongsTo(db.mascara, {
 db.rol.belongsToMany(db.permiso, {
   through: "rol_permiso",
   as: "permisos",
-  foreignKey: "rol_id"
+  foreignKey: "rol_id",
+  primaryKey: true
 });
 
 db.permiso.belongsToMany(db.rol, {
   through: "rol_permiso",
   as: "roles",
-  foreignKey: "permiso_id"
+  foreignKey: "permiso_id",
+  primaryKey: true
 });
 
+db.rolPermiso     = require("../models/rolpermiso")(sequelize, Sequelize);
 
 module.exports = db;
 

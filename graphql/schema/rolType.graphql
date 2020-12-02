@@ -29,6 +29,15 @@ type Permiso {
   updatedAt: Date
 }
 
+input PermisoUpdInput {
+  id: Int!
+}
+
+input RolUpdInput {
+  id: Int!
+  permisos: [PermisoUpdInput]
+}
+
 input RolFilter {
   nombre: String
 }
@@ -50,4 +59,8 @@ type Query {
   permisos(filter: PermisoFilter, order: PermisOrderBy): [Permiso!]
   rolById(id:Int): Rol!
   rolByNombre(nombre: String): Rol
+}
+
+type Mutation {
+  updateRol(rol: RolUpdInput): Rol
 }
