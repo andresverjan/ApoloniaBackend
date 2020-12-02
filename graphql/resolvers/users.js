@@ -41,6 +41,19 @@ module.exports = {
             throw error;
         }
     },
+    updatePassword: async (args) => {
+        const usuario = Users.findOne({where:{USUARIO_CORREO: args.password.USUARIO_CORREO}});
+        usuario.USUARIO_PASSWORD= args.password.USUARIO_PASSWORD
+        try {
+          return await Users.update(usuario, {
+            where: { USUARIO_CORREO: args.password.USUARIO_CORREO},
+          }).then((data) => {
+            console.log(data);
+          });
+        } catch (error) {
+          throw error;
+        }
+      },
 
 
 };

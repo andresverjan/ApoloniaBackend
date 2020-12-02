@@ -7,6 +7,7 @@ type User {
   USUARIO_TELEFONO: String
   USUARIO_ACTIVO: Boolean
   USUARIO_LOGIN: String!
+  USUARIO_PASSWORD: String!
   EMPRESA_ID: String
   URL_FOTO_PERFIL: String
   STATUS_ONLINE: String
@@ -39,6 +40,17 @@ type Etiquetas{
  DESRIPCION: String
 }
 
+input PasswordInputUpdate{
+  USUARIO_CORREO: String!
+  USUARIO_PASSWORD: String!
+
+}  
+
 type Query {
   login(username:String! , password:String!): User
 }
+
+type Mutation {
+  updatePassword(password: PasswordInputUpdate): User
+}
+

@@ -63,7 +63,7 @@ module.exports = {
                         }
                     });
                 
-                Application.update({ nombre: application.nombre, updatedAt: new Date().toISOString()}, {   
+                Application.update({ nombre: application.nombre, icono: application.icono, updatedAt: new Date().toISOString()}, {   
                     where: { id: application.id }})
                 .then(() => {
                     

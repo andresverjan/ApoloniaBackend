@@ -1,7 +1,7 @@
 scalar Date
 
 type genericApplication {
-  id : Int
+  id: Int
   application: Application
   campos: [String]
 }
@@ -22,28 +22,29 @@ input CampoValor {
   id: Int!
   nombre: String!
   valor: String
-  tipoCampoId: Int!
+  tipoCampoId: Int
 }
 
 input genericApplicationCampos {
-  id : Int
+  id: Int
   application: ApplicationInput #Ya definido en Applications.
   campos: [CampoValor]
 }
 
 input genericApplicationCamposUpdate {
-  id : Int
+  id: Int
   application: ApplicationInput #Ya definido en Applications.
   campos: [CampoValor]
 }
 
 input genericApplicationCamposDelete {
-  id : Int!
+  id: Int!
   application: ApplicationInput #Ya definido en Applications.
 }
 
-input genericApplicationInput {
+input genericApplicationInputFilter {
   id: Int!
+  campos: [CampoValor]
 }
 
 input genericApplicationOrderBy {
@@ -51,11 +52,14 @@ input genericApplicationOrderBy {
 }
 
 type Query {
-  genericList( filter: genericApplicationInput, order: genericApplicationOrderBy): [genericApplication!]
+  genericList(
+    filter: genericApplicationInputFilter
+    order: genericApplicationOrderBy
+  ): [genericApplication!]
 }
 
 type Mutation {
-  genericSave(application: genericApplicationCampos)   : genericResponse
-  genericUpdate(application: genericApplicationCamposUpdate) : genericResponse
-  genericDelete(application: genericApplicationCamposDelete) : genericResponse
+  genericSave(application: genericApplicationCampos): genericResponse
+  genericUpdate(application: genericApplicationCamposUpdate): genericResponse
+  genericDelete(application: genericApplicationCamposDelete): genericResponse
 }
