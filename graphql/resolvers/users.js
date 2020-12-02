@@ -54,6 +54,20 @@ module.exports = {
           throw error;
         }
       },
+      updateIdiom: async (args) => {
+        const usuario = Users.findOne({where:{USUARIO_CORREO: args.idiom.USUARIO_CORREO}});
+        usuario.IDIOMA_ID= args.idiom.IDIOMA_ID
+        try {
+          return await Users.update(usuario, {
+            where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO},
+          }).then((data) => {
+            console.log(data);
+          });
+        } catch (error) {
+          throw error;
+        }
+      },
+
 
 
 };
