@@ -41,7 +41,7 @@ type Etiquetas{
 }
 
 input PasswordInputUpdate{
-  ID: Int!
+  USUARIO_CORREO: String!
   USUARIO_PASSWORD: String!
 
 }  
