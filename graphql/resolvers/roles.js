@@ -7,7 +7,6 @@ const helpers = require("../../helpers");
 
 module.exports = {
     roles: async (args) => {
-//        console.log("INGRESO A ROLEX", args.filter);
         try {
             let where = {};
             if (args.filter != null && args.filter != undefined) {
@@ -16,7 +15,7 @@ module.exports = {
             if (args.order != null && args.order != undefined) {
                 where.order = helpers.getOrderFromObject(args.order);
             }
-//            console.log("Woles: ", where);
+
             const roles= list = await Roles.findAll(where, {
                 include: [
                 {
@@ -24,7 +23,7 @@ module.exports = {
                   as: "permisos"
                 },
               ],});
-            //console.log("Roles: ", roles);
+
             return roles;
         } catch (error) {
             throw error;
@@ -32,18 +31,15 @@ module.exports = {
     },
 
     rolById: async (args) => {
-        console.log("CONSULTA ROLES POR ID:", args.id);
         try {
-            
             const rol = await Roles.findByPk(args.id, {
                 attributes: ['nombre'],
                 include: [
-                {
-                  model: Permiso,
-                  as: "permisos"
-                },
-              ],});
-            console.log("Rol: ", rol);
+                    {
+                    model: Permiso,
+                    as: "permisos"
+                    },
+                ]});
             return rol;
         } catch (error) {
             throw error;
@@ -51,7 +47,6 @@ module.exports = {
     },
 
     rolByNombre: async (args) => {
-        console.log("CONSULTA ROLES POR NOMBRE", args.id);
         try {            
             let where = {
                 nombre: args.nombre
@@ -65,8 +60,8 @@ module.exports = {
                     model: Permiso,
                     as: "permisos"
                     },
-                ]
-                });
+                ] 
+            });
             console.log("Rol: ", rol);
             return rol;
         } catch (error) {
@@ -75,7 +70,6 @@ module.exports = {
     },
 
     permisos: async (args) => {
-        console.log("INGRESO A PERMIXOX");
         try {
             let where = {};
             if (args.filter != null && args.filter != undefined) {
@@ -84,12 +78,11 @@ module.exports = {
             if (args.order != null && args.order != undefined) {
                 where.order = helpers.getOrderFromObject(args.order);
             }
-            return list = await Permiso.findAll(where, {include: [
-                {
-                  model: Roles,
-                  as: "roles"
-                },
-              ],});
+            return list = await Permiso.findAll(where, {include: [{
+                model: Roles,
+                as: "roles"
+                }]
+            });
         } catch (error) {
             throw error;
         }
@@ -108,22 +101,22 @@ module.exports = {
                 }
             });    
 
-            await Roles.update({ updatedAt: new Date().toISOString()}, {  
-                where: { id: rolId }}).then(() => {
+            await Roles.update({ updatedAt: new Date().toISOString()}, { where: { id: rolId }})
+                .then(() => {
                     
-                    RolPermiso.destroy({ where : { rol_id: rolId }}).then(() => {
+                RolPermiso.destroy({ where : { rol_id: rolId }}).then(() => {
 
-                        RolPermiso.bulkCreate(newFields, { validate: true }).then(() => {})
-                        .catch((err) => {
-                            throw err;
-                        });
-                    })
+                    RolPermiso.bulkCreate(newFields, { validate: true }).then(() => {})
                     .catch((err) => {
                         throw err;
                     });
-                }).catch(err => {
+                })
+                .catch((err) => {
                     throw err;
                 });
+            }).catch(err => {
+                throw err;
+            });
               
             return await Roles.findOne( { where : { id:  rolId}});
         } catch (error) {
