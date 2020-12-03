@@ -42,24 +42,32 @@ module.exports = {
         }
     },
     updatePassword: async (args) => {
-        console.log("INGRESO A updatePassword");
-        console.log(args.password);
-        const usuario = Users.findOne({where:{id: args.password.ID}});
-        console.log(usuario);
+        const usuario = Users.findOne({where:{USUARIO_CORREO: args.password.USUARIO_CORREO}});
         usuario.USUARIO_PASSWORD= args.password.USUARIO_PASSWORD
         try {
-            console.log('Entro al try')
           return await Users.update(usuario, {
-            where: { id: args.password.ID},
+            where: { USUARIO_CORREO: args.password.USUARIO_CORREO},
           }).then((data) => {
-              
             console.log(data);
           });
-          
         } catch (error) {
           throw error;
         }
       },
+      updateIdiom: async (args) => {
+        const usuario = Users.findOne({where:{USUARIO_CORREO: args.idiom.USUARIO_CORREO}});
+        usuario.IDIOMA_ID= args.idiom.IDIOMA_ID
+        try {
+          return await Users.update(usuario, {
+            where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO},
+          }).then((data) => {
+            console.log(data);
+          });
+        } catch (error) {
+          throw error;
+        }
+      },
+
 
 
 };

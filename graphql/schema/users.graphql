@@ -41,9 +41,13 @@ type Etiquetas{
 }
 
 input PasswordInputUpdate{
-  ID: Int!
+  USUARIO_CORREO: String!
   USUARIO_PASSWORD: String!
+}  
 
+input IdiomInputUpdate{
+  USUARIO_CORREO: String!
+  IDIOMA_ID: String
 }  
 
 type Query {
@@ -52,5 +56,6 @@ type Query {
 
 type Mutation {
   updatePassword(password: PasswordInputUpdate): User
+  updateIdiom(idiom: IdiomInputUpdate): User
 }
 

@@ -1,12 +1,9 @@
 const db = require("../../models");
-const TipoCampos = db.tipocampos;
-const Op = db.Sequelize.Op;
 const helpers = require("../../helpers");
 const Application = db.application;
 
 module.exports = {
   genericList: async (args) => {
-    console.log("INGRESO A genericList");
     const { id, campos } = args.filter;
 
     try {
@@ -26,10 +23,43 @@ module.exports = {
       //REPLACEALL NO ESTÁ SOPORTADO AÚN
       condicion = condicion.split(",").join(" ");
 
+      //PAGINATION
+      let limitQueryStr = "";
+      const { pagina, limite } = args.limit;
+
+      const res = await db.sequelize.query(
+        "CALL countGenericList (:APPLICATION_ID, :CONDICION)",
+        {
+          replacements: {
+            APPLICATION_ID: id,
+            CONDICION: condicion,
+          },
+        }
+      );
+
+      let totalRegistros = res.map((val) => {
+        return val["COUNT(*)"];
+      });
+
+      totalRegistros = Number.parseInt(totalRegistros[0]);
+
+      const start = limite * pagina - limite;
+
+      limitQueryStr = ` limit ${start},${limite}`;
+
+      console.log(limitQueryStr);
+
       const application = await Application.findOne({ where: { id: id } });
+
       const result = await db.sequelize.query(
-        "CALL genericList (:APPLICATION_ID, :CONDICION)",
-        { replacements: { APPLICATION_ID: id, CONDICION: condicion } }
+        "CALL genericList (:APPLICATION_ID, :CONDICION, :LIMITE)",
+        {
+          replacements: {
+            APPLICATION_ID: id,
+            CONDICION: condicion,
+            LIMITE: limitQueryStr,
+          },
+        }
       );
 
       let newFields = result.map((field) => {
@@ -41,6 +71,7 @@ module.exports = {
       const r = {
         application,
         campos: newFields,
+        totalRegistros,
       };
 
       return [r];

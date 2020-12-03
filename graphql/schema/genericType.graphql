@@ -4,6 +4,7 @@ type genericApplication {
   id: Int
   application: Application
   campos: [String]
+  totalRegistros: Int
 }
 
 type genericResponse {
@@ -39,7 +40,12 @@ input genericApplicationCamposUpdate {
 
 input genericApplicationCamposDelete {
   id: Int!
-  application: ApplicationInput #Ya definido en Applications.
+  application: ApplicationInput
+}
+
+input genericApplicationLimitFilter {
+  pagina: Int!
+  limite: Int!
 }
 
 input genericApplicationInputFilter {
@@ -55,6 +61,7 @@ type Query {
   genericList(
     filter: genericApplicationInputFilter
     order: genericApplicationOrderBy
+    limit: genericApplicationLimitFilter
   ): [genericApplication!]
 }
 
