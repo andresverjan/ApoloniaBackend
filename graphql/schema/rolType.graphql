@@ -1,0 +1,66 @@
+scalar Date
+type Rol {
+  id: Int!
+  nombre: String
+  version: String
+  descripcion: String
+  MCA_ACTIVO: String
+  MCA_SUPERUSUARIO: String
+  permisos: [Permiso]
+  createdAt: Date
+  updatedAt: Date
+ 
+}
+
+type Permiso {
+  id: Int!
+  nombre: String!
+  version: String
+  descripcion: String
+  url_menu: String
+  icon: String
+  MCA_ACTIVO: String
+  EMPRESA_ID: Int
+  IDIOMA_ID: Int
+  applicationId: Int
+  orden: Int
+  roles: [Rol]
+  createdAt: Date
+  updatedAt: Date
+}
+
+input PermisoUpdInput {
+  id: Int!
+}
+
+input RolUpdInput {
+  id: Int!
+  permisos: [PermisoUpdInput]
+}
+
+input RolFilter {
+  nombre: String
+}
+
+input RolOrderBy {
+  nombre: String
+}
+
+input PermisoFilter {
+  nombre: String
+}
+
+input PermisOrderBy {
+  nombre: String
+}
+
+type Query {
+  roles(filter: RolFilter, order: RolOrderBy): [Rol!]
+  permisos(filter: PermisoFilter, order: PermisOrderBy): [Permiso!]
+  rolById(id:Int): Rol!
+  rolByNombre(nombre: String): Rol
+}
+
+type Mutation {
+  updateRol(rol: RolUpdInput): Rol
+}
