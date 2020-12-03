@@ -10,14 +10,14 @@ module.exports = {
       let condicion = "";
       condicion = campos
         ? campos
-            .map((field, i) => {
-              if (i == 0) {
-                return ` ${field.nombre} like '%${field.valor}%'  `;
-              } else {
-                return `and ${field.nombre} like '%${field.valor}%' `;
-              }
-            })
-            .join()
+          .map((field, i) => {
+            if (i == 0) {
+              return ` ${field.nombre} like '%${field.valor}%'  `;
+            } else {
+              return `and ${field.nombre} like '%${field.valor}%' `;
+            }
+          })
+          .join()
         : "";
 
       //REPLACEALL NO ESTÁ SOPORTADO AÚN
@@ -46,8 +46,6 @@ module.exports = {
       const start = limite * pagina - limite;
 
       limitQueryStr = ` limit ${start},${limite}`;
-
-      console.log(limitQueryStr);
 
       const application = await Application.findOne({ where: { id: id } });
 
@@ -98,7 +96,12 @@ module.exports = {
               field.valor = helpers.convertDateTimeIsoToString(d);
             }
           }
-          return "'" + field.valor + "'";
+          if (field.valor == 'null' || field.valor == 'NULL') {
+            return field.valor;
+          } else {
+            return "'" + field.valor + "'";
+          }
+          //return "'" + field.valor + "'";
         })
         .join();
       const result = await db.sequelize
@@ -143,10 +146,14 @@ module.exports = {
           if (field.nombre == "createdAt" || field.nombre == "updatedAt") {
             field.valor = helpers.convertDateTimeIsoToString(field.valor);
           }
-          return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";
+          if (field.valor == 'null' || field.valor == 'NULL') {
+            return "`" + field.nombre + "`" + "=" + field.valor;
+          } else {
+            return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";
+          }
         })
         .join();
-      console.log(columnas);
+
       const result = await db.sequelize
         .query("CALL genericUpdate ( :ROW_ID, :APPLICATION_ID, :COLUMNAS )", {
           replacements: {
