@@ -47,8 +47,6 @@ module.exports = {
 
       limitQueryStr = ` limit ${start},${limite}`;
 
-      console.log(limitQueryStr);
-
       const application = await Application.findOne({ where: { id: id } });
 
       const result = await db.sequelize.query(
@@ -155,7 +153,7 @@ module.exports = {
           }
         })
         .join();
-      console.log(columnas);
+
       const result = await db.sequelize
         .query("CALL genericUpdate ( :ROW_ID, :APPLICATION_ID, :COLUMNAS )", {
           replacements: {
