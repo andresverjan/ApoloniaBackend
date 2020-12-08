@@ -1,0 +1,20 @@
+scalar Date
+type Odontologo{
+    id: Int!
+    IdOdontologo: String!
+    Nombres: String!
+    Apellidos: String!
+    Especialidad: String!
+    Titulo: String!
+    Registro: Date!
+    PorcentajePago: Int
+    Usuario: String !
+    PorcentajePagoEsp: Int
+    Unidad: String!
+    PorcentajeLab: Int
+    FecNac: Date!
+}
+
+type Query{
+    odontologos:[Odontologo!]
+}

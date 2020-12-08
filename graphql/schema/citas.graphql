@@ -1,0 +1,51 @@
+type Cita{
+ id: Int!
+ TITLE: String
+ START: String
+ END: String
+ odontologoId:Int
+ horaIngreso: String
+ horaSalida: String
+ asistencia: Boolean
+ cancelado:Boolean
+ observaciones: String
+}
+
+input CitaInput{
+ TITLE: String!
+ START: String!
+ END: String
+ odontologoId:Int
+ horaIngreso: String
+ horaSalida: String
+ asistencia: Boolean
+ cancelado:Boolean
+ observaciones: String
+}
+
+input CitaInputUpdate{
+ id: Int!
+ TITLE: String
+ START: String
+ END: String
+ odontologoId:Int
+ horaIngreso: String
+ horaSalida: String
+ asistencia: Boolean
+ cancelado:Boolean
+ observaciones: String
+}
+
+input CitaInputDelete{
+ id: Int!
+}
+type Query {
+  getCitasByOdontologoId(odontologoId:Int!): [Cita!]
+}
+
+type Mutation {
+  createCita(cita: CitaInput): Cita
+  deleteCita(cita: CitaInputDelete): String
+  updateCita(cita: CitaInputUpdate): Cita
+
+}
