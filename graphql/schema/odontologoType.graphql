@@ -8,11 +8,11 @@ type Odontologo{
     Titulo: String!
     Registro: Date!
     PorcentajePago: Int
-    Usuario: String !
+    Usuario: String
     PorcentajePagoEsp: Int
-    Unidad: String!
+    Unidad: String
     PorcentajeLab: Int
-    FecNac: Date!
+    FecNac: Date
 }
 
 type Query{

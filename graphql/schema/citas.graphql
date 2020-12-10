@@ -1,13 +1,13 @@
 type Cita{
  id: Int!
- TITLE: String
- START: String
+ TITLE: String!
+ START: String!
  END: String
- odontologoId:Int
+ odontologoId:Int!
  horaIngreso: String
  horaSalida: String
- asistencia: Boolean
- cancelado:Boolean
+ asistencia: Boolean!
+ cancelado:Boolean!
  observaciones: String
 }
 
@@ -15,11 +15,11 @@ input CitaInput{
  TITLE: String!
  START: String!
  END: String
- odontologoId:Int
+ odontologoId:Int!
  horaIngreso: String
  horaSalida: String
- asistencia: Boolean
- cancelado:Boolean
+ asistencia: Boolean!
+ cancelado:Boolean!
  observaciones: String
 }
 
