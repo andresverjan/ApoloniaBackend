@@ -49,34 +49,31 @@ module.exports = {
     console.log("INGRESO A createTutorial");
     //const { id, img, value, active, description } = args.tutorial;
     try {
-      const _tutorial = await Tutorial.create(args.tutorial).then((_tutorial) => {
-        //console.log(data);
-        console.log(_tutorial);
-      const idTutorial = _tutorial.id;
+      const _tutorial = await Tutorial.create(args.tutorial).then(
+        (_tutorial) => {
+          //console.log(data);
+          console.log(_tutorial);
+          const idTutorial = _tutorial.id;
 
-      let comentarios = [
-        {
-          title: "one to many",
-          description: "si sirve",
-          tutorialId: _tutorial.id,
-        },
-        {
-          title: "one to many to",
-          description: "si sirve coi",
-          tutorialId: _tutorial.id,
-        },
-      ];
+          let comentarios = [
+            {
+              title: "one to many",
+              description: "si sirve",
+              tutorialId: _tutorial.id,
+            },
+            {
+              title: "one to many to",
+              description: "si sirve coi",
+              tutorialId: _tutorial.id,
+            },
+          ];
 
-      Comment.bulkCreate(comentarios, { validate: true })
-        .then(() => {
-          console.log("sirvió che'");
-        })
-        .catch((err) => {
-          console.log("horror creando la nota");
-        });
-      });
+          Comment.bulkCreate(comentarios, { validate: true })
+            .then(() => {})
+            .catch((err) => {});
+        }
+      );
 
-      
       return _tutorial;
     } catch (error) {
       throw error;
