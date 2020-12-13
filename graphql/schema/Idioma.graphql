@@ -1,0 +1,28 @@
+type Idiomas {
+  id : String
+  NOMBRE_IDIOMA: String!
+  SHORT_NAME: String
+  BANDERA: String
+}
+
+input IdiomasInput {
+  id : String
+  NOMBRE_IDIOMA: String!
+  SHORT_NAME: String
+  BANDERA: String
+}
+
+input IdiomasInputUpdate {
+  id : String!
+  NOMBRE_IDIOMA: String!
+  SHORT_NAME: String
+  BANDERA: String
+}
+
+input IdiomasInputDelete {
+  id: String!
+}
+
+type Query {
+  idiomas: [Idiomas!]
+}
