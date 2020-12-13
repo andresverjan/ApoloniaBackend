@@ -78,7 +78,6 @@ module.exports = {
   sendReminder: async (args) => {
     const { USUARIO_CORREO } = args.email;
 
-    console.log(USUARIO_CORREO);
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -90,8 +89,8 @@ module.exports = {
     const mailOptions = {
       from: "developteamcol@gmail.com",
       to: USUARIO_CORREO,
-      subject: "Sending Email using Node.js",
-      text: "That was easy!",
+      subject: "Recordatorio Cita",
+      html: "<h1>Tienes cita de odontología pronto!</h1>",
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
