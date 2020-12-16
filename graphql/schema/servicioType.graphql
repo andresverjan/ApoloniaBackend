@@ -1,0 +1,32 @@
+scalar Date
+type Servicio {
+  id: Int!
+  nombre: String
+  description: String
+  duracion: Int
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+input ServicioInput{
+  nombre: String
+  description: String
+  duracion: Int
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+input ServicioFilter {
+  nombre: String
+}
+
+input ServicioOrderBy {
+  nombre: String
+}
+
+type Query {
+  servicios(filter: ServicioFilter, order: ServicioOrderBy): [Servicio!]
+#  servicioById(id:Int): Servicio!
+}
