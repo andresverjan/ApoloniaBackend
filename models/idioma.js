@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     BANDERA: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.STRING
     }
   });
   return Idiomas;

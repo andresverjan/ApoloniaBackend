@@ -55,6 +55,8 @@ db.rol          = require("../models/rol")(sequelize, Sequelize);
 db.permiso      = require("../models/permiso")(sequelize, Sequelize);
 db.paciente     = require("../models/paciente")(sequelize, Sequelize);
 
+
+
 db.application.hasMany(db.campos, { onDelete: 'CASCADE',
                                     as: "fields" });
 
@@ -92,6 +94,18 @@ db.permiso.belongsToMany(db.rol, {
 
 db.rolPermiso     = require("../models/rolpermiso")(sequelize, Sequelize);
 
+db.citas      = require("../models/citas")(sequelize, Sequelize);
+db.odontologos      = require("../models/odontologos")(sequelize, Sequelize);
+
+db.odontologos.hasMany(db.citas, { onDelete: 'CASCADE',as: "fields" });
+
+db.citas.belongsTo(db.odontologos, {
+  foreignKey: "odontologoId",
+  onDelete: 'CASCADE',
+  as: "application",
+});
+
+                                    
 module.exports = db;
 
 
