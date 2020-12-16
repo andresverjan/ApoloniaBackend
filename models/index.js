@@ -53,6 +53,7 @@ db.application  = require("../models/applications")(sequelize, Sequelize);
 db.campos       = require("../models/applicationFieldsConfig")(sequelize, Sequelize);
 db.rol          = require("../models/rol")(sequelize, Sequelize);
 db.permiso      = require("../models/permiso")(sequelize, Sequelize);
+db.paciente     = require("../models/paciente")(sequelize, Sequelize);
 
 db.application.hasMany(db.campos, { onDelete: 'CASCADE',
                                     as: "fields" });
