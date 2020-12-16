@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Pacientes = db.paciente;
+const Servicios = db.servicio;
 
 const helpers = require("../../helpers");
 
 module.exports = {
-    pacientes: async (args) => {
+    servicios: async (args) => {
         try {
             let where = {};
             console.log("!!!!!!!!", args)
@@ -15,7 +15,7 @@ module.exports = {
                 where.order = helpers.getOrderFromObject(args.order);
             }
             
-            return (list = await Pacientes.findAll(where));
+            return (list = await Servicios.findAll(where));
         } catch (error) {
             throw error;
         }

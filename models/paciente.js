@@ -1,7 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Paciente = sequelize.define("paciente", {
       Cedula: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
+      },
+
+      TipoDoc: {
+        type:   Sequelize.ENUM,
+        values: ['CC', 'CE', 'PASSPORT']
       },
       
       Apellidos1: {
@@ -21,15 +26,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       
       FechaNacimiento: {
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
 
       TelCasa: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
 
       TelOficina: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
 
       Direccion: {
@@ -37,15 +42,15 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       Ciudad: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
 
       Municipio: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
 
       FechaIngreso: {
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
 
       Sexo: {
@@ -63,11 +68,6 @@ module.exports = (sequelize, Sequelize) => {
       
       Mail: {
         type: Sequelize.STRING
-      },
-      
-      TipoDoc: {
-        type:   Sequelize.ENUM,
-        values: ['CC', 'CE', 'PASSPORT']
       },
 
       Contacto: {
@@ -88,7 +88,8 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       EMPRESA_ID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        default: 1
       }
     },
     {

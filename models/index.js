@@ -54,7 +54,7 @@ db.campos       = require("../models/applicationFieldsConfig")(sequelize, Sequel
 db.rol          = require("../models/rol")(sequelize, Sequelize);
 db.permiso      = require("../models/permiso")(sequelize, Sequelize);
 db.paciente     = require("../models/paciente")(sequelize, Sequelize);
-
+db.servicio     = require("../models/servicio")(sequelize, Sequelize);
 
 
 db.application.hasMany(db.campos, { onDelete: 'CASCADE',
@@ -92,20 +92,31 @@ db.permiso.belongsToMany(db.rol, {
   primaryKey: true
 });
 
-db.rolPermiso     = require("../models/rolpermiso")(sequelize, Sequelize);
+db.rolPermiso   = require("../models/rolpermiso")(sequelize, Sequelize);
+db.citas        = require("../models/citas")(sequelize, Sequelize);
+db.odontologos  = require("../models/odontologos")(sequelize, Sequelize);
 
-db.citas      = require("../models/citas")(sequelize, Sequelize);
-db.odontologos      = require("../models/odontologos")(sequelize, Sequelize);
-
-db.odontologos.hasMany(db.citas, { onDelete: 'CASCADE',as: "fields" });
-
+db.odontologos.hasMany(db.citas, { onDelete: 'CASCADE',as: "citas" });
 db.citas.belongsTo(db.odontologos, {
   foreignKey: "odontologoId",
   onDelete: 'CASCADE',
-  as: "application",
+  as: "odontologos",
 });
 
-                                    
+db.paciente.hasMany(db.citas, { as: "citas" });
+db.citas.belongsTo(db.paciente, {
+  foreignKey: "pacienteId",
+  onDelete: 'CASCADE',
+  as: "paciente",
+});
+
+db.servicio.hasMany(db.citas, { as: "citas" });
+db.citas.belongsTo(db.servicio, {
+  foreignKey: "servicioId",
+  onDelete: 'CASCADE',
+  as: "servicio",
+});
+                                 
 module.exports = db;
 
 
