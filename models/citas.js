@@ -2,13 +2,13 @@
 
 module.exports = (sequelize, Sequelize) => {
     const CitasSchema = sequelize.define("cita", {
-        TITLE: {
+        title: {
             type: Sequelize.STRING,
         },
-        START: {
+        start: {
             type: Sequelize.STRING,
         },
-        END: {
+        end: {
             type: Sequelize.STRING,
         },
         odontologoId:{
@@ -20,18 +20,21 @@ module.exports = (sequelize, Sequelize) => {
         horaSalida:{
             type: Sequelize.STRING,
         },
-        asistencia:{
-            type: Sequelize.BOOLEAN,
+        status:{
+            type: Sequelize.INTEGER,
         },
-        cancelado:{
-            type: Sequelize.BOOLEAN,
+        pacienteId:{
+            type: Sequelize.INTEGER,
+        },
+        servicioId:{
+            type: Sequelize.INTEGER,
         },
         observaciones:{
             type: Sequelize.STRING,
-        }
-
-    
-        
+        }    
+    },
+    {
+        freezeTableName: true
     });
     return CitasSchema;
 };
