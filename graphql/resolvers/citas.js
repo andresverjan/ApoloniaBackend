@@ -52,6 +52,10 @@ module.exports = {
       return await Citas.update(args.cita, {
         where: { id: args.cita.id },
       }).then((data) => {
+        CitaTrazabilidad.create(args.cita).then((data) => {
+          console.log("Creating Trazabilidad.");
+          console.log(data);
+        });
         console.log(data);
       });
     } catch (error) {
