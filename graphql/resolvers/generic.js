@@ -10,14 +10,14 @@ module.exports = {
       let condicion = "";
       condicion = campos
         ? campos
-          .map((field, i) => {
-            if (i == 0) {
-              return ` ${field.nombre} like '%${field.valor}%'  `;
-            } else {
-              return `and ${field.nombre} like '%${field.valor}%' `;
-            }
-          })
-          .join()
+            .map((field, i) => {
+              if (i == 0) {
+                return ` ${field.nombre} like '%${field.valor}%'  `;
+              } else {
+                return `and ${field.nombre} like '%${field.valor}%' `;
+              }
+            })
+            .join()
         : "";
 
       //REPLACEALL NO ESTÁ SOPORTADO AÚN
@@ -45,7 +45,7 @@ module.exports = {
 
       const start = limite * pagina - limite;
 
-      limitQueryStr = ` limit ${start},${limite}`;
+      limitQueryStr = ` LIMIT ${start},${limite}`;
 
       const application = await Application.findOne({ where: { id: id } });
 
@@ -66,6 +66,7 @@ module.exports = {
         }
         return JSON.stringify(field);
       });
+
       const r = {
         application,
         campos: newFields,
@@ -96,7 +97,7 @@ module.exports = {
               field.valor = helpers.convertDateTimeIsoToString(d);
             }
           }
-          if (field.valor == 'null' || field.valor == 'NULL') {
+          if (field.valor == "null" || field.valor == "NULL") {
             return field.valor;
           } else {
             return "'" + field.valor + "'";
@@ -146,7 +147,7 @@ module.exports = {
           if (field.nombre == "createdAt" || field.nombre == "updatedAt") {
             field.valor = helpers.convertDateTimeIsoToString(field.valor);
           }
-          if (field.valor == 'null' || field.valor == 'NULL') {
+          if (field.valor == "null" || field.valor == "NULL") {
             return "`" + field.nombre + "`" + "=" + field.valor;
           } else {
             return "`" + field.nombre + "`" + "=" + "'" + field.valor + "'";

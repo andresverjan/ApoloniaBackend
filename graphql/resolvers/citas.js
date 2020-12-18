@@ -22,7 +22,6 @@ module.exports = {
       throw error;
     }
   },
-
   deleteCita: async (args) => {
     console.log("INGRESO A deleteEtiquetas");
     const { id } = args.cita;
@@ -63,7 +62,7 @@ module.exports = {
     try {
       const id = args.odontologoId;
       const list = await Citas.findAll({
-        where: { odontologoId: id }
+        where: { odontologoId: id },
       });
 
       if (!list) {
@@ -81,5 +80,5 @@ module.exports = {
     } catch (error) {
       throw error;
     }
-  }
+  },
 };
