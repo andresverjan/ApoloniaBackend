@@ -11,7 +11,7 @@ type Cita {
   pacienteId: Int
   servicioId: Int
   observaciones: String
-  usuarioId: Int #TODO: AGREGAR EL ID DEL USUARIO
+  usuarioId: Int
 }
 
 type Status {
@@ -31,6 +31,7 @@ input CitaInput {
   pacienteId: Int
   servicioId: Int
   observaciones: String
+  usuarioId: Int
 }
 
 input CitaInputUpdate {
@@ -45,11 +46,13 @@ input CitaInputUpdate {
   pacienteId: Int
   servicioId: Int
   observaciones: String
+  usuarioId: Int
 }
 
 input CitaInputDelete {
   id: Int!
 }
+
 type Query {
   getCitasByOdontologoId(odontologoId: Int!): [Cita!]
   statusCitas: [Status!]

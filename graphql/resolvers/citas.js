@@ -22,8 +22,6 @@ module.exports = {
       throw error;
     }
   },
-
-  //TODO: LAS CITAS NO SE ELIMINAN
   deleteCita: async (args) => {
     console.log("INGRESO A deleteEtiquetas");
     const { id } = args.cita;

@@ -1,6 +1,4 @@
 module.exports = (sequelize, Sequelize) => {
-  //TODO: actualizar el modelo
-
   const CitasSchema = sequelize.define(
     "cita",
     {
@@ -28,12 +26,14 @@ module.exports = (sequelize, Sequelize) => {
       pacienteId: {
         type: Sequelize.INTEGER,
       },
-      //TODO: RELACIÓN
       servicioId: {
         type: Sequelize.INTEGER,
       },
       observaciones: {
         type: Sequelize.STRING,
+      },
+      usuarioId: {
+        type: Sequelize.INTEGER,
       },
     },
     {
