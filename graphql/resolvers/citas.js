@@ -1,6 +1,8 @@
 const db = require("../../models");
 const citas = require("../../models/citas");
+const status = require("../../models/citaEstado");
 const Citas = db.citas;
+const Status = db.status;
 const Op = db.Sequelize.Op;
 
 module.exports = {
@@ -67,4 +69,12 @@ module.exports = {
       throw error;
     }
   },
+
+  statusCitas: async () => {
+    try {        
+        return (list = await Status.findAll());
+    } catch (error) {
+        throw error;
+    }
+  }
 };
