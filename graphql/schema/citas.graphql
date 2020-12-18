@@ -18,6 +18,8 @@ type Status {
   id: Int!
   nombre: String!
   color: String
+  textColor: String
+  borderColor: String
 }
 
 input CitaInput {
