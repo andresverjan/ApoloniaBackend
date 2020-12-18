@@ -1,6 +1,8 @@
 const db = require("../../models");
 const citas = require("../../models/citas");
+const citaTrazabilidad = require("../../models/citaTrazabilidad");
 const status = require("../../models/citaEstado");
+const CitaTrazabilidad = db.citaTrazabilidad;
 const Citas = db.citas;
 const Status = db.status;
 const Op = db.Sequelize.Op;
@@ -8,9 +10,12 @@ const Op = db.Sequelize.Op;
 module.exports = {
   createCita: async (args) => {
     console.log("INGRESO A CREATE CITAS");
-
     try {
       return await Citas.create(args.cita).then((data) => {
+        CitaTrazabilidad.create(args.cita).then((data) => {
+          console.log("Creating Trazabilidad.");
+          console.log(data);
+        });
         console.log(data);
       });
     } catch (error) {
@@ -71,10 +76,10 @@ module.exports = {
   },
 
   statusCitas: async () => {
-    try {        
-        return (list = await Status.findAll());
+    try {
+      return (list = await Status.findAll());
     } catch (error) {
-        throw error;
+      throw error;
     }
   }
 };

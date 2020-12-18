@@ -34,15 +34,8 @@ sequelize.query(SHOW_VARIABLES).then(function(result){
 console.log("DONE");
 console.log("****************************");
 
-db.tutorials = require("../models/tutorial")(sequelize, Sequelize);
-db.comment = require("../models/comment")(sequelize, Sequelize);
-
-db.tutorials.hasMany(db.comment, { as: "comments" });
-db.comment.belongsTo(db.tutorials, {
-  foreignKey: "tutorialId",
-  as: "tutorial",
-});
-
+db.tutorials    = require("../models/tutorial")(sequelize, Sequelize);
+db.comment      = require("../models/comment")(sequelize, Sequelize);
 db.etiquetas    = require("../models/etiquetas")(sequelize, Sequelize);
 db.users        = require("../models/user")(sequelize, Sequelize);
 db.idiomas      = require("../models/idioma")(sequelize, Sequelize);
@@ -55,7 +48,16 @@ db.rol          = require("../models/rol")(sequelize, Sequelize);
 db.permiso      = require("../models/permiso")(sequelize, Sequelize);
 db.paciente     = require("../models/paciente")(sequelize, Sequelize);
 db.servicio     = require("../models/servicio")(sequelize, Sequelize);
+db.rolPermiso   = require("../models/rolpermiso")(sequelize, Sequelize);
+db.citas        = require("../models/citas")(sequelize, Sequelize);
+db.odontologos  = require("../models/odontologos")(sequelize, Sequelize);
+db.citaTrazabilidad = require("../models/citaTrazabilidad")(sequelize, Sequelize);
 
+db.tutorials.hasMany(db.comment, { as: "comments" });
+db.comment.belongsTo(db.tutorials, {
+  foreignKey: "tutorialId",
+  as: "tutorial",
+});
 
 db.application.hasMany(db.campos, { onDelete: 'CASCADE',
                                     as: "fields" });
@@ -92,11 +94,8 @@ db.permiso.belongsToMany(db.rol, {
   primaryKey: true
 });
 
-db.rolPermiso   = require("../models/rolpermiso")(sequelize, Sequelize);
-db.citas        = require("../models/citas")(sequelize, Sequelize);
-db.odontologos  = require("../models/odontologos")(sequelize, Sequelize);
-
 db.odontologos.hasMany(db.citas, { onDelete: 'CASCADE',as: "citas" });
+
 db.citas.belongsTo(db.odontologos, {
   foreignKey: "odontologoId",
   onDelete: 'CASCADE',
@@ -118,7 +117,5 @@ db.citas.belongsTo(db.servicio, {
 });
 
 db.status = require("../models/citaEstado")(sequelize, Sequelize);
-                                 
+
 module.exports = db;
-
-
