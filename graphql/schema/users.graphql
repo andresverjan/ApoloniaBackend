@@ -1,6 +1,6 @@
 scalar Date
 type User {
-  ID: Int!
+  id: Int!
   USUARIO_NOMBRE: String!
   USUARIO_APELLIDO: String
   USUARIO_CORREO: String
