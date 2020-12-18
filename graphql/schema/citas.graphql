@@ -1,3 +1,4 @@
+#TODO: actualizar el modelo
 type Cita {
   id: Int!
   title: String!
@@ -10,12 +11,13 @@ type Cita {
   pacienteId: Int
   servicioId: Int
   observaciones: String
+  usuarioId: Int #TODO: AGREGAR EL ID DEL USUARIO
 }
 
-type Status{
- id: Int!
- nombre: String!
- color: String
+type Status {
+  id: Int!
+  nombre: String!
+  color: String
 }
 
 input CitaInput {
