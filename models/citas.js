@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, Sequelize) => {
     const CitasSchema = sequelize.define("cita", {
         title: {

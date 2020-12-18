@@ -12,6 +12,12 @@ type Cita {
   observaciones: String
 }
 
+type Status{
+ id: Int!
+ nombre: String!
+ color: String
+}
+
 input CitaInput {
   title: String!
   start: String!
@@ -44,6 +50,7 @@ input CitaInputDelete {
 }
 type Query {
   getCitasByOdontologoId(odontologoId: Int!): [Cita!]
+  statusCitas: [Status!]
 }
 
 type Mutation {
