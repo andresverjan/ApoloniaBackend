@@ -116,6 +116,8 @@ db.citas.belongsTo(db.servicio, {
   onDelete: 'CASCADE',
   as: "servicio",
 });
+
+db.status = require("../models/citaEstado")(sequelize, Sequelize);
                                  
 module.exports = db;
 

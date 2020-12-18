@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, Sequelize) => {
     const CitasSchema = sequelize.define("cita", {
         TITLE: {
@@ -28,10 +26,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         observaciones:{
             type: Sequelize.STRING,
-        }
-
-    
-        
+        }    
     });
     return CitasSchema;
 };
