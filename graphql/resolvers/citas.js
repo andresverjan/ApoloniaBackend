@@ -77,7 +77,15 @@ module.exports = {
       throw error;
     }
   },
+  getCita: async (args) => {
+    const { id } = args.cita;
+    const cita = await Citas.findOne({
+      where: { id },
+    });
 
+    console.log(cita);
+    return cita;
+  },
   statusCitas: async () => {
     try {
       return (list = await Status.findAll());

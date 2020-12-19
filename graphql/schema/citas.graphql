@@ -57,6 +57,7 @@ input CitaInputDelete {
 
 type Query {
   getCitasByOdontologoId(odontologoId: Int!): [Cita!]
+  getCita(cita: CitaInputDelete!): Cita!
   statusCitas: [Status!]
 }
 
