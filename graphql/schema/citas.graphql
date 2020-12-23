@@ -1,51 +1,68 @@
-type Cita{
- id: Int!
- TITLE: String!
- START: String!
- END: String
- odontologoId:Int!
- horaIngreso: String
- horaSalida: String
- asistencia: Boolean!
- cancelado:Boolean!
- observaciones: String
+#TODO: actualizar el modelo
+type Cita {
+  id: Int!
+  title: String!
+  start: String!
+  end: String
+  odontologoId: Int!
+  horaIngreso: String
+  horaSalida: String
+  status: Int
+  pacienteId: Int
+  servicioId: Int
+  observaciones: String
+  usuarioId: Int
 }
 
-input CitaInput{
- TITLE: String!
- START: String!
- END: String
- odontologoId:Int!
- horaIngreso: String
- horaSalida: String
- asistencia: Boolean!
- cancelado:Boolean!
- observaciones: String
+type Status {
+  id: Int!
+  nombre: String!
+  color: String
+  textColor: String
+  borderColor: String
 }
 
-input CitaInputUpdate{
- id: Int!
- TITLE: String
- START: String
- END: String
- odontologoId:Int
- horaIngreso: String
- horaSalida: String
- asistencia: Boolean
- cancelado:Boolean
- observaciones: String
+input CitaInput {
+  title: String!
+  start: String!
+  end: String
+  odontologoId: Int!
+  horaIngreso: String
+  horaSalida: String
+  status: Int
+  pacienteId: Int
+  servicioId: Int
+  observaciones: String
+  usuarioId: Int
 }
 
-input CitaInputDelete{
- id: Int!
+input CitaInputUpdate {
+  id: Int!
+  title: String
+  start: String
+  end: String
+  odontologoId: Int
+  horaIngreso: String
+  horaSalida: String
+  status: Int
+  pacienteId: Int
+  servicioId: Int
+  observaciones: String
+  usuarioId: Int
 }
+
+input CitaInputDelete {
+  id: Int!
+}
+
 type Query {
-  getCitasByOdontologoId(odontologoId:Int!): [Cita!]
+  getCitasByOdontologoId(odontologoId: Int!): [Cita!]
+  getCita(cita: CitaInputDelete!): Cita!
+  statusCitas: [Status!]
 }
 
 type Mutation {
   createCita(cita: CitaInput): Cita
   deleteCita(cita: CitaInputDelete): String
   updateCita(cita: CitaInputUpdate): Cita
-
 }

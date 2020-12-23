@@ -30,7 +30,7 @@ type User {
   ETIQUETAS: [Etiquetas]
 }
 
-type Idioma{
+type Idioma {
   ID: Int!
   NOMBRE_IDIOMA: String
   SHORT_NAME: String
@@ -41,21 +41,21 @@ type Menu {
   id: Int!
   nombre: String
   descripcion: String
-  url_menu:String
-  icon:String
-  applicationId:Int
+  url_menu: String
+  icon: String
+  applicationId: Int
 }
 
-type Etiquetas{
- NOMBRE: String
- LABEL: String
- DESRIPCION: String
+type Etiquetas {
+  NOMBRE: String
+  LABEL: String
+  DESRIPCION: String
 }
 
-input PasswordInputUpdate{
+input PasswordInputUpdate {
   USUARIO_CORREO: String!
   USUARIO_PASSWORD: String!
-}  
+}
 
 input UserInputUpdate{
   ID: Int!
@@ -84,13 +84,22 @@ input UserInputUpdate{
   CODIGOINTERNACIONAL: String
   BANDERA: String
 }  
+input IdiomInputUpdate {
+  USUARIO_CORREO: String!
+  IDIOMA_ID: String
+}
+
+input SendReminderInput {
+  USUARIO_CORREO: String!
+}
 
 type Query {
-  login(username:String! , password:String!): User
+  login(username: String!, password: String!): User
 }
 
 type Mutation {
   updatePassword(password: PasswordInputUpdate): User
   updateUser(User: UserInputUpdate): User
+  updateIdiom(idiom: IdiomInputUpdate): User
+  sendReminder(email: SendReminderInput): String!
 }
-
