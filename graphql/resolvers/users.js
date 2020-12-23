@@ -1,15 +1,12 @@
 const db = require("../../models");
-const helpers = require("../../helpers");
 const Users = db.users;
 const Idioma = db.idiomas;
 const Etiquetas = db.etiquetas;
-const Campo = db.campos;
-const Op = db.Sequelize.Op;
+
+
 
 module.exports = {
     login: async (args) => {
-        console.log("INGRESO A getUserMenu");
-        console.log(args);
         const { username, password } = args;
         try {
 
@@ -34,7 +31,6 @@ module.exports = {
                         ETIQUETAS: etiquetas
                     };                    
                 }
-                console.log(usrFinal);
                 return usrFinal;
             }
         } catch (error) {
@@ -48,26 +44,28 @@ module.exports = {
           return await Users.update(usuario, {
             where: { USUARIO_CORREO: args.password.USUARIO_CORREO},
           }).then((data) => {
-            console.log(data);
           });
         } catch (error) {
           throw error;
         }
       },
-      updateIdiom: async (args) => {
-        const usuario = Users.findOne({where:{USUARIO_CORREO: args.idiom.USUARIO_CORREO}});
-        usuario.IDIOMA_ID= args.idiom.IDIOMA_ID
+      updateUser: async (args) => {
         try {
-          return await Users.update(usuario, {
-            where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO},
-          }).then((data) => {
-            console.log(data);
-          });
+          const{
+            User:user
+          }=args
+          const newUser = Users.update({ USUARIO_NOMBRE: user.USUARIO_NOMBRE, USUARIO_APELLIDO: user.USUARIO_APELLIDO, IDIOMA_ID: user.IDIOMA_ID, USUARIO_CORREO: user.USUARIO_CORREO, USUARIO_TELEFONO: user.USUARIO_TELEFONO, updatedAt: new Date().toISOString() }, {
+            where: { id: user.ID }
+          })
+          .then(() => {
+            console.log(newUser)
+        }).catch(err => {
+            throw err;
+          })
+          return await Users.findOne({ where: { ID: user.ID } });
         } catch (error) {
           throw error;
         }
       },
-
-
 
 };

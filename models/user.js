@@ -1,5 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
     const UserSchema = sequelize.define("usuarios", {
+        ID: {
+            type: Sequelize.INTEGER,
+        },
+        USUARIO_ID: {
+            type: Sequelize.STRING,
+        },
         USUARIO_NOMBRE: {
             type: Sequelize.STRING,
         },
@@ -36,6 +42,18 @@ module.exports = (sequelize, Sequelize) => {
         FECHA_CREACION: {
             type: Sequelize.STRING,
         },
+        MCA_EMPLEADO: {
+            type: Sequelize.STRING,
+        },
+        NOMBRE_CIUDAD: {
+            type: Sequelize.STRING,
+        },
+        NOMBRE_DIRECCION: {
+            type: Sequelize.STRING,
+        },
+        CELULAR: {
+            type: Sequelize.STRING,
+        },
         URL_FOTO_PERFIL: {
             type: Sequelize.STRING,
         },
@@ -46,6 +64,27 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
         },
         LONGITUD: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_TOKEN: {
+            type: Sequelize.STRING,
+        },
+        USUARIO_NACIMIENTO: {
+            type: Sequelize.DATE,
+        },
+        USUARIO_SEXO: {
+            type: Sequelize.STRING,
+        },
+        FECHA_REGISTRO: {
+            type: Sequelize.DATE,
+        },
+        COUNTRY: {
+            type: Sequelize.STRING,
+        },
+        CODIGOINTERNACIONAL: {
+            type: Sequelize.STRING,
+        },
+        BANDERA: {
             type: Sequelize.STRING,
         },
         IDIOMA_ID: {
@@ -60,6 +99,9 @@ module.exports = (sequelize, Sequelize) => {
         MCA_BLOQUEADO_INTENTOS: {
             type: Sequelize.STRING,
         },
-    });
+    },
+        {
+            freezeTableName: true
+        });
     return UserSchema;
 };

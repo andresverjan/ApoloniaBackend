@@ -1,6 +1,7 @@
 scalar Date
 type User {
   ID: Int!
+  USUARIO_ID: String
   USUARIO_NOMBRE: String!
   USUARIO_APELLIDO: String
   USUARIO_CORREO: String
@@ -8,11 +9,22 @@ type User {
   USUARIO_ACTIVO: Boolean
   USUARIO_LOGIN: String!
   USUARIO_PASSWORD: String!
+  MCA_EMPLEADO: String
   EMPRESA_ID: String
+  NOMBRE_CIUDAD: String
+  NOMBRE_DIRECCION : String
+  CELULAR: String
   URL_FOTO_PERFIL: String
   STATUS_ONLINE: String
   IDIOMA_ID: String
   ROL_ID: String
+  USUARIO_TOKEN: String
+  USUARIO_NACIMIENTO: Date
+  USUARIO_SEXO: String
+  FECHA_REGISTRO: Date
+  COUNTRY: String
+  CODIGOINTERNACIONAL: String
+  BANDERA: String
   PERMISOS: [Menu]
   IDIOMA: Idioma
   ETIQUETAS: [Etiquetas]
@@ -45,9 +57,32 @@ input PasswordInputUpdate{
   USUARIO_PASSWORD: String!
 }  
 
-input IdiomInputUpdate{
-  USUARIO_CORREO: String!
+input UserInputUpdate{
+  ID: Int!
+  USUARIO_ID: String
+  USUARIO_NOMBRE: String
+  USUARIO_APELLIDO: String
+  USUARIO_CORREO: String
+  USUARIO_TELEFONO: String
+  USUARIO_ACTIVO: Boolean
+  USUARIO_LOGIN: String
+  USUARIO_PASSWORD: String
+  MCA_EMPLEADO: String
+  EMPRESA_ID: String
+  NOMBRE_CIUDAD: String
+  NOMBRE_DIRECCION : String
+  CELULAR: String
+  URL_FOTO_PERFIL: String
+  STATUS_ONLINE: String
   IDIOMA_ID: String
+  ROL_ID: String
+  USUARIO_TOKEN: String
+  USUARIO_NACIMIENTO: Date
+  USUARIO_SEXO: String
+  FECHA_REGISTRO: Date
+  COUNTRY: String
+  CODIGOINTERNACIONAL: String
+  BANDERA: String
 }  
 
 type Query {
@@ -56,6 +91,6 @@ type Query {
 
 type Mutation {
   updatePassword(password: PasswordInputUpdate): User
-  updateIdiom(idiom: IdiomInputUpdate): User
+  updateUser(User: UserInputUpdate): User
 }
 
