@@ -57,7 +57,6 @@ module.exports = {
         where: { id: user.ID }
       })
         .then(() => {
-          console.log(newUser)
         }).catch(err => {
           throw err;
         })
@@ -75,7 +74,6 @@ module.exports = {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO },
       }).then((data) => {
-        console.log(data);
       });
     } catch (error) {
       throw error;
