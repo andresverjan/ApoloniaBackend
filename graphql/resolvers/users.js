@@ -8,26 +8,31 @@ module.exports = {
   login: async (args) => {
     const { username, password } = args;
     try {
-
-      const usr = await Users.findOne({ where: { USUARIO_LOGIN: username, USUARIO_PASSWORD: password } });
+      const usr = await Users.findOne({
+        where: { USUARIO_LOGIN: username, USUARIO_PASSWORD: password },
+      });
       if (usr != null) {
-        const permisos = await db.sequelize.query('CALL login(:USERNAME, :USERPASS)',
-          { replacements: { USERNAME: username, USERPASS: password, } });
+        const permisos = await db.sequelize.query(
+          "CALL login(:USERNAME, :USERPASS)",
+          { replacements: { USERNAME: username, USERPASS: password } }
+        );
         let usrFinal = {
           ...usr.dataValues,
-          PERMISOS: permisos
+          PERMISOS: permisos,
         };
         let idiomaId = usrFinal.IDIOMA_ID ? usrFinal.IDIOMA_ID : 1;
         if (idiomaId != null) {
           const idioma = await Idioma.findOne({ where: { ID: idiomaId } });
           usrFinal = {
             ...usrFinal,
-            IDIOMA: idioma.dataValues
+            IDIOMA: idioma.dataValues,
           };
-          const etiquetas = await Etiquetas.findAll({ where: { IDIOMA_ID: idiomaId } });
+          const etiquetas = await Etiquetas.findAll({
+            where: { IDIOMA_ID: idiomaId },
+          });
           usrFinal = {
             ...usrFinal,
-            ETIQUETAS: etiquetas
+            ETIQUETAS: etiquetas,
           };
         }
         return usrFinal;
@@ -37,35 +42,43 @@ module.exports = {
     }
   },
   updatePassword: async (args) => {
-    const usuario = Users.findOne({ where: { USUARIO_CORREO: args.password.USUARIO_CORREO } });
-    usuario.USUARIO_PASSWORD = args.password.USUARIO_PASSWORD
+    const usuario = Users.findOne({
+      where: { USUARIO_CORREO: args.password.USUARIO_CORREO },
+    });
+    usuario.USUARIO_PASSWORD = args.password.USUARIO_PASSWORD;
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.password.USUARIO_CORREO },
-      }).then((data) => {
-      });
+      }).then((data) => {});
     } catch (error) {
       throw error;
     }
   },
   updateUser: async (args) => {
     try {
-      const {
-        User: user
-      } = args
-      const newUser = Users.update({ USUARIO_NOMBRE: user.USUARIO_NOMBRE, USUARIO_APELLIDO: user.USUARIO_APELLIDO, IDIOMA_ID: user.IDIOMA_ID, USUARIO_CORREO: user.USUARIO_CORREO, USUARIO_TELEFONO: user.USUARIO_TELEFONO, updatedAt: new Date().toISOString() }, {
-        where: { id: user.ID }
-      })
-        .then(() => {
-          console.log(newUser)
-        }).catch(err => {
+      const { User: user } = args;
+      const newUser = Users.update(
+        {
+          USUARIO_NOMBRE: user.USUARIO_NOMBRE,
+          USUARIO_APELLIDO: user.USUARIO_APELLIDO,
+          IDIOMA_ID: user.IDIOMA_ID,
+          USUARIO_CORREO: user.USUARIO_CORREO,
+          USUARIO_TELEFONO: user.USUARIO_TELEFONO,
+          updatedAt: new Date().toISOString(),
+        },
+        {
+          where: { id: user.id },
+        }
+      )
+        .then(() => {})
+        .catch((err) => {
           throw err;
-        })
-      return await Users.findOne({ where: { ID: user.ID } });
+        });
+      return await Users.findOne({ where: { id: user.id } });
     } catch (error) {
       throw error;
     }
-  }, 
+  },
   updateIdiom: async (args) => {
     const usuario = Users.findOne({
       where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO },
@@ -74,9 +87,7 @@ module.exports = {
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO },
-      }).then((data) => {
-        console.log(data);
-      });
+      }).then((data) => {});
     } catch (error) {
       throw error;
     }
@@ -91,7 +102,7 @@ module.exports = {
         pass: "devteam123$",
       },
     });
-  const mailOptions = {
+    const mailOptions = {
       from: "developteamcol@gmail.com",
       to: USUARIO_CORREO,
       subject: "Recordatorio Cita",
@@ -107,5 +118,5 @@ module.exports = {
     });
 
     return "Email enviado";
-  }
-}
+  },
+};

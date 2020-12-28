@@ -1,6 +1,6 @@
 scalar Date
 type User {
-  ID: Int!
+  id: Int!
   USUARIO_ID: String
   USUARIO_NOMBRE: String!
   USUARIO_APELLIDO: String
@@ -12,7 +12,7 @@ type User {
   MCA_EMPLEADO: String
   EMPRESA_ID: String
   NOMBRE_CIUDAD: String
-  NOMBRE_DIRECCION : String
+  NOMBRE_DIRECCION: String
   CELULAR: String
   URL_FOTO_PERFIL: String
   STATUS_ONLINE: String
@@ -57,8 +57,8 @@ input PasswordInputUpdate {
   USUARIO_PASSWORD: String!
 }
 
-input UserInputUpdate{
-  ID: Int!
+input UserInputUpdate {
+  id: Int!
   USUARIO_ID: String
   USUARIO_NOMBRE: String
   USUARIO_APELLIDO: String
@@ -70,7 +70,7 @@ input UserInputUpdate{
   MCA_EMPLEADO: String
   EMPRESA_ID: String
   NOMBRE_CIUDAD: String
-  NOMBRE_DIRECCION : String
+  NOMBRE_DIRECCION: String
   CELULAR: String
   URL_FOTO_PERFIL: String
   STATUS_ONLINE: String
@@ -83,7 +83,7 @@ input UserInputUpdate{
   COUNTRY: String
   CODIGOINTERNACIONAL: String
   BANDERA: String
-}  
+}
 input IdiomInputUpdate {
   USUARIO_CORREO: String!
   IDIOMA_ID: String
