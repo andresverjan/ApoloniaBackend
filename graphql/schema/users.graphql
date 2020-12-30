@@ -58,11 +58,7 @@ input PasswordInputUpdate {
 }
 
 input UserInputUpdate {
-<<<<<<< Updated upstream
   id: Int!
-=======
-  ID: Int!
->>>>>>> Stashed changes
   USUARIO_ID: String
   USUARIO_NOMBRE: String
   USUARIO_APELLIDO: String
