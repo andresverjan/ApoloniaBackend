@@ -1,11 +1,7 @@
 const db = require("../../models");
-const citas = require("../../models/citas");
-const citaTrazabilidad = require("../../models/citaTrazabilidad");
-const status = require("../../models/citaEstado");
 const CitaTrazabilidad = db.citaTrazabilidad;
 const Citas = db.citas;
 const Status = db.status;
-const Op = db.Sequelize.Op;
 
 module.exports = {
   createCita: async (args) => {
