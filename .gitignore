@@ -8,9 +8,9 @@
 /.bundle
 
 /node_modules
-/yarn.lock
-/yarn-error.log
-/package-lock.json
+yarn.lock
+yarn-error.log
+package-lock.json
 
 # Ignore all logfiles and tempfiles.
 /log/*

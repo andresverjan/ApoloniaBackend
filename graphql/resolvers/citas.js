@@ -1,21 +1,23 @@
 const db = require("../../models");
-const citas = require("../../models/citas");
+const CitaTrazabilidad = db.citaTrazabilidad;
 const Citas = db.citas;
-const Op = db.Sequelize.Op;
+const Status = db.status;
 
 module.exports = {
   createCita: async (args) => {
     console.log("INGRESO A CREATE CITAS");
-
     try {
       return await Citas.create(args.cita).then((data) => {
+        CitaTrazabilidad.create(args.cita).then((data) => {
+          console.log("Creating Trazabilidad.");
+          console.log(data);
+        });
         console.log(data);
       });
     } catch (error) {
       throw error;
     }
   },
-
   deleteCita: async (args) => {
     console.log("INGRESO A deleteEtiquetas");
     const { id } = args.cita;
@@ -46,6 +48,10 @@ module.exports = {
       return await Citas.update(args.cita, {
         where: { id: args.cita.id },
       }).then((data) => {
+        CitaTrazabilidad.create(args.cita).then((data) => {
+          console.log("Creating Trazabilidad.");
+          console.log(data);
+        });
         console.log(data);
       });
     } catch (error) {
@@ -56,13 +62,29 @@ module.exports = {
     try {
       const id = args.odontologoId;
       const list = await Citas.findAll({
-        where: { odontologoId: id }
+        where: { odontologoId: id },
       });
 
       if (!list) {
         throw new Error("not found");
       }
       return list;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getCita: async (args) => {
+    const { id } = args.cita;
+    const cita = await Citas.findOne({
+      where: { id },
+    });
+
+    console.log(cita);
+    return cita;
+  },
+  statusCitas: async () => {
+    try {
+      return (list = await Status.findAll());
     } catch (error) {
       throw error;
     }
