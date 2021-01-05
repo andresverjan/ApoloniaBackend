@@ -59,7 +59,7 @@ input PacienteFilter {
 }
 
 input PacienteOrderBy {
-  Nombres1: String
+  Cedula: String
 }
 
 type Query {
