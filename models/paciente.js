@@ -1,99 +1,102 @@
 module.exports = (sequelize, Sequelize) => {
-    const Paciente = sequelize.define("paciente", {
+  const Paciente = sequelize.define(
+    "paciente",
+    {
       Cedula: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       TipoDoc: {
-        type:   Sequelize.ENUM,
-        values: ['CC', 'CE', 'PASSPORT']
+        type: Sequelize.ENUM,
+        values: ["CC", "CE", "PASSPORT", "TI"],
       },
-      
+
       Apellidos1: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Apellidos2: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Nombres1: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      
+
       Nombres2: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      
+
       FechaNacimiento: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
 
       TelCasa: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       TelOficina: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Direccion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Ciudad: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Municipio: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       FechaIngreso: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
 
       Sexo: {
         type: Sequelize.ENUM,
-        values: ['Masculino', 'Femenino', 'Intersexual']
+        values: ["Masculino", "Femenino", "Intersexual"],
       },
 
       RemitidoPor: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Ocupacion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      
+
       Mail: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       Contacto: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       EstadoCivil: {
-        type:   Sequelize.ENUM,
-        values: ['Soltero', 'Casado', 'Separado', 'Unión Libre', 'Viudo']
+        type: Sequelize.ENUM,
+        values: ["Soltero", "Casado", "Separado", "Unión Libre", "Viudo"],
       },
 
       Nacionaliad: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      
+
       EPS: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       EMPRESA_ID: {
         type: Sequelize.INTEGER,
-        default: 1
-      }
+        default: 1,
+      },
     },
     {
-      freezeTableName: true
-    });
-    return Paciente;
-  };
+      freezeTableName: true,
+    }
+  );
+  return Paciente;
+};

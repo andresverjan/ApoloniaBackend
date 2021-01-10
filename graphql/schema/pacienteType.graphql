@@ -27,7 +27,7 @@ type Paciente {
   updatedAt: Date
 }
 
-input PacienteInput{
+input PacienteInput {
   Cedula: String!
   TipoDoc: String
   Apellidos1: String
@@ -64,5 +64,5 @@ input PacienteOrderBy {
 
 type Query {
   pacientes(filter: PacienteFilter, order: PacienteOrderBy): [Paciente!]
-#  pacienteById(id:Int): Paciente!
+  pacienteById(id: Int): Paciente!
 }
