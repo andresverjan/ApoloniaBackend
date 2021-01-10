@@ -9,7 +9,7 @@ type Servicio {
   updatedAt: Date
 }
 
-input ServicioInput{
+input ServicioInput {
   nombre: String
   description: String
   duracion: Int
@@ -28,5 +28,5 @@ input ServicioOrderBy {
 
 type Query {
   servicios(filter: ServicioFilter, order: ServicioOrderBy): [Servicio!]
-#  servicioById(id:Int): Servicio!
+  servicioById(id: Int): Servicio!
 }
