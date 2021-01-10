@@ -2,6 +2,9 @@ const db = require("../../models");
 const Users = db.users;
 const Idioma = db.idiomas;
 const Etiquetas = db.etiquetas;
+const Pacientes = db.paciente;
+const Odontologos = db.odontologos;
+const Servicios = db.servicio;
 const nodemailer = require("nodemailer");
 
 module.exports = {
@@ -93,7 +96,7 @@ module.exports = {
     }
   },
   sendReminder: async (args) => {
-    const { USUARIO_CORREO } = args.email;
+    const { USUARIO_CORREO, cita } = args.email;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -102,17 +105,62 @@ module.exports = {
         pass: "devteam123$",
       },
     });
+
+    const paciente = await Pacientes.findOne({
+      where: { id: cita.pacienteId },
+    });
+    const odontologo = await Odontologos.findOne({
+      where: { id: cita.odontologoId },
+    });
+    const servicio = await Servicios.findOne({
+      where: { id: cita.servicioId },
+    });
+
     const mailOptions = {
       from: "developteamcol@gmail.com",
       to: USUARIO_CORREO,
-      subject: "Recordatorio Cita",
-      html: "<h1>Tienes cita de odontología pronto!</h1>",
+      subject: `Recordatorio cita odontológica: ${paciente.Nombres1} ${paciente.Apellidos1}`,
+      html: `
+      
+      <h1>Señor ${paciente.Nombres1} ${
+        paciente.Apellidos1
+      }. Tiene cita de odontología pronto!</h1>
+      
+      <h2><strong>Información de la cita:</strong></h2>
+
+      <ul>
+
+        <li>
+          <h4><strong>Título:</strong></h4> ${cita.title}
+        </li>
+
+        <li>
+          <h4><strong>Hora de inicio:</strong></h4>${cita.start
+            .split("T")[1]
+            .substr(0, 5)}
+        </li>
+      
+        <li>
+          <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${
+        odontologo.Apellidos
+      }
+        </li>
+
+        <li>
+          <h4><strong>Tipo de cita:</strong></h4> ${servicio.nombre}
+        </li>
+
+      </ul>
+
+      `,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.log(error);
         return "Error";
       } else {
+        console.log(info.response);
         return "Email sent: " + info.response;
       }
     });

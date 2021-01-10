@@ -89,8 +89,24 @@ input IdiomInputUpdate {
   IDIOMA_ID: String
 }
 
+input InputCita {
+  id: Int!
+  title: String!
+  start: String!
+  end: String
+  odontologoId: Int!
+  horaIngreso: String
+  horaSalida: String
+  status: Int
+  pacienteId: Int
+  servicioId: Int
+  observaciones: String
+  usuarioId: Int
+}
+
 input SendReminderInput {
   USUARIO_CORREO: String!
+  cita: InputCita!
 }
 
 type Query {
