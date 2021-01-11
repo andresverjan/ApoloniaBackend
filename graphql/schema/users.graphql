@@ -90,7 +90,7 @@ input IdiomInputUpdate {
 }
 
 input InputCita {
-  id: Int!
+  id: Int
   title: String!
   start: String!
   end: String
