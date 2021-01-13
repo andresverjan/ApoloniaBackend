@@ -164,7 +164,6 @@ module.exports = {
         return "Email sent: " + info.response;
       }
     });
-
     return "Email enviado";
   },
 };
