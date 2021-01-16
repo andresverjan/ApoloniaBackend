@@ -7,16 +7,13 @@ module.exports = {
   pacientes: async (args) => {
     try {
       let where = {};
-      console.log("!!!!!!!!", args);
-      console.log("INGRESO A BUSCAR PACIENTES ");
-      console.log(args.filter);
+
       if (args.filter != null && args.filter != undefined) {
         where = helpers.getFilterFromObjectAllLike(args.filter);
       }
-      console.log(where);
       if (args.order != null && args.order != undefined) {
         where.order = helpers.getOrderFromObject(args.order);
-      }      
+      }
 
       return (list = await Pacientes.findAll(where));
     } catch (error) {
