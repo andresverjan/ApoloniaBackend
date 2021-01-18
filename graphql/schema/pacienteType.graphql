@@ -57,7 +57,33 @@ input PacienteInput {
 }
 
 input PacienteFilter {
+  id: Int
   Cedula: String
+  TipoDoc: String
+  Apellidos1: String
+  Apellidos2: String
+  Nombres1: String
+  Nombres2: String
+  Apellidos: String
+  Nombres: String
+  FechaNacimiento: Date
+  TelCasa: String
+  TelOficina: String
+  Direccion: String
+  Ciudad: String
+  Municipio: String
+  FechaIngreso: Date
+  Sexo: String
+  RemitidoPor: String
+  Ocupacion: String
+  Mail: String
+  Contacto: String
+  EstadoCivil: String
+  Nacionaliad: String
+  EPS: String
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
 }
 
 input PacienteOrderBy {
