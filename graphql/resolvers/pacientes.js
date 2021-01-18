@@ -7,9 +7,9 @@ module.exports = {
   pacientes: async (args) => {
     try {
       let where = {};
-      console.log("!!!!!!!!", args);
+
       if (args.filter != null && args.filter != undefined) {
-        where = helpers.getFilterFromObject(args.filter);
+        where = helpers.getFilterFromObjectAllLike(args.filter);
       }
       if (args.order != null && args.order != undefined) {
         where.order = helpers.getOrderFromObject(args.order);

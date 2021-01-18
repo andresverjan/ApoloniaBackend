@@ -79,6 +79,17 @@ const getFilterFromObject = (object) => {
   return result.length>0 ? { where: result }: {};
 };
 
+const getFilterFromObjectAllLike = (object) => {
+  let result = [];
+  for (let key of Object.keys(object)) {
+    let valor = object[key];
+    let obj = {};
+      obj[key] = {[Op.like]: "%" + valor  + "%"};
+      result.push(obj);
+  }
+  return result.length>0 ? { where: result }: {};
+};
+
 const getFilterFormObjectMongo = (object) => {
   let result = [];  
   for (let key of Object.keys(object)) {
@@ -130,6 +141,7 @@ module.exports = {
   getUserByJwt,
   getCurrentDateTime,
   getFilterFromObject,
+  getFilterFromObjectAllLike,
   getOrderFromObject,
   getFilterFormObjectMongo,
   convertDateTimeIsoToString
