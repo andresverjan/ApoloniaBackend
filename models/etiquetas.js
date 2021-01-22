@@ -1,17 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
   const Etiquetas = sequelize.define("etiquetas", {
     NOMBRE: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     DESCRIPCION: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     LABEL: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.STRING,
     },
     IDIOMA_ID: {
-      type: Sequelize.BOOLEAN
-    }
+      type: Sequelize.STRING,
+    },
   });
   return Etiquetas;
 };
