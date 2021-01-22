@@ -44,8 +44,6 @@ module.exports = {
     }
   },
   createEtiqueta: async (args) => {
-    console.log("INGRESO A CREATE Etiquetas");
-    //const { id, img, value, active, description } = args.tutorial;
     try {
       return await Etiquetas.create(args.etiqueta).then((data) => {
         console.log(data);
