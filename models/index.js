@@ -51,6 +51,7 @@ db.servicio = require("../models/servicio")(sequelize, Sequelize);
 db.rolPermiso = require("../models/rolpermiso")(sequelize, Sequelize);
 db.citas = require("../models/citas")(sequelize, Sequelize);
 db.odontologos = require("../models/odontologos")(sequelize, Sequelize);
+db.esterilizacion = require("../models/esterilizaciones")(sequelize, Sequelize);
 db.citaTrazabilidad = require("../models/citaTrazabilidad")(
   sequelize,
   Sequelize
