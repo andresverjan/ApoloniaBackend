@@ -1,37 +1,36 @@
 type Etiqueta {
-  id : String!
-  nombre: String!
-  descripcion: String
-  label: String
-  idioma_id: String
+  id: String
+  NOMBRE: String!
+  DESCRIPCION: String
+  LABEL: String
+  IDIOMA_ID: String
 }
 
 input EtiquetaInput {
-  id : String!
-  nombre: String!
-  descripcion: String
-  label: String
-  idioma_id: String
+  NOMBRE: String!
+  DESCRIPCION: String
+  LABEL: String
+  IDIOMA_ID: String
 }
 
 input EtiquetaInputUpdate {
-  id : String!
-  title: String!
-  descripcion: String
-  published: String
+  id: String!
+  NOMBRE: String!
+  DESCRIPCION: String
+  LABEL: String
+  IDIOMA_ID: String
 }
 
 input EtiquetaInputDelete {
-  id: String!  
+  id: String!
 }
 
-
 input EtiquetaFilter {
-  title: String!
-  descripcion: String
-  published: String
-}  
-
+  NOMBRE: String!
+  DESCRIPCION: String
+  LABEL: String
+  IDIOMA_ID: String
+}
 type Query {
   etiquetas: [Etiqueta!]
 }
