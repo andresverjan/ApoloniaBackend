@@ -1,0 +1,22 @@
+scalar Date
+type Esterilizacion {
+  T27Codigo: String
+  T27Fecha: Date
+  T27Campo9: String
+  T27Campo24: String
+  T27Auditoria: String
+  T27Consecutivo: Int
+}
+
+input EsterilizacionFilter {
+  T27Codigo: String
+  T27Fecha: Date
+  T27Campo9: String
+  T27Campo24: String
+  T27Auditoria: String
+  T27Consecutivo: Int
+}
+
+type Query {
+  esterilizaciones: [Esterilizacion!]
+}
