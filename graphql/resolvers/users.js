@@ -7,6 +7,9 @@ const Odontologos = db.odontologos;
 const Servicios = db.servicio;
 const nodemailer = require("nodemailer");
 
+const https = require("https");
+var btoa = require("btoa");
+
 module.exports = {
   login: async (args) => {
     const { username, password } = args;
@@ -166,4 +169,38 @@ module.exports = {
     });
     return "Email enviado";
   },
+
+  sendsms: async (args) => {
+    try {
+      const dato = JSON.stringify(args.msg)
+      const options = {
+        hostname: 'api.labsmobile.com',
+        port: 443,
+        path: '/json/send',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa('andresverjandiaz@gmail.com:t4nK83HBra3kPVe2JKduBx6hNpkjVzwf'),
+          'Content-Length': dato.length
+        }
+      }
+      
+      var req = https.request(options, function (res) {
+        var chunks = [];
+        res.on("data", function (chunk) {
+          console.log("IDIOTO chunk...", chunk);
+          chunks.push(chunk);
+        });
+        res.on("end", function () {
+          let body = Buffer.concat(chunks);
+          console.log("IDIOTO...", body.toString());
+        });
+      });
+      
+      req.write(dato)
+      req.end()
+    } catch (error) {
+        throw error;
+    }
+  }
 };

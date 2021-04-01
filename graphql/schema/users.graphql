@@ -52,6 +52,21 @@ type Etiquetas {
   DESRIPCION: String
 }
 
+type MsgOutput {
+  subid: String
+  code: String
+  message: String
+}
+
+input Msisdn {
+  msisdn: String! 
+}
+
+input MsgInput {
+  message: String!
+  recipient: [Msisdn]
+}
+
 input PasswordInputUpdate {
   USUARIO_CORREO: String!
   USUARIO_PASSWORD: String!
@@ -118,4 +133,5 @@ type Mutation {
   updateUser(User: UserInputUpdate): User
   updateIdiom(idiom: IdiomInputUpdate): User
   sendReminder(email: SendReminderInput): String!
+  sendsms(msg: MsgInput): MsgOutput
 }
