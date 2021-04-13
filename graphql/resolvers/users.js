@@ -7,8 +7,10 @@ const Odontologos = db.odontologos;
 const Servicios = db.servicio;
 const nodemailer = require("nodemailer");
 
+//const request = require("request");
+const btoa = require("btoa");
 const https = require("https");
-var btoa = require("btoa");
+var request = require('request');
 
 module.exports = {
   login: async (args) => {
@@ -55,7 +57,7 @@ module.exports = {
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.password.USUARIO_CORREO },
-      }).then((data) => {});
+      }).then((data) => { });
     } catch (error) {
       throw error;
     }
@@ -76,7 +78,7 @@ module.exports = {
           where: { id: user.id },
         }
       )
-        .then(() => {})
+        .then(() => { })
         .catch((err) => {
           throw err;
         });
@@ -93,7 +95,7 @@ module.exports = {
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO },
-      }).then((data) => {});
+      }).then((data) => { });
     } catch (error) {
       throw error;
     }
@@ -125,9 +127,8 @@ module.exports = {
       subject: `Recordatorio cita odontológica: ${paciente.Nombres1} ${paciente.Apellidos1}`,
       html: `
       
-      <h1>Señor ${paciente.Nombres1} ${
-        paciente.Apellidos1
-      }. Tiene cita de odontología pronto!</h1>
+      <h1>Señor ${paciente.Nombres1} ${paciente.Apellidos1
+        }. Tiene cita de odontología pronto!</h1>
       
       <h2><strong>Información de la cita:</strong></h2>
 
@@ -139,14 +140,13 @@ module.exports = {
 
         <li>
           <h4><strong>Hora de inicio:</strong></h4>${cita.start
-            .split("T")[1]
-            .substr(0, 5)}
+          .split("T")[1]
+          .substr(0, 5)}
         </li>
       
         <li>
-          <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${
-        odontologo.Apellidos
-      }
+          <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${odontologo.Apellidos
+        }
         </li>
 
         <li>
@@ -172,35 +172,25 @@ module.exports = {
 
   sendsms: async (args) => {
     try {
-      const dato = JSON.stringify(args.msg)
-      const options = {
-        hostname: 'api.labsmobile.com',
-        port: 443,
-        path: '/json/send',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const dato = JSON.stringify(args.msg);
+            
+      var options = {
+        'method': 'POST',
+        'url': 'https://api.labsmobile.com/json/send',
+        'headers': {
           'Authorization': 'Basic ' + btoa('andresverjandiaz@gmail.com:t4nK83HBra3kPVe2JKduBx6hNpkjVzwf'),
-          'Content-Length': dato.length
-        }
-      }
-      
-      var req = https.request(options, function (res) {
-        var chunks = [];
-        res.on("data", function (chunk) {
-          console.log("IDIOTO chunk...", chunk);
-          chunks.push(chunk);
-        });
-        res.on("end", function () {
-          let body = Buffer.concat(chunks);
-          console.log("IDIOTO...", body.toString());
-        });
+          'Content-Type': 'application/json'
+        },
+        body: dato
+      };
+      request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
       });
-      
-      req.write(dato)
-      req.end()
-    } catch (error) {
-        throw error;
+       
+    } catch (error) {      
+      console.log("EXECPTION:" , error);
+      throw error;
     }
   }
 };
