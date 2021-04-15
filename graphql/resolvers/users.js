@@ -189,8 +189,6 @@ module.exports = {
         };
       });
 
-      console.log("EXECPTION configParam:-------" , url + '-' + token + '-' + usuario);
-
       const dato = JSON.stringify(args.msg);
       var options = {
         'method': 'POST',
@@ -204,13 +202,11 @@ module.exports = {
 
       return request(options, function (error, response) {
         if (error) throw new Error(error);
-        console.log("sucess:" , JSON.parse(response.body));
         return res = JSON.parse(response.body);
       });
        
     } catch (error) {      
-      console.log("EXCEPTION:" , error);
-      throw error;
+        throw error;
     }
   },
 
