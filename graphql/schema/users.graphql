@@ -58,6 +58,11 @@ type MsgOutput {
   message: String
 }
 
+type ConfigParam {
+  NombreParametro: String
+  Valor: String
+}
+
 input Msisdn {
   msisdn: String! 
 }
@@ -126,6 +131,7 @@ input SendReminderInput {
 
 type Query {
   login(username: String!, password: String!): User
+  configByParamGroup(paramGroup: String!): [ConfigParam]
 }
 
 type Mutation {

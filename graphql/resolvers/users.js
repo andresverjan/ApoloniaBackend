@@ -5,6 +5,7 @@ const Etiquetas = db.etiquetas;
 const Pacientes = db.paciente;
 const Odontologos = db.odontologos;
 const Servicios = db.servicio;
+const ConfiguracionParametro = db.configuracionParametros;
 const nodemailer = require("nodemailer");
 
 //const request = require("request");
@@ -172,25 +173,57 @@ module.exports = {
 
   sendsms: async (args) => {
     try {
+      let usuario, token, url;
+      (await ConfiguracionParametro.findAll({
+        where: {
+          GrupoParametro: "SMS_CONFIG"
+        }, 
+        attributes: ['NombreParametro', 'Valor']
+      })).map((field) => {
+        if (field.NombreParametro == "usuario") {
+          usuario = field.Valor;
+        } else if (field.NombreParametro == "token") {
+          token = field.Valor;
+        } else if (field.NombreParametro == "url") {
+          url = field.Valor;
+        };
+      });
+
+      console.log("EXECPTION configParam:-------" , url + '-' + token + '-' + usuario);
+
       const dato = JSON.stringify(args.msg);
-            
       var options = {
         'method': 'POST',
-        'url': 'https://api.labsmobile.com/json/send',
+        'url': url,//'https://api.labsmobile.com/json/send',
         'headers': {
-          'Authorization': 'Basic ' + btoa('andresverjandiaz@gmail.com:t4nK83HBra3kPVe2JKduBx6hNpkjVzwf'),
+          'Authorization': 'Basic ' + btoa(usuario + ':' + token),
           'Content-Type': 'application/json'
         },
         body: dato
       };
-      request(options, function (error, response) {
+
+      return request(options, function (error, response) {
         if (error) throw new Error(error);
-        console.log(response.body);
+        console.log("sucess:" , JSON.parse(response.body));
+        return res = JSON.parse(response.body);
       });
        
     } catch (error) {      
-      console.log("EXECPTION:" , error);
+      console.log("EXCEPTION:" , error);
       throw error;
     }
-  }
+  },
+
+  configByParamGroup: async (args) => {
+    try {            
+      return configParam = list = await ConfiguracionParametro.findAll({
+        where: {
+          GrupoParametro: args.paramGroup
+        }, 
+          attributes: ['NombreParametro', 'Valor']
+      });
+    } catch (error) {
+        throw error;
+    }
+  },
 };

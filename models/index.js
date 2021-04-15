@@ -127,5 +127,6 @@ db.citas.belongsTo(db.users, {
 });
 
 db.status = require("../models/citaEstado")(sequelize, Sequelize);
+db.configuracionParametros = require("../models/configuracionParametro")(sequelize, Sequelize);
 
 module.exports = db;
