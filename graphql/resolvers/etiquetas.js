@@ -56,7 +56,7 @@ module.exports = {
     console.log("INGRESO A updateTutorial");
     try {
       return await Etiquetas.update(args.etiqueta, {
-        where: { id: args.tutorial.id },
+        where: { id: args.etiqueta.id },
       }).then((data) => {
         console.log(data);
       });
