@@ -8,9 +8,7 @@ const Servicios = db.servicio;
 const ConfiguracionParametro = db.configuracionParametros;
 const nodemailer = require("nodemailer");
 
-//const request = require("request");
 const btoa = require("btoa");
-const https = require("https");
 var request = require('request');
 
 module.exports = {
@@ -103,13 +101,31 @@ module.exports = {
   },
   sendReminder: async (args) => {
     const { USUARIO_CORREO, cita } = args.email;
+    console.log("args.email - cita", cita);
+
+    let usuario, password, smtpServ;
+    (await ConfiguracionParametro.findAll({
+      where: {
+        GrupoParametro: "EMAIL_CONFIG"
+      }, 
+      attributes: ['NombreParametro', 'Valor']
+    })).map((field) => {
+      if (field.NombreParametro == "usuario") {
+        usuario = field.Valor;
+      } else if (field.NombreParametro == "password") {
+        password = field.Valor;
+      } else if (field.NombreParametro == "servicio") {
+        smtpServ = field.Valor;
+      };
+    });
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: smtpServ,
       auth: {
-        user: "developteamcol@gmail.com",
-        pass: "devteam123$",
+        user: usuario,
+        pass: password,
       },
+      tls : { rejectUnauthorized: false }
     });
 
     const paciente = await Pacientes.findOne({
@@ -123,40 +139,31 @@ module.exports = {
     });
 
     const mailOptions = {
-      from: "developteamcol@gmail.com",
+      from: usuario,//"developteamcol@gmail.com",
       to: USUARIO_CORREO,
       subject: `Recordatorio cita odontológica: ${paciente.Nombres1} ${paciente.Apellidos1}`,
       html: `
       
       <h1>Señor ${paciente.Nombres1} ${paciente.Apellidos1
         }. Tiene cita de odontología pronto!</h1>
-      
       <h2><strong>Información de la cita:</strong></h2>
-
       <ul>
-
         <li>
           <h4><strong>Título:</strong></h4> ${cita.title}
         </li>
-
         <li>
           <h4><strong>Hora de inicio:</strong></h4>${cita.start
           .split("T")[1]
           .substr(0, 5)}
         </li>
-      
         <li>
           <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${odontologo.Apellidos
         }
         </li>
-
         <li>
           <h4><strong>Tipo de cita:</strong></h4> ${servicio.nombre}
         </li>
-
-      </ul>
-
-      `,
+      </ul>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
