@@ -217,16 +217,4 @@ module.exports = {
     }
   },
 
-  configByParamGroup: async (args) => {
-    try {            
-      return configParam = list = await ConfiguracionParametro.findAll({
-        where: {
-          GrupoParametro: args.paramGroup
-        }, 
-          attributes: ['NombreParametro', 'Valor']
-      });
-    } catch (error) {
-        throw error;
-    }
-  },
 };

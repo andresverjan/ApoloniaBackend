@@ -1,0 +1,11 @@
+type ConfigParam {
+  NombreParametro: String!
+  GrupoParametro: String!
+  EmpresaID: String
+  Observaciones: String
+  Valor: String!
+}
+
+type Query {
+  configByParamGroup(GrupoParametro: String!): [ConfigParam]
+}
