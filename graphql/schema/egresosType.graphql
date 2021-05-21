@@ -1,10 +1,12 @@
+scalar Date
+
 type Egresos {
   T17Nivel1: String
-  T17Fecha: String
+  T17Fecha: Date
   T17Factura: String
   T17Proveedor: String
   T17Observacion: String
-  T17Valor: String
+  T17Valor: Int
   T17Clasificacion: String
   T17FormaPago: String
   T17Banco: String
@@ -13,21 +15,93 @@ type Egresos {
   T17Usuario: String
   T17Anulado: String
   T17MotivoAnulado: String
-  T17FechaAnulado: String
+  T17FechaAnulado: Date
   T17UsuarioAnulado: String
-  T17ICA: String
-  T17IVA: String
-  T17RF: String
-  T17Dctos: String
-  T17Total: String
-  T17FechaIni: String
-  T17FechaFin: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
   T17NroResolucion: String
   T17FacturaPrint: String
   T17Cia: String
-  T17ConsecutivoEG: String
+  T17ConsecutivoEG: Int
   T17ValorLetras: String
   T17Girado: String
   T17Item: String
-  T17CREE: String
+  T17CREE: Float
+}
+
+input EgresosFilter {
+  T17Nivel1: String
+  T17Fecha: Date
+  T17Factura: String
+  T17Proveedor: String
+  T17Observacion: String
+  T17Valor: Int
+  T17Clasificacion: String
+  T17FormaPago: String
+  T17Banco: String
+  T17NroCheque: String
+  T17Soporte: String
+  T17Usuario: String
+  T17Anulado: String
+  T17MotivoAnulado: String
+  T17FechaAnulado: Int
+  T17UsuarioAnulado: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
+  T17NroResolucion: String
+  T17FacturaPrint: String
+  T17Cia: String
+  T17ConsecutivoEG: Int
+  T17ValorLetras: String
+  T17Girado: String
+  T17Item: String
+  T17CREE: Float
+}
+input EgresosInput {
+  T17Nivel1: String
+  T17Fecha: Date
+  T17Factura: String
+  T17Proveedor: String
+  T17Observacion: String
+  T17Valor: Int
+  T17Clasificacion: String
+  T17FormaPago: String
+  T17Banco: String
+  T17NroCheque: String
+  T17Soporte: String
+  T17Usuario: String
+  T17Anulado: String
+  T17MotivoAnulado: String
+  T17FechaAnulado: Int
+  T17UsuarioAnulado: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
+  T17NroResolucion: String
+  T17FacturaPrint: String
+  T17Cia: String
+  T17ConsecutivoEG: Int
+  T17ValorLetras: String
+  T17Girado: String
+  T17Item: String
+  T17CREE: Float
+}
+
+type Query {
+  egresos(filter: EgresosFilter): [Egresos]!
+  createEgreso(egreso: EgresosInput): [Egresos]!
 }
