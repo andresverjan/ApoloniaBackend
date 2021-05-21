@@ -8,7 +8,7 @@ module.exports = {
       return (configParam = list =
         await ConfiguracionParametro.findAll({
           where: {
-            GrupoParametro: GrupoParametro,
+            GrupoParametro,
           },
         }));
     } catch (error) {
