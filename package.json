@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "rundev": "nodemon app.js",
+    "rundev": "nodemon app.js -e js,graphql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
