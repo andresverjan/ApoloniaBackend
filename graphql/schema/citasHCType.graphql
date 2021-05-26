@@ -68,6 +68,7 @@ type CitaHC {
 }
 
 input CitaFilter {
+  Cedula: String
   Paciente: String
   IdOdontologo: String
   Fecha: String
