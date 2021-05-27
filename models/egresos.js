@@ -5,7 +5,6 @@ module.exports = (sequelize, Sequelize) => {
       T17Nivel1: {
         type: Sequelize.STRING,
         allowNull: true,
-        primaryKey: true,
       },
       T17Fecha: {
         type: Sequelize.DATE,
@@ -14,6 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       T17Factura: {
         type: Sequelize.STRING,
         allowNull: true,
+        primaryKey: true,
       },
       T17Proveedor: {
         type: Sequelize.STRING,
