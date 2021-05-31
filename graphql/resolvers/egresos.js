@@ -19,7 +19,7 @@ module.exports = {
       await Egresos.create(args.egreso).then((data) => {
         console.log(data);
       });
-      return `Egreso con T17Nivel1 = ${args.egreso.T17Nivel1} --> CREADO`;
+      return `Egreso con T17Factura = ${args.egreso.T17Factura} --> CREADO`;
     } catch (error) {
       throw error;
     }
@@ -27,32 +27,32 @@ module.exports = {
   updateEgresos: async (args) => {
     try {
       await Egresos.update(args.egreso, {
-        where: { T17Nivel1: args.egreso.T17Nivel1 },
+        where: { T17Factura: args.egreso.T17Factura },
       }).then((data) => {
         console.log(data);
       });
-      return `Egreso con T17Nivel1 = ${args.egreso.T17Nivel1} --> ACTUALIZADO`;
+      return `Egreso con T17Factura = ${args.egreso.T17Factura} --> ACTUALIZADO`;
     } catch (error) {
       throw error;
     }
   },
   deleteEgresos: async (args) => {
-    const { T17Nivel1 } = args.egreso;
+    const { T17Factura } = args.egreso;
     try {
       Egresos.destroy({
-        where: { T17Nivel1 },
+        where: { T17Factura },
       })
         .then((resCode) => {
           if (resCode == 1) {
             console.log('Egreso was deleted successfully!');
           } else {
             console.log(
-              `Cannot delete Egreso with T17Nivel1=${T17Nivel1}. Maybe Egreso was not found!`,
+              `Cannot delete Egreso with T17Factura=${T17Factura}. Maybe Egreso was not found!`,
             );
           }
         })
         .catch((err) => {
-          console.log('Could not delete Egreso with T17Nivel1=' + T17Nivel1);
+          console.log('Could not delete Egreso with T17Factura=' + T17Factura);
         });
       return 'Egreso fue borrado';
     } catch (error) {
