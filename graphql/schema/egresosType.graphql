@@ -134,7 +134,7 @@ input EgresosUpdate {
   T17CREE: Float
 }
 input EgresosDelete {
-  T17Nivel1: String!
+  T17Factura: String!
 }
 
 type Query {
