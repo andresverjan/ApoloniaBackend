@@ -34,7 +34,6 @@ module.exports = {
         ),
     );
 
-    console.log(where.where);
     try {
       return await Egresos.findAll(where);
     } catch (error) {
