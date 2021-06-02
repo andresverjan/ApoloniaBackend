@@ -11,9 +11,6 @@ module.exports = (sequelize, Sequelize) => {
       Fecha: {
         type: Sequelize.STRING,
       },
-      odontologoId: {
-        type: Sequelize.INTEGER,
-      },
       HorarioIni: {
         type: Sequelize.DATE,
       },
@@ -206,6 +203,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     {
       freezeTableName: true,
+      timestamps: false
     },
   );
   return CitasHCSchema;
