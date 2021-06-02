@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+const moment = require('moment');
 const db = require('../../models');
 const helpers = require('../../helpers');
 const Egresos = db.egresos;
@@ -8,6 +10,30 @@ module.exports = {
     if (args.filter) {
       where = helpers.getFilterFromObject(args.filter);
     }
+
+    if (
+      args.filter.T17FechaFin &&
+      args.filter.T17FechaFin != '' &&
+      args.filter.T17FechaIni &&
+      args.filter.T17FechaIni != ''
+    ) {
+      where.where.push({
+        ['T17Fecha']: {
+          [Op.between]: [
+            moment(args.filter.T17FechaIni).toDate(),
+            moment(args.filter.T17FechaFin).toDate(),
+          ],
+        },
+      });
+    }
+    where.where = where.where.filter(
+      (e) =>
+        !(
+          e.hasOwnProperty('T17FechaIni') === true ||
+          e.hasOwnProperty('T17FechaFin') === true
+        ),
+    );
+
     try {
       return await Egresos.findAll(where);
     } catch (error) {
