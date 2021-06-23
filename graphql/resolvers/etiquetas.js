@@ -19,7 +19,7 @@ module.exports = {
       throw error;
     }
   },
-  delete: async (args) => {
+  deleteEtiqueta: async (args) => {
     console.log("INGRESO A deleteEtiquetas");
     const { id } = args.etiqueta;
     try {
@@ -52,11 +52,11 @@ module.exports = {
       throw error;
     }
   },
-  update: async (args) => {
-    console.log("INGRESO A updateTutorial");
+  updateEtiqueta: async (args) => {
+    console.log("INGRESO A updateEtiqueta");
     try {
       return await Etiquetas.update(args.etiqueta, {
-        where: { id: args.tutorial.id },
+        where: { id: args.etiqueta.id },
       }).then((data) => {
         console.log(data);
       });

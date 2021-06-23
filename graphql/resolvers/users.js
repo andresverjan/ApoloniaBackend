@@ -5,7 +5,11 @@ const Etiquetas = db.etiquetas;
 const Pacientes = db.paciente;
 const Odontologos = db.odontologos;
 const Servicios = db.servicio;
+const ConfiguracionParametro = db.configuracionParametros;
 const nodemailer = require("nodemailer");
+
+const btoa = require("btoa");
+var request = require('request');
 
 module.exports = {
   login: async (args) => {
@@ -52,7 +56,7 @@ module.exports = {
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.password.USUARIO_CORREO },
-      }).then((data) => {});
+      }).then((data) => { });
     } catch (error) {
       throw error;
     }
@@ -73,7 +77,7 @@ module.exports = {
           where: { id: user.id },
         }
       )
-        .then(() => {})
+        .then(() => { })
         .catch((err) => {
           throw err;
         });
@@ -90,20 +94,38 @@ module.exports = {
     try {
       return await Users.update(usuario, {
         where: { USUARIO_CORREO: args.idiom.USUARIO_CORREO },
-      }).then((data) => {});
+      }).then((data) => { });
     } catch (error) {
       throw error;
     }
   },
   sendReminder: async (args) => {
     const { USUARIO_CORREO, cita } = args.email;
+    console.log("args.email - cita", cita);
+
+    let usuario, password, smtpServ;
+    (await ConfiguracionParametro.findAll({
+      where: {
+        GrupoParametro: "EMAIL_CONFIG"
+      }, 
+      attributes: ['NombreParametro', 'Valor']
+    })).map((field) => {
+      if (field.NombreParametro == "usuario") {
+        usuario = field.Valor;
+      } else if (field.NombreParametro == "password") {
+        password = field.Valor;
+      } else if (field.NombreParametro == "servicio") {
+        smtpServ = field.Valor;
+      };
+    });
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: smtpServ,
       auth: {
-        user: "developteamcol@gmail.com",
-        pass: "devteam123$",
+        user: usuario,
+        pass: password,
       },
+      tls : { rejectUnauthorized: false }
     });
 
     const paciente = await Pacientes.findOne({
@@ -117,42 +139,31 @@ module.exports = {
     });
 
     const mailOptions = {
-      from: "developteamcol@gmail.com",
+      from: usuario,//"developteamcol@gmail.com",
       to: USUARIO_CORREO,
       subject: `Recordatorio cita odontológica: ${paciente.Nombres1} ${paciente.Apellidos1}`,
       html: `
       
-      <h1>Señor ${paciente.Nombres1} ${
-        paciente.Apellidos1
-      }. Tiene cita de odontología pronto!</h1>
-      
+      <h1>Señor ${paciente.Nombres1} ${paciente.Apellidos1
+        }. Tiene cita de odontología pronto!</h1>
       <h2><strong>Información de la cita:</strong></h2>
-
       <ul>
-
         <li>
           <h4><strong>Título:</strong></h4> ${cita.title}
         </li>
-
         <li>
           <h4><strong>Hora de inicio:</strong></h4>${cita.start
-            .split("T")[1]
-            .substr(0, 5)}
+          .split("T")[1]
+          .substr(0, 5)}
         </li>
-      
         <li>
-          <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${
-        odontologo.Apellidos
-      }
+          <h4><strong>Odontólogo:</strong></h4> ${odontologo.Nombres} ${odontologo.Apellidos
+        }
         </li>
-
         <li>
           <h4><strong>Tipo de cita:</strong></h4> ${servicio.nombre}
         </li>
-
-      </ul>
-
-      `,
+      </ul>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -166,4 +177,44 @@ module.exports = {
     });
     return "Email enviado";
   },
+
+  sendsms: async (args) => {
+    try {
+      let usuario, token, url;
+      (await ConfiguracionParametro.findAll({
+        where: {
+          GrupoParametro: "SMS_CONFIG"
+        }, 
+        attributes: ['NombreParametro', 'Valor']
+      })).map((field) => {
+        if (field.NombreParametro == "usuario") {
+          usuario = field.Valor;
+        } else if (field.NombreParametro == "token") {
+          token = field.Valor;
+        } else if (field.NombreParametro == "url") {
+          url = field.Valor;
+        };
+      });
+
+      const dato = JSON.stringify(args.msg);
+      var options = {
+        'method': 'POST',
+        'url': url,//'https://api.labsmobile.com/json/send',
+        'headers': {
+          'Authorization': 'Basic ' + btoa(usuario + ':' + token),
+          'Content-Type': 'application/json'
+        },
+        body: dato
+      };
+
+      return request(options, function (error, response) {
+        if (error) throw new Error(error);
+        return res = JSON.parse(response.body);
+      });
+       
+    } catch (error) {      
+        throw error;
+    }
+  },
+
 };

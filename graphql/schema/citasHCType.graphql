@@ -1,9 +1,7 @@
 type CitaHC {
-  id: Int!
   Paciente:String
-  IdOdontologo:String,
+  IdOdontologo:String
   Fecha: String
-  odontologoId:Int
   HorarioIni:Date
   HorarioFin:Date
   Actividad: String
@@ -69,6 +67,18 @@ type CitaHC {
   FechaPte: Date  
 }
 
+input CitaFilter {
+  Cedula: String
+  Paciente: String
+  IdOdontologo: String
+  Fecha: String
+}
+
+input CitOrderBy {
+  Paciente: String
+}
+
 type Query {
-  CitasHc: [CitaHC!]
+  getCitasHC(filter: CitaFilter, order: CitOrderBy): [CitaHC!]
+  
 }
