@@ -108,9 +108,16 @@ input EgresosUpdate {
 input EgresosDelete {
   T17Factura: String!
 }
+input EgresosPagination {
+  pagina: Int!
+  limite: Int!
+}
 
 type Query {
-  egresos(filter: EgresosFilter): [Egreso]!
+  egresos(
+    filter: EgresosFilter
+    pagination: EgresosPagination
+  ): [Egreso]!
 }
 
 type Mutation {
