@@ -3,7 +3,7 @@ scalar Date
 type Egreso {
   T17Nivel1: String
   T17Fecha: Date
-  T17Factura: String #PRIMARY KEY
+  T17Factura: String! #PRIMARY KEY
   T17Proveedor: String
   T17Observacion: String
   T17Valor: Int
@@ -73,9 +73,9 @@ input EgresosInput {
   T17CREE: Float
 }
 input EgresosUpdate {
-  T17Nivel1: String!
+  T17Nivel1: String
   T17Fecha: Date
-  T17Factura: String
+  T17Factura: String!
   T17Proveedor: String
   T17Observacion: String
   T17Valor: Int
