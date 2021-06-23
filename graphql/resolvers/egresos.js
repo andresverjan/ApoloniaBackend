@@ -32,7 +32,11 @@ module.exports = {
           ),
       );
     }
-
+    if (args.pagination) {
+      const { limite: limit, pagina } = args.pagination;
+      const offset = limit * pagina;
+      where = { ...where, limit, offset };
+    }
     try {
       return await Egresos.findAll(where);
     } catch (error) {
@@ -77,7 +81,10 @@ module.exports = {
           }
         })
         .catch((err) => {
-          console.log('Could not delete Egreso with T17Factura=' + T17Factura);
+          console.log(
+            'Could not delete Egreso with T17Factura=' +
+              T17Factura,
+          );
         });
       return 'Egreso fue borrado';
     } catch (error) {
