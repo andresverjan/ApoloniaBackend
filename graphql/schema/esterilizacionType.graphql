@@ -6,17 +6,16 @@ type Esterilizacion {
   T27Campo24: String
   T27Auditoria: String
   T27Consecutivo: Int
+  CedulaPaciente: String
+  disponible: String
 }
 
 input EsterilizacionFilter {
   T27Codigo: String
-  T27Fecha: Date
-  T27Campo9: String
-  T27Campo24: String
-  T27Auditoria: String
-  T27Consecutivo: Int
+  CedulaPaciente: String
+  disponible: String
 }
 
 type Query {
-  esterilizaciones: [Esterilizacion!]
+  esterilizaciones(filter: EsterilizacionFilter): [Esterilizacion!]
 }

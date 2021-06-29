@@ -55,7 +55,7 @@ db.esterilizacion = require('../models/esterilizaciones')(sequelize, Sequelize);
 db.citashc = require('../models/citasHC')(sequelize, Sequelize);
 db.citaTrazabilidad = require('../models/citaTrazabilidad')(
   sequelize,
-  Sequelize,
+  Sequelize
 );
 
 db.tutorials.hasMany(db.comment, { as: 'comments' });
@@ -130,7 +130,7 @@ db.citas.belongsTo(db.users, {
 db.status = require('../models/citaEstado')(sequelize, Sequelize);
 db.configuracionParametros = require('../models/configuracionParametro')(
   sequelize,
-  Sequelize,
+  Sequelize
 );
 db.egresos = require('../models/egresos')(sequelize, Sequelize);
 
