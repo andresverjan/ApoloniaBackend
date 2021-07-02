@@ -38,7 +38,10 @@ module.exports = {
       where = { ...where, limit, offset };
     }
     try {
-      return await Egresos.findAll(where);
+      let egresos = await Egresos.findAll();
+      const totalRegistros = egresos.length;
+      egresos = await Egresos.findAll(where);
+      return { totalRegistros, egresos };
     } catch (error) {
       throw error;
     }
