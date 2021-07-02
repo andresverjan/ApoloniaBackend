@@ -113,11 +113,16 @@ input EgresosPagination {
   limite: Int!
 }
 
+type ReponseEgresos {
+  egresos: [Egreso]!
+  totalRegistros: Int!
+}
+
 type Query {
   egresos(
     filter: EgresosFilter
     pagination: EgresosPagination
-  ): [Egreso]!
+  ): ReponseEgresos
 }
 
 type Mutation {
