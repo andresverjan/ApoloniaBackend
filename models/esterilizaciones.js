@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Esterilizacion = sequelize.define(
-    "Esterilizacion",
+    'Esterilizacion',
     {
       T27Codigo: {
         type: Sequelize.STRING,
@@ -19,9 +19,15 @@ module.exports = (sequelize, Sequelize) => {
       T27Auditoria: {
         type: Sequelize.STRING,
       },
-      T27Consecutivo:{
-          type: Sequelize.INTEGER,
-      }
+      T27Consecutivo: {
+        type: Sequelize.INTEGER,
+      },
+      CedulaPaciente: {
+        type: Sequelize.STRING,
+      },
+      disponible: {
+        type: Sequelize.STRING,
+      },
     },
     {
       freezeTableName: true,
