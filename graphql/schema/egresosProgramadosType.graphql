@@ -1,0 +1,79 @@
+scalar Date
+
+type EgresoProgramado {
+  T17Nivel1: String
+  T17Fecha: Date
+  T17Factura: String! #PRIMARY KEY
+  T17Proveedor: String
+  T17Observacion: String
+  T17Valor: Int
+  T17Clasificacion: String
+  T17FormaPago: String
+  T17Banco: String
+  T17NroCheque: String
+  T17Soporte: String
+  T17Usuario: String
+  T17Anulado: String
+  T17MotivoAnulado: String
+  T17FechaAnulado: Date
+  T17UsuarioAnulado: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
+  T17NroResolucion: String
+  T17FacturaPrint: String
+  T17Cia: String
+  T17ConsecutivoEG: Int
+  T17ValorLetras: String
+  T17Girado: String
+  T17Item: String
+  T17CREE: Float
+}
+
+input EgresosProgramadosInput {
+  T17Nivel1: String
+  T17Fecha: Date
+  T17Factura: String!
+  T17Proveedor: String
+  T17Observacion: String
+  T17Valor: Int
+  T17Clasificacion: String
+  T17FormaPago: String
+  T17Banco: String
+  T17NroCheque: String
+  T17Soporte: String
+  T17Usuario: String
+  T17Anulado: String
+  T17MotivoAnulado: String
+  T17FechaAnulado: Int
+  T17UsuarioAnulado: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
+  T17NroResolucion: String
+  T17FacturaPrint: String
+  T17Cia: String
+  T17ConsecutivoEG: Int
+  T17ValorLetras: String
+  T17Girado: String
+  T17Item: String
+  T17CREE: Float
+}
+
+type Query {
+  egresosProgramados: [EgresoProgramado]!
+}
+
+type Mutation {
+  createEgresosProgramados(
+    egresoProgramado: EgresosProgramadosInput
+  ): String!
+}
