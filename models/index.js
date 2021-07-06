@@ -132,6 +132,16 @@ db.configuracionParametros = require('../models/configuracionParametro')(
   sequelize,
   Sequelize
 );
+
 db.egresos = require('../models/egresos')(sequelize, Sequelize);
+db.rolpermisos = require('../models/rolpermiso')(sequelize, Sequelize);
+db.rolpermisos.belongsTo(db.rol, {
+  as: 'roles',
+  foreignKey: 'rol_id'
+});
+db.rolpermisos.belongsTo(db.permiso, {
+  as: 'permisos',
+  foreignKey: 'permiso_id'
+});
 
 module.exports = db;
