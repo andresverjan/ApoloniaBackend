@@ -2,7 +2,7 @@ const db = require("../../models");
 const Roles = db.rol;
 const Permiso = db.permiso;
 const RolPermiso = db.rolPermiso;
-//const Op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;
 const helpers = require("../../helpers");
 
 module.exports = {
@@ -71,18 +71,29 @@ module.exports = {
 
     permisos: async (args) => {
         try {
-            let where = {};
-            if (args.filter != null && args.filter != undefined) {
-                where = helpers.getFilterFromObject(args.filter);
-            }
-            if (args.order != null && args.order != undefined) {
-                where.order = helpers.getOrderFromObject(args.order);
-            }
-            return list = await Permiso.findAll(where, {include: [{
-                model: Roles,
-                as: "roles"
-                }]
-            });
+            return newFields = await Permiso.findAll({
+                attributes: ['id'],
+                distinct: 'id',
+                include: {
+                    model: Roles,
+                    through: 'rol_permiso', 
+                    distinct: 'id',
+                    as: 'roles',
+                    where: {
+                        id: { [Op.eq]: args.rol_id }
+                    }
+                },
+                raw: true
+            })
+            .then((goes) => goes.map((i) => i.id))
+            .then((ids) => Permiso.findAll({
+                attributes: ['id', 'nombre'],     
+                where: {
+                    id: { [Op.notIn]: ids }
+                }
+            })).catch(err => {
+                throw err;
+            });             
         } catch (error) {
             throw error;
         }
