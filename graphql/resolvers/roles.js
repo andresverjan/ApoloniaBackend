@@ -46,15 +46,7 @@ module.exports = {
                 },
                 raw: true
             })
-            /*await Roles.findByPk(args.id, {
-                attributes: ['nombre'],
-                include: [
-                    {
-                    model: Permiso,
-                    as: "permisos"
-                    },
-                ]});
-            return rol;*/
+            
         } catch (error) {
             throw error;
         }
