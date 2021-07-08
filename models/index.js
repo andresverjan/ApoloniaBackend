@@ -90,10 +90,7 @@ db.servicio = require('../models/servicio')(
   sequelize,
   Sequelize,
 );
-db.rolPermiso = require('../models/rolpermiso')(
-  sequelize,
-  Sequelize,
-);
+
 db.citas = require('../models/citas')(sequelize, Sequelize);
 db.odontologos = require('../models/odontologos')(
   sequelize,
@@ -140,16 +137,16 @@ db.campos.belongsTo(db.mascara, {
   foreignKey: 'mascaraId',
   as: 'mascara',
 });
-
+db.rol_permiso = require('../models/rolpermiso')(sequelize, Sequelize);
 db.rol.belongsToMany(db.permiso, {
-  through: 'rol_permiso',
+  through: 'rol_permiso', //db.rol_permiso
   as: 'permisos',
   foreignKey: 'rol_id',
   primaryKey: true,
 });
 
 db.permiso.belongsToMany(db.rol, {
-  through: 'rol_permiso',
+  through: 'rol_permiso', //db.rol_permiso
   as: 'roles',
   foreignKey: 'permiso_id',
   primaryKey: true,
@@ -202,12 +199,12 @@ db.egresos = require('../models/egresos')(
 );
 
 db.egresos = require('../models/egresos')(sequelize, Sequelize);
-db.rolpermisos = require('../models/rolpermiso')(sequelize, Sequelize);
-db.rolpermisos.belongsTo(db.rol, {
+
+db.rol_permiso.belongsTo(db.rol, {
   as: 'roles',
   foreignKey: 'rol_id'
 });
-db.rolpermisos.belongsTo(db.permiso, {
+db.rol_permiso.belongsTo(db.permiso, {
   as: 'permisos',
   foreignKey: 'permiso_id'
 });
