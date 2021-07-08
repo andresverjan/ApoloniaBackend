@@ -1,7 +1,7 @@
 const db = require("../../models");
 const Roles = db.rol;
 const Permiso = db.permiso;
-const RolPermiso = db.rolPermiso;
+const RolPermiso = db.rol_permiso;
 const Op = db.Sequelize.Op;
 const helpers = require("../../helpers");
 
@@ -32,7 +32,21 @@ module.exports = {
 
     rolById: async (args) => {
         try {
-            const rol = await Roles.findByPk(args.id, {
+            return rol = await Permiso.findAll({
+                attributes: ['id','nombre'],
+                distinct: 'id',
+                include: {
+                    model: Roles,
+                    through: 'rol_permiso', 
+                    distinct: 'id',
+                    as: 'roles',
+                    where: {
+                        id: { [Op.eq]: args.id }
+                    }
+                },
+                raw: true
+            })
+            /*await Roles.findByPk(args.id, {
                 attributes: ['nombre'],
                 include: [
                     {
@@ -40,7 +54,7 @@ module.exports = {
                     as: "permisos"
                     },
                 ]});
-            return rol;
+            return rol;*/
         } catch (error) {
             throw error;
         }
