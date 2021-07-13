@@ -47,6 +47,7 @@ input RolOrderBy {
 }
 
 input PermisoFilter {
+  rol_id: Int
   nombre: String
 }
 
@@ -56,10 +57,12 @@ input PermisOrderBy {
 
 type Query {
   roles(filter: RolFilter, order: RolOrderBy): [Rol!]
-  permisos(filter: PermisoFilter, order: PermisOrderBy): [Permiso!]
-  rolById(id:Int): Rol!
+  permisos(rol_id: Int): [Permiso!]
+  rolById(id:Int): [Permiso!]
   rolByNombre(nombre: String): Rol
 }
+
+#filter: PermisoFilter, order: PermisOrderBy
 
 type Mutation {
   updateRol(rol: RolUpdInput): Rol

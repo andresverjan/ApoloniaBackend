@@ -32,9 +32,16 @@ module.exports = {
           ),
       );
     }
-
+    if (args.pagination) {
+      const { limite: limit, pagina } = args.pagination;
+      const offset = limit * pagina;
+      where = { ...where, limit, offset };
+    }
     try {
-      return await Egresos.findAll(where);
+      let egresos = await Egresos.findAll();
+      const totalRegistros = egresos.length;
+      egresos = await Egresos.findAll(where);
+      return { totalRegistros, egresos };
     } catch (error) {
       throw error;
     }
@@ -77,7 +84,10 @@ module.exports = {
           }
         })
         .catch((err) => {
-          console.log('Could not delete Egreso with T17Factura=' + T17Factura);
+          console.log(
+            'Could not delete Egreso with T17Factura=' +
+              T17Factura,
+          );
         });
       return 'Egreso fue borrado';
     } catch (error) {

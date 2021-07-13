@@ -1,6 +1,6 @@
 scalar Date
 
-type Egreso {
+type EgresoProgramado {
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String! #PRIMARY KEY
@@ -34,45 +34,7 @@ type Egreso {
   T17CREE: Float
 }
 
-input EgresosFilter {
-  T17Factura: String
-  T17FechaIni: Date
-  T17FechaFin: Date
-}
-input EgresosInput {
-  T17Nivel1: String
-  T17Fecha: Date
-  T17Factura: String
-  T17Proveedor: String
-  T17Observacion: String
-  T17Valor: Int
-  T17Clasificacion: String
-  T17FormaPago: String
-  T17Banco: String
-  T17NroCheque: String
-  T17Soporte: String
-  T17Usuario: String
-  T17Anulado: String
-  T17MotivoAnulado: String
-  T17FechaAnulado: Int
-  T17UsuarioAnulado: String
-  T17ICA: Float
-  T17IVA: Float
-  T17RF: Float
-  T17Dctos: Float
-  T17Total: Float
-  T17FechaIni: Date
-  T17FechaFin: Date
-  T17NroResolucion: String
-  T17FacturaPrint: String
-  T17Cia: String
-  T17ConsecutivoEG: Int
-  T17ValorLetras: String
-  T17Girado: String
-  T17Item: String
-  T17CREE: Float
-}
-input EgresosUpdate {
+input EgresosProgramadosInput {
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String!
@@ -104,29 +66,14 @@ input EgresosUpdate {
   T17Girado: String
   T17Item: String
   T17CREE: Float
-}
-input EgresosDelete {
-  T17Factura: String!
-}
-input EgresosPagination {
-  pagina: Int!
-  limite: Int!
-}
-
-type ReponseEgresos {
-  egresos: [Egreso]!
-  totalRegistros: Int!
 }
 
 type Query {
-  egresos(
-    filter: EgresosFilter
-    pagination: EgresosPagination
-  ): ReponseEgresos
+  egresosProgramados: [EgresoProgramado]!
 }
 
 type Mutation {
-  createEgresos(egreso: EgresosInput): String!
-  updateEgresos(egreso: EgresosUpdate): String!
-  deleteEgresos(egreso: EgresosDelete): String!
+  createEgresosProgramados(
+    egresoProgramado: EgresosProgramadosInput
+  ): String!
 }
