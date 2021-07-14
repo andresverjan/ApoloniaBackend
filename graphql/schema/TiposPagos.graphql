@@ -30,14 +30,14 @@ input TiposPagosInputDelete {
 }
 
 input TiposPagosFilter {
-  nombre: String!
+  nombre: String
   descripcion: String
   active: String
 }
 
 input TiposPagosOrderBy {
-  id : String!
-  nombre: String!
+  id : String
+  nombre: String
   descripcion: String
   active: String
   createdAt: String
