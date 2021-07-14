@@ -215,4 +215,9 @@ db.egresosProgramados =
     Sequelize,
   );
 
+  db.tipospagos = require('../models/tipospagos')(
+    sequelize,
+    Sequelize,
+  );
+
 module.exports = db;
