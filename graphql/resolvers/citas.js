@@ -1,15 +1,15 @@
-const db = require("../../models");
+const db = require('../../models');
 const CitaTrazabilidad = db.citaTrazabilidad;
 const Citas = db.citas;
 const Status = db.status;
 
 module.exports = {
   createCita: async (args) => {
-    console.log("INGRESO A CREATE CITAS");
+    console.log('INGRESO A CREATE CITAS');
     try {
       return await Citas.create(args.cita).then((data) => {
         CitaTrazabilidad.create(args.cita).then((data) => {
-          console.log("Creating Trazabilidad.");
+          console.log('Creating Trazabilidad.');
           console.log(data);
         });
         console.log(data);
@@ -19,7 +19,7 @@ module.exports = {
     }
   },
   deleteCita: async (args) => {
-    console.log("INGRESO A deleteEtiquetas");
+    console.log('INGRESO A deleteEtiquetas');
     const { id } = args.cita;
     try {
       Citas.destroy({
@@ -27,7 +27,7 @@ module.exports = {
       })
         .then((num) => {
           if (num == 1) {
-            console.log("Cita was deleted successfully!");
+            console.log('Cita was deleted successfully!');
           } else {
             console.log(
               `Cannot delete Cita with id=${id}. Maybe Cita was not found!`
@@ -35,21 +35,21 @@ module.exports = {
           }
         })
         .catch((err) => {
-          console.log("Could not delete Cita with id=" + id);
+          console.log('Could not delete Cita with id=' + id);
         });
-      return "Cita fue borrada";
+      return 'Cita fue borrada';
     } catch (error) {
       throw error;
     }
   },
   updateCita: async (args) => {
-    console.log("INGRESO A updateCitas");
+    console.log('INGRESO A updateCitas');
     try {
       return await Citas.update(args.cita, {
         where: { id: args.cita.id },
       }).then((data) => {
         CitaTrazabilidad.create(args.cita).then((data) => {
-          console.log("Creating Trazabilidad.");
+          console.log('Creating Trazabilidad.');
           console.log(data);
         });
         console.log(data);
@@ -66,7 +66,7 @@ module.exports = {
       });
 
       if (!list) {
-        throw new Error("not found");
+        throw new Error('not found');
       }
       return list;
     } catch (error) {
