@@ -17,4 +17,15 @@ module.exports = {
       throw error;
     }
   },
+  updateEsterilizacion: async (args) => {
+    try {
+      return await Esterilizaciones.update(args.esterilizacion, {
+        where: { id: args.esterilizacion.id },
+      }).then((data) => {
+        console.log(data);
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
 };
