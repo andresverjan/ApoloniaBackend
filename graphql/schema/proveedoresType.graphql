@@ -1,0 +1,25 @@
+type Proveedor {
+  id: Int
+  Nit: String
+  Nombre: String
+  Telefono: String
+  Contacto: String
+  Observacion: String
+  Direccion: String
+  EMPRESA_ID: Int
+}
+
+input FilterProveedor {
+  id: Int
+  Nit: String
+  Nombre: String
+  Telefono: String
+  Contacto: String
+  Observacion: String
+  Direccion: String
+  EMPRESA_ID: Int
+}
+
+type Query {
+  proveedores(filter: FilterProveedor): [Proveedor]!
+}
