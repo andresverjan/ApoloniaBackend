@@ -58,7 +58,7 @@ input PermisOrderBy {
 type Query {
   roles(filter: RolFilter, order: RolOrderBy): [Rol!]
   permisos(rol_id: Int): [Permiso!]
-  rolById(id:Int): Rol!
+  rolById(id:Int): [Permiso!]
   rolByNombre(nombre: String): Rol
 }
 

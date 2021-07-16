@@ -1,0 +1,48 @@
+type TiposPagos {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+  createdAt: String
+}
+
+input TiposPagosInput {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+  createdAt: String
+}
+
+input TiposPagosInputUpdate {
+  id : String!
+  nombre: String!
+  descripcion: String
+  active: String
+  createdBy: String
+  createdAt: String
+}
+
+input TiposPagosInputDelete {
+  id: String!  
+}
+
+input TiposPagosFilter {
+  nombre: String
+  descripcion: String
+  active: String
+}
+
+input TiposPagosOrderBy {
+  id : String
+  nombre: String
+  descripcion: String
+  active: String
+  createdAt: String
+}
+ 
+type Query {
+  tipospagos(filter: TiposPagosFilter, order: TiposPagosOrderBy): [TiposPagos!]
+}
