@@ -137,7 +137,10 @@ db.campos.belongsTo(db.mascara, {
   foreignKey: 'mascaraId',
   as: 'mascara',
 });
-db.rol_permiso = require('../models/rolpermiso')(sequelize, Sequelize);
+db.rol_permiso = require('../models/rolpermiso')(
+  sequelize,
+  Sequelize,
+);
 db.rol.belongsToMany(db.permiso, {
   through: 'rol_permiso', //db.rol_permiso
   as: 'permisos',
@@ -198,15 +201,18 @@ db.egresos = require('../models/egresos')(
   Sequelize,
 );
 
-db.egresos = require('../models/egresos')(sequelize, Sequelize);
+db.egresos = require('../models/egresos')(
+  sequelize,
+  Sequelize,
+);
 
 db.rol_permiso.belongsTo(db.rol, {
   as: 'roles',
-  foreignKey: 'rol_id'
+  foreignKey: 'rol_id',
 });
 db.rol_permiso.belongsTo(db.permiso, {
   as: 'permisos',
-  foreignKey: 'permiso_id'
+  foreignKey: 'permiso_id',
 });
 
 db.egresosProgramados =
@@ -215,9 +221,13 @@ db.egresosProgramados =
     Sequelize,
   );
 
-  db.tipospagos = require('../models/tipospagos')(
-    sequelize,
-    Sequelize,
-  );
+db.tipospagos = require('../models/tipospagos')(
+  sequelize,
+  Sequelize,
+);
+db.proveedores = require('../models/proveedores')(
+  sequelize,
+  Sequelize,
+);
 
 module.exports = db;
