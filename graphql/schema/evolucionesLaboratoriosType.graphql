@@ -1,0 +1,44 @@
+type EvolucionesLaboratorios {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  especialistaId : String!  
+  observaciones : String
+}
+
+input EvolucionesLaboratoriosInput {
+  evolucionId: String!
+  pacienteId : String!
+  especialistaId : String!
+  observaciones : String
+}
+
+input EvolucionesLaboratoriosInputUpdate {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  especialistaId : String!
+  observaciones : String
+}
+
+input EvolucionesLaboratoriosInputDelete {
+  id: String!
+}
+
+input Filter {
+  evolucionId: String!
+  pacienteId : String!
+  especialistaId : String
+}
+
+input OrderBy {
+  nombre: String
+}
+
+type Query {
+  evolucionesLaboratorios(filter:Filter, order:OrderBy): [EvolucionesLaboratorios!]
+}
+
+type Mutation {
+  createEvolucionesLaboratorios(evolucionesLaboratorios: EvolucionesLaboratoriosInput): EvolucionesLaboratorios
+}

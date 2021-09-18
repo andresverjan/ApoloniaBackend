@@ -1,0 +1,45 @@
+type EvolucionesEsterilizacion {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  itemIdEsterilizacion: String!
+  observaciones : String
+}
+
+input EvolucionesEsterilizacionInput {
+  evolucionId: String!
+  pacienteId : String!
+  itemIdEsterilizacion: String!
+  observaciones : String
+}
+
+input EvolucionesEsterilizacionInputUpdate {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  itemIdEsterilizacion: String
+  observaciones : String
+}
+
+input EvolucionesEsterilizacionInputDelete {
+  id: String!
+}
+
+input Filter {
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String
+  itemIdEsterilizacion: String
+}
+
+input OrderBy {
+  nombre: String
+}
+
+type Query {
+  evolucionesEsterilizacion(filter:Filter, order:OrderBy): [EvolucionesEsterilizacion!]
+}
+
+type Mutation {
+  createEvolucionesEsterilizacion(evolucionesEsterilizacion: EvolucionesEsterilizacionInput): EvolucionesEsterilizacion
+}
