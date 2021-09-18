@@ -206,6 +206,38 @@ db.egresos = require('../models/egresos')(
   Sequelize,
 );
 
+
+
+/***EVOLUCIONES MODELS*/
+db.evolucionesRemision = require('../models/evoluciones/remision')(
+  sequelize,
+  Sequelize,
+);
+
+db.evolucionesEventos = require('../models/evoluciones/eventos')(
+  sequelize,
+  Sequelize,
+);
+
+db.evolucionesLaboratorios = require('../models/evoluciones/laboratorios')(
+  sequelize,
+  Sequelize,
+);
+
+db.evolucionesRecetario = require('../models/evoluciones/recetario')(
+  sequelize,
+  Sequelize,
+);
+
+db.evolucionesEsterilizacion = require('../models/evoluciones/esterilizacion')(
+  sequelize,
+  Sequelize,
+);
+
+
+
+
+
 db.rol_permiso.belongsTo(db.rol, {
   as: 'roles',
   foreignKey: 'rol_id',
