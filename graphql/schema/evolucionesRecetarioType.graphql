@@ -1,0 +1,44 @@
+type EvolucionesRecetario {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!  
+  observaciones : String
+}
+
+input EvolucionesRecetarioInput {
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!
+  observaciones : String
+}
+
+input EvolucionesRecetarioInputUpdate {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!
+  observaciones : String
+}
+
+input EvolucionesRecetarioInputDelete {
+  id: String!
+}
+
+input Filter {
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String
+}
+
+input OrderBy {
+  nombre: String
+}
+
+type Query {
+  evolucionesRecetario(filter:Filter, order:OrderBy): [EvolucionesRecetario!]
+}
+
+type Mutation {
+  createEvolucionesRecetario(evolucionesRecetario: EvolucionesRecetarioInput): EvolucionesRecetario
+}
