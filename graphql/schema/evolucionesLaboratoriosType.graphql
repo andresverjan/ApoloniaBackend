@@ -4,6 +4,7 @@ type EvolucionesLaboratorios {
   pacienteId : String!
   especialistaId : String!  
   observaciones : String
+  createdAt: Date
 }
 
 input EvolucionesLaboratoriosInput {

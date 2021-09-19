@@ -6,6 +6,7 @@ type EvolucionesRemision {
   especialistaIdDestino:String!
   especialistaIdOrigen:String!
   observaciones : String
+  createdAt: Date
 }
 
 input EvolucionesRemisionInput {
