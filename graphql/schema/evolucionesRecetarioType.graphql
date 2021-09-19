@@ -4,6 +4,7 @@ type EvolucionesRecetario {
   pacienteId : String!
   medicamentoId : String!  
   observaciones : String
+  createdAt: Date
 }
 
 input EvolucionesRecetarioInput {
@@ -18,7 +19,7 @@ input EvolucionesRecetarioInputUpdate {
   evolucionId: String!
   pacienteId : String!
   medicamentoId : String!
-  observaciones : String
+  observaciones : String  
 }
 
 input EvolucionesRecetarioInputDelete {
