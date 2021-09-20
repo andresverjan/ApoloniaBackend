@@ -1,13 +1,45 @@
 scalar Date
 type Esterilizacion {
-  T27Codigo: String
+  id: Int!
   T27Fecha: Date
-  T27Campo9: String
-  T27Campo24: String
-  T27Auditoria: String
-  T27Consecutivo: Int
-  CedulaPaciente: String
-  disponible: String
+  sede: String
+  motivo: String
+  tipo: String
+  esporas: String
+  dispMed: String
+  tipEmp: String
+  timeMin: Int
+  temper: Int
+  presion: Int
+  observ: String
+  cantidad: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+#type Esterilizacion {
+#  T27Codigo: String
+#  T27Campo9: String
+#  T27Campo24: String
+#  T27Auditoria: String
+#  T27Consecutivo: Int
+#  CedulaPaciente: String
+#  disponible: String
+#}
+
+input EsterilInput {
+  T27Fecha: Date
+  sede: String
+  motivo: String
+  tipo: String
+  esporas: String
+  dispMed: String
+  tipEmp: String
+  timeMin: Int
+  temper: Int
+  presion: Int
+  observ: String
+  cantidad: Int
 }
 
 input EsterilizacionFilter {
@@ -18,4 +50,8 @@ input EsterilizacionFilter {
 
 type Query {
   esterilizaciones(filter: EsterilizacionFilter): [Esterilizacion!]
+}
+
+type Mutation {
+  saveSterilizations(esteriliz: EsterilInput): Esterilizacion!
 }

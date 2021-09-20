@@ -96,7 +96,7 @@ db.odontologos = require('../models/odontologos')(
   sequelize,
   Sequelize,
 );
-db.esterilizacion = require('../models/esterilizaciones')(
+db.esterilizaciones = require('../models/esterilizaciones')(
   sequelize,
   Sequelize,
 );

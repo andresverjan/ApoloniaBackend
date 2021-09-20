@@ -1,5 +1,5 @@
 const db = require('../../models');
-const Esterilizaciones = db.esterilizacion;
+const Esterilizaciones = db.esterilizaciones;
 const helpers = require('../../helpers');
 
 module.exports = {
@@ -13,6 +13,16 @@ module.exports = {
         where.order = helpers.getOrderFromObject(args.order);
       }
       return (list = await Esterilizaciones.findAll(where));
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  saveSterilizations: async (args) => {
+    try {
+      return await Esterilizaciones.create(args.esteriliz).then((data) => {
+        console.log(data);
+      });
     } catch (error) {
       throw error;
     }
