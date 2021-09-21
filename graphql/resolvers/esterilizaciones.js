@@ -20,8 +20,13 @@ module.exports = {
         const offset = limit * pagina;
         where = { ...where, limit, offset };
       }
+
+      console.log("printing WHERE");
       console.log(where);
+      let list = await Esterilizaciones.findAll();
+      const totalRegistros = list.length;
       return (list = await Esterilizaciones.findAll(where));
+      //return (list = await Esterilizaciones.findAll(where));
     } catch (error) {
       throw error;
     }
