@@ -16,13 +16,11 @@ module.exports = {
         where.order = helpers.getOrderFromObject(args.order);
       }*/
       if (args.pagination) {
-        const { limite: limit, pagina } = args.pagination;
+        let { limite: limit, pagina } = args.pagination;
+        pagina =  pagina-1;
         const offset = limit * pagina;
         where = { ...where, limit, offset };
       }
-
-      console.log("printing WHERE");
-      console.log(where);
       let list = await Esterilizaciones.findAll();
       const totalRegistros = list.length;
       return (list = await Esterilizaciones.findAll(where));
