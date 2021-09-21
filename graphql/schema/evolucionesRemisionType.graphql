@@ -1,0 +1,53 @@
+type EvolucionesRemision {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!
+  especialistaIdDestino:String!
+  especialistaIdOrigen:String!
+  observaciones : String
+  createdAt: Date
+}
+
+input EvolucionesRemisionInput {
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!
+  especialistaIdDestino:String!
+  especialistaIdOrigen:String!
+  observaciones : String
+}
+
+input EvolucionesRemisionInputUpdate {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String!
+  especialistaIdDestino:String!
+  especialistaIdOrigen:String!
+  observaciones : String
+}
+
+input EvolucionesRemisionInputDelete {
+  id: String!
+}
+
+input Filter {
+  evolucionId: String!
+  pacienteId : String!
+  medicamentoId : String
+  especialistaIdDestino:String
+  especialistaIdOrigen:String
+}
+
+input OrderBy {
+  nombre: String
+}
+
+type Query {
+  evolucionesRemision(filter:Filter, order:OrderBy): [EvolucionesRemision!]
+}
+
+type Mutation {
+  createEvolucionesRemision(evolucionesRemision: EvolucionesRemisionInput): EvolucionesRemision
+}

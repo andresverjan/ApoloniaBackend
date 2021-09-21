@@ -1,10 +1,10 @@
 const db = require('../../models');
-const Pacientes = db.paciente;
+const Proveedores = db.proveedores;
 
 const helpers = require('../../helpers');
 
 module.exports = {
-  pacientes: async (args) => {
+  proveedores: async (args) => {
     try {
       let where = {};
 
@@ -19,14 +19,9 @@ module.exports = {
         );
       }
 
-      return (list = await Pacientes.findAll(where));
+      return (list = await Proveedores.findAll(where));
     } catch (error) {
       throw error;
     }
-  },
-  pacienteById: async (args) => {
-    const { id } = args;
-
-    return Pacientes.findOne({ where: { id } });
   },
 };

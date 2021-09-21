@@ -9,9 +9,9 @@ module.exports = {
       if (args.filter != null && args.filter != undefined) {
         where = helpers.getFilterFromObjectAllLike(args.filter);
       }
-      if (args.order != null && args.order != undefined) {
+      /*if (args.order != null && args.order != undefined) {
         where.order = helpers.getOrderFromObject(args.order);
-      }
+      }*/
       return (list = await Esterilizaciones.findAll(where));
     } catch (error) {
       throw error;
@@ -20,7 +20,21 @@ module.exports = {
 
   saveSterilizations: async (args) => {
     try {
-      return await Esterilizaciones.create(args.esteriliz).then((data) => {
+      const _resp = await Esterilizaciones.create(args.esteriliz).then((data) => {
+        console.log(data);
+        return data;
+      });
+      return _resp;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  updateEsterilizacion: async (args) => {
+    try {
+      return await Esterilizaciones.update(args.esterilizacion, {
+        where: { id: args.esterilizacion.id },
+      }).then((data) => {
         console.log(data);
       });
     } catch (error) {
