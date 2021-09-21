@@ -70,13 +70,18 @@ input EsterilizacionInputDelete {
   id: Int!
 }
 
+input Pagination {
+  pagina: Int!
+  limite: Int!
+}
+
 input EsterilizacionFilter {
   cedulaPaciente: String
   disponible: String
 }
 
 type Query {
-  esterilizaciones(filter: EsterilizacionFilter): [Esterilizacion!]
+  esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): [Esterilizacion!]
 }
 
 type Mutation {

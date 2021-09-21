@@ -12,6 +12,11 @@ module.exports = {
       /*if (args.order != null && args.order != undefined) {
         where.order = helpers.getOrderFromObject(args.order);
       }*/
+      if (args.pagination) {
+        const { limite: limit, pagina } = args.pagination;
+        const offset = limit * pagina;
+        where = { ...where, limit, offset };
+      }
       return (list = await Esterilizaciones.findAll(where));
     } catch (error) {
       throw error;
