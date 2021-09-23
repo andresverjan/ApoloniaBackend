@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+const moment = require('moment');
 const db = require('../../models');
 const Esterilizaciones = db.esterilizaciones;
 const helpers = require('../../helpers');
@@ -6,25 +8,37 @@ module.exports = {
   esterilizaciones: async (args) => {
     try {
       let where = {};
-
       if (args.filter) {
-        if (args.filter != null && args.filter != undefined) {
-          where = helpers.getFilterFromObjectAllLike(args.filter);
+        where = helpers.getFilterFromObject(args.filter);
+        if (
+          args.filter.fechend &&  args.filter.fechend != '' &&
+          args.filter.fechini &&  args.filter.fechini != ''
+        ) {
+          where.where.push({
+            ['T27Fecha']: {
+              [Op.between]: [
+                moment(args.filter.fechini).toDate(),
+                moment(args.filter.fechend).toDate(),
+              ],
+            },
+          });
         }
+        where.where = where.where.filter(
+          (e) =>
+            !(
+              e.hasOwnProperty('fechini') === true ||
+              e.hasOwnProperty('fechend') === true
+            ),
+        );
       }
-      /*if (args.order != null && args.order != undefined) {
-        where.order = helpers.getOrderFromObject(args.order);
-      }*/
+      
       if (args.pagination) {
         let { limite: limit, pagina } = args.pagination;
         pagina =  pagina-1;
         const offset = limit * pagina;
         where = { ...where, limit, offset };
       }
-      let list = await Esterilizaciones.findAll();
-      const totalRegistros = list.length;
-      return (list = await Esterilizaciones.findAll(where));
-      //return (list = await Esterilizaciones.findAll(where));
+      return await Esterilizaciones.findAll(where);
     } catch (error) {
       throw error;
     }

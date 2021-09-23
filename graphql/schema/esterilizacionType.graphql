@@ -76,8 +76,9 @@ input Pagination {
 }
 
 input EsterilizacionFilter {
-  cedulaPaciente: String
   disponible: String
+  fechini: Date
+  fechend: Date
 }
 
 type Query {
