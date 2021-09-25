@@ -82,12 +82,12 @@ input EsterilizacionFilter {
 }
 
 type Reponse {
-  esterilizacion: [Esterilizacion]!
+  list: [Esterilizacion]!
   totalRegistros: Int!
 }
 
 type Query {
-  esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): [Reponse!]
+  esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): Reponse
 }
 
 type Mutation {

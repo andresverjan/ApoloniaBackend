@@ -41,9 +41,15 @@ module.exports = {
         const offset = limit * pagina;
         where = { ...where, limit, offset };
       }      
-
-      list = await Esterilizaciones.findAll(where);
-      return { totalRegistros,  list };
+    
+      try {
+        list = await Esterilizaciones.findAll(where);
+        console.log("RESPONSE!!!");
+        console.log(list);
+        return { totalRegistros,  list };
+      } catch (error) {
+        throw error;
+      }
 
     } catch (error) {
       throw error;

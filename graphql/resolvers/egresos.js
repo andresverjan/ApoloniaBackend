@@ -33,7 +33,7 @@ module.exports = {
       );
     }
 
-    let egresos = await Egresos.findAll(were);
+    let egresos = await Egresos.findAll(where);
     const totalRegistros = egresos.length;
 
     if (args.pagination) {
