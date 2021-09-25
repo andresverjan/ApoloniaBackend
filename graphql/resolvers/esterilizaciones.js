@@ -32,13 +32,19 @@ module.exports = {
         );
       }
       
+      let list = await Esterilizaciones.findAll(where);
+      const totalRegistros = list.length;
+
       if (args.pagination) {
         let { limite: limit, pagina } = args.pagination;
         pagina =  pagina-1;
         const offset = limit * pagina;
         where = { ...where, limit, offset };
-      }
-      return await Esterilizaciones.findAll(where);
+      }      
+
+      list = await Esterilizaciones.findAll(where);
+      return { totalRegistros,  list };
+
     } catch (error) {
       throw error;
     }

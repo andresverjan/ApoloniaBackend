@@ -32,14 +32,16 @@ module.exports = {
           ),
       );
     }
+
+    let egresos = await Egresos.findAll(were);
+    const totalRegistros = egresos.length;
+
     if (args.pagination) {
       const { limite: limit, pagina } = args.pagination;
       const offset = limit * pagina;
       where = { ...where, limit, offset };
     }
     try {
-      let egresos = await Egresos.findAll();
-      const totalRegistros = egresos.length;
       egresos = await Egresos.findAll(where);
       return { totalRegistros, egresos };
     } catch (error) {

@@ -81,8 +81,13 @@ input EsterilizacionFilter {
   fechend: Date
 }
 
+type Reponse {
+  esterilizacion: [Esterilizacion]!
+  totalRegistros: Int!
+}
+
 type Query {
-  esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): [Esterilizacion!]
+  esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): [Reponse!]
 }
 
 type Mutation {
