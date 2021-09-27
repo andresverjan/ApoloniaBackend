@@ -1,37 +1,53 @@
 module.exports = (sequelize, Sequelize) => {
-  const Esterilizacion = sequelize.define(
-    'Esterilizacion',
+  const esterilizacion = sequelize.define(
+    'esterilizaciones',
     {
-      T27Codigo: {
-        type: Sequelize.STRING,
-      },
       T27Fecha: {
         type: Sequelize.DATE,
       },
-
-      T27Campo9: {
+      sede: {
         type: Sequelize.STRING,
       },
-
-      T27Campo24: {
+      motivo: {
         type: Sequelize.STRING,
       },
-      T27Auditoria: {
+      tipo: {
         type: Sequelize.STRING,
       },
-      T27Consecutivo: {
+      esporas: {
+        type: Sequelize.STRING,
+      },
+      dispMed: {
+        type: Sequelize.STRING,
+      },
+      tipEmp: {
+        type: Sequelize.STRING,
+      },
+      timeMin: {
         type: Sequelize.INTEGER,
       },
-      CedulaPaciente: {
+      temper: {
+        type: Sequelize.INTEGER,
+      },
+      presion: {
+        type: Sequelize.INTEGER,
+      },
+      observ: {
         type: Sequelize.STRING,
+      },
+      cantidad: {
+        type: Sequelize.INTEGER,
       },
       disponible: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
+      cedulaPaciente: {
+        type: Sequelize.INTEGER,
+      }
     },
     {
       freezeTableName: true,
     }
   );
-  return Esterilizacion;
+  return esterilizacion;
 };
