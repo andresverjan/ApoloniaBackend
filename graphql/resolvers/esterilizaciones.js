@@ -50,7 +50,6 @@ module.exports = {
       } catch (error) {
         throw error;
       }
-
     } catch (error) {
       throw error;
     }
