@@ -44,8 +44,6 @@ module.exports = {
     
       try {
         list = await Esterilizaciones.findAll(where);
-        console.log("RESPONSE!!!");
-        console.log(list);
         return { totalRegistros,  list };
       } catch (error) {
         throw error;
