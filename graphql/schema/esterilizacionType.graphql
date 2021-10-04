@@ -18,16 +18,6 @@ type Esterilizacion {
   updatedAt: Date
 }
 
-#type Esterilizacion {
-#  T27Codigo: String
-#  T27Campo9: String
-#  T27Campo24: String
-#  T27Auditoria: String
-#  T27Consecutivo: Int
-#  CedulaPaciente: String
-#  disponible: String
-#}
-
 input EsterilInput {
   T27Fecha: Date
   sede: String
@@ -43,27 +33,31 @@ input EsterilInput {
   cantidad: Int
 }
 
-input EsterilizacionInput {
-  T27Codigo: String
-  T27Fecha: Date!
-  T27Campo9: String!
-  T27Campo24: String!
-  T27Auditoria: String!
-  T27Consecutivo: Int!
-  CedulaPaciente: String!
-  disponible: String!
-}
+#input EsterilizacionInput {
+#  T27Codigo: String
+#  T27Fecha: Date!
+#  T27Campo9: String!
+#  T27Campo24: String!
+#  T27Auditoria: String!
+#  T27Consecutivo: Int!
+#  CedulaPaciente: String!
+#  disponible: String!
+#}
 
-input EsterilizacionInputUpdate {
+input EsterilizInputUpd {
   id: Int!
-  T27Codigo: String
   T27Fecha: Date
-  T27Campo9: String
-  T27Campo24: String
-  T27Auditoria: String
-  T27Consecutivo: Int
-  CedulaPaciente: String
-  disponible: String
+  sede: String
+  motivo: String
+  tipo: String
+  esporas: String
+  dispMed: String
+  tipEmp: String
+  timeMin: Int
+  temper: Int
+  presion: Int
+  observ: String
+  cantidad: Int
 }
 
 input EsterilizacionInputDelete {
@@ -91,10 +85,8 @@ type Query {
 }
 
 type Mutation {
-  saveSterilizations(esteriliz: EsterilInput): Esterilizacion!
-  createEsterilizacion(esterilizacion: EsterilizacionInput): Esterilizacion
-  updateEsterilizacion(
-    esterilizacion: EsterilizacionInputUpdate
-  ): Esterilizacion
+  saveSterilizations(esteriliz: EsterilInput): Esterilizacion
+#  createEsterilizacion(esterilizacion: EsterilizacionInput): Esterilizacion
+  updateSterilizations(esterilizacion: EsterilizInputUpd): Esterilizacion
   deleteEsterilizacion(esterilizacion: EsterilizacionInputDelete): String
 }
