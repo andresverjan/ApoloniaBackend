@@ -44,8 +44,6 @@ module.exports = {
     
       try {
         list = await Esterilizaciones.findAll(where);
-        console.log("RESPONSE!!!");
-        console.log(list);
         return { totalRegistros,  list };
       } catch (error) {
         throw error;
@@ -58,6 +56,18 @@ module.exports = {
   saveSterilizations: async (args) => {
     try {
       return await Esterilizaciones.create(args.esteriliz).then((data) => {
+        console.log(data);
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  updateSterilizations: async (args) => {
+    try {
+      return await Esterilizaciones.update(args.esterilizacion, {
+        where: { id: args.esterilizacion.id }
+      }).then((data) => {
         console.log(data);
       });
     } catch (error) {
