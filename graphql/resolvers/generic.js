@@ -89,6 +89,12 @@ module.exports = {
         .join();
       let values = campos
         .map((field) => {
+          if (field.tipoCampoId == 2 || field.tipoCampoId == 3) {
+            field.valor = helpers.convertDateTimeIsoToString(field.valor);
+          }
+          if (field.tipoCampoId == 4) {
+            field.valor = field.valor == "true" ? 1 : 0;
+          }
           if (field.nombre == "createdAt" || field.nombre == "updatedAt") {
             if (field.valor != "") {
               field.valor = helpers.convertDateTimeIsoToString(field.valor);
@@ -141,6 +147,9 @@ module.exports = {
     try {
       let columnas = campos
         .map((field) => {
+          if (field.tipoCampoId == 2 || field.tipoCampoId == 3) {
+            field.valor = helpers.convertDateTimeIsoToString(field.valor);
+          }
           if (field.tipoCampoId == 4) {
             field.valor = field.valor == "true" ? 1 : 0;
           }
