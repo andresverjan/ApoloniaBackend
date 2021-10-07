@@ -19,6 +19,22 @@ module.exports = {
       throw error;
     }
   },
+  etiquetasNewTest: async (args) => {
+    console.log("INGRESO A TUT¿ORIALES");
+    try {
+      let where = {};
+      if (args.filter != null && args.filter != undefined) {
+        where = helpers.getFilterFormObject(args.filter);
+      }
+      let sort = { name: "1" };
+      if (args.order != null && args.order != undefined) {
+        sort = helpers.getOrderFromObject(args.order);
+      }
+      return (list = await Etiquetas.findAll());
+    } catch (error) {
+      throw error;
+    }
+  },
   deleteEtiqueta: async (args) => {
     console.log("INGRESO A deleteEtiquetas");
     const { id } = args.etiqueta;
