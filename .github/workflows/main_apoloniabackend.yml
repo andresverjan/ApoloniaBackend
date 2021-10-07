@@ -53,3 +53,9 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4184CBE81D584B3FA8C1CC2662A47B0F }}
           package: .
+
+      - name: 'Start Backend'
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          npm start
