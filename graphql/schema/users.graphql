@@ -44,6 +44,7 @@ type Menu {
   url_menu: String
   icon: String
   applicationId: Int
+  padreId: Int
 }
 
 type Etiquetas {

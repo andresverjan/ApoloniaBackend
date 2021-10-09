@@ -33,6 +33,7 @@ input EtiquetaFilter {
 }
 type Query {
   etiquetas: [Etiqueta!]
+  etiquetasNewTest: [Etiqueta!]
 }
 
 type Mutation {

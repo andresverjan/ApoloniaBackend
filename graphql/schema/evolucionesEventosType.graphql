@@ -1,0 +1,44 @@
+type EvolucionesEventos {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  nombre : String
+  observaciones : String
+  createdAt: Date
+}
+
+input EvolucionesEventosInput {
+  evolucionId: String!
+  pacienteId : String!
+  nombre : String!
+  observaciones : String
+}
+
+input EvolucionesEventosInputUpdate {
+  id : String
+  evolucionId: String!
+  pacienteId : String!
+  nombre : String
+  observaciones : String
+}
+
+input EvolucionesEventosInputDelete {
+  id: String!
+}
+
+input Filter {
+  evolucionId: String!
+  pacienteId : String!
+}
+
+input OrderBy {
+  nombre: String
+}
+
+type Query {
+  evolucionesEventos(filter:Filter, order:OrderBy): [EvolucionesEventos!]
+}
+
+type Mutation {
+  createEvolucionesEventos(evolucionesEventos: EvolucionesEventosInput): EvolucionesEventos
+}

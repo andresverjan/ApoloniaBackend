@@ -89,8 +89,14 @@ module.exports = {
         .join();
       let values = campos
         .map((field) => {
+          if (field.tipoCampoId == 2 || field.tipoCampoId == 3) {
+            field.valor = helpers.convertDateTimeIsoToString(field.valor);
+          }
+          if (field.tipoCampoId == 4) {
+            field.valor = field.valor == "true" ? 1 : 0;
+          }
           if (field.nombre == "createdAt" || field.nombre == "updatedAt") {
-            if (field.valor != "") {
+            if (field.valor != "" && field.valor!= 'null') {
               field.valor = helpers.convertDateTimeIsoToString(field.valor);
             } else {
               let d = new Date();
@@ -141,11 +147,19 @@ module.exports = {
     try {
       let columnas = campos
         .map((field) => {
+          if (field.tipoCampoId == 2 || field.tipoCampoId == 3) {
+            field.valor = helpers.convertDateTimeIsoToString(field.valor);
+          }
           if (field.tipoCampoId == 4) {
             field.valor = field.valor == "true" ? 1 : 0;
           }
           if (field.nombre == "createdAt" || field.nombre == "updatedAt") {
-            field.valor = helpers.convertDateTimeIsoToString(field.valor);
+            if (field.valor != "" && field.valor!= 'null') {
+              field.valor = helpers.convertDateTimeIsoToString(field.valor);
+            } else {
+              let d = new Date();
+              field.valor = helpers.convertDateTimeIsoToString(d);
+            }
           }
           if (field.valor == "null" || field.valor == "NULL") {
             return "`" + field.nombre + "`" + "=" + field.valor;

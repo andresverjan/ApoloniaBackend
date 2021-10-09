@@ -119,7 +119,7 @@ type ReponseEgresos {
 }
 
 type Query {
-  egresos(
+  egresos( 
     filter: EgresosFilter
     pagination: EgresosPagination
   ): ReponseEgresos
