@@ -1,6 +1,6 @@
 scalar Date
 
-type EgresoProgramado {
+type EgresoProgramados {
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String! #PRIMARY KEY
@@ -34,7 +34,45 @@ type EgresoProgramado {
   T17CREE: Float
 }
 
+input EgresosProgramadosFilter {
+  T17Factura: String
+  T17FechaIni: Date
+  T17FechaFin: Date
+}
 input EgresosProgramadosInput {
+  T17Nivel1: String
+  T17Fecha: Date
+  T17Factura: String
+  T17Proveedor: String
+  T17Observacion: String
+  T17Valor: Int
+  T17Clasificacion: String
+  T17FormaPago: String
+  T17Banco: String
+  T17NroCheque: String
+  T17Soporte: String
+  T17Usuario: String
+  T17Anulado: String
+  T17MotivoAnulado: String
+  T17FechaAnulado: Int
+  T17UsuarioAnulado: String
+  T17ICA: Float
+  T17IVA: Float
+  T17RF: Float
+  T17Dctos: Float
+  T17Total: Float
+  T17FechaIni: Date
+  T17FechaFin: Date
+  T17NroResolucion: String
+  T17FacturaPrint: String
+  T17Cia: String
+  T17ConsecutivoEG: Int
+  T17ValorLetras: String
+  T17Girado: String
+  T17Item: String
+  T17CREE: Float
+}
+input EgresosProgramadosUpdate {
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String!
@@ -67,13 +105,34 @@ input EgresosProgramadosInput {
   T17Item: String
   T17CREE: Float
 }
+input EgresosProgramadosDelete {
+  T17Factura: String!
+}
+input EgresosProgramadosPagination {
+  pagina: Int!
+  limite: Int!
+}
+
+type ReponseEgresosProgramados {
+  egresosProgramados: [EgresoProgramados]!
+  totalRegistros: Int!
+}
 
 type Query {
-  egresosProgramados: [EgresoProgramado]!
+  egresosProgramados(
+    filter: EgresosProgramadosFilter
+    pagination: EgresosProgramadosPagination
+  ): ReponseEgresosProgramados
 }
 
 type Mutation {
   createEgresosProgramados(
     egresoProgramado: EgresosProgramadosInput
+  ): String!
+  updateEgresosProgramados(
+    egresoProgramado: EgresosProgramadosUpdate
+  ): String!
+  deleteEgresosProgramados(
+    egresoProgramado: EgresosProgramadosDelete
   ): String!
 }
