@@ -38,7 +38,7 @@ module.exports = {
 
     if (args.pagination) {
       const { limite: limit, pagina } = args.pagination;
-      const offset = limit * pagina;
+      const offset = limit * (pagina-1);
       where = { ...where, limit, offset };
     }
     try {
