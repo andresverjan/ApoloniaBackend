@@ -2,12 +2,12 @@ scalar Date
 type Esterilizacion {
   id: Int!
   T27Fecha: Date
-  sede: String
-  motivo: String
-  tipo: String
+  sede: Int
+  motivo: Int
+  tipo: Int
   esporas: String
-  dispMed: String
-  tipEmp: String
+  dispMed: Int
+  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
@@ -20,12 +20,12 @@ type Esterilizacion {
 
 input EsterilInput {
   T27Fecha: Date
-  sede: String
-  motivo: String
-  tipo: String
+  sede: Int
+  motivo: Int
+  tipo: Int
   esporas: String
-  dispMed: String
-  tipEmp: String
+  dispMed: Int
+  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
@@ -47,12 +47,12 @@ input EsterilInput {
 input EsterilizInputUpd {
   id: Int!
   T27Fecha: Date
-  sede: String
-  motivo: String
-  tipo: String
+  sede: Int
+  motivo: Int
+  tipo: Int
   esporas: String
-  dispMed: String
-  tipEmp: String
+  dispMed: Int
+  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
