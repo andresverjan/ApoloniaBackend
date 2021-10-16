@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       especialistaIdDestino: {
         type: Sequelize.INTEGER,
       },     
-      observaciones: {
+      Observaciones: {
         type: Sequelize.STRING,
       },
       pacienteId: {

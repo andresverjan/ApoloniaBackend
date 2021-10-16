@@ -69,6 +69,13 @@ type CitaHC {
 }
 
 
+
+input EventosAdversos {
+  nombre: String,
+  observaciones: String
+}
+
+
 input CitaHCInput  {
   id: Int
   Paciente:String
@@ -136,7 +143,23 @@ input CitaHCInput  {
   Campo9: String
   Campo10: String
   ConfirmadoAuditoria:String
-  FechaPte: Date  
+  FechaPte: Date 
+  eventosAdversos: [EventosAdversos],
+  remision: [Remision]
+  medicamentos: [Medicamentos]
+}
+
+input Medicamentos {
+  medicamentoId: Int  
+  observaciones: String
+}
+
+input Remision {
+  evolucionId: Int
+  pacienteId: Int
+  especialistaIdOrigen:Int
+  especialistaIdDestino: Int
+  Observaciones: String
 }
 
 input CitaFilter {
