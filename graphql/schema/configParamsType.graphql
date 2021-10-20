@@ -1,4 +1,5 @@
 type ConfigParam {
+  id: Int!
   NombreParametro: String!
   GrupoParametro: String!
   EmpresaID: String
@@ -6,6 +7,17 @@ type ConfigParam {
   Valor: String!
 }
 
+input UpdateConfigParam {
+  id: Int!
+  NombreParametro: String
+  GrupoParametro: String
+  EmpresaID: String
+  Observaciones: String
+  Valor: String
+}
 type Query {
   configByParamGroup(GrupoParametro: String!): [ConfigParam]
+}
+type Mutation {
+  updateParamGroup(configParam: UpdateConfigParam!): String
 }
