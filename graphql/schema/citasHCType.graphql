@@ -1,4 +1,5 @@
 type CitaHC {
+  id: Int
   Paciente:String
   IdOdontologo:String
   Fecha: String
@@ -67,6 +68,100 @@ type CitaHC {
   FechaPte: Date  
 }
 
+
+
+input EventosAdversos {
+  nombre: String,
+  observaciones: String
+}
+
+
+input CitaHCInput  {
+  id: Int
+  Paciente:String
+  IdOdontologo:String
+  Fecha: String
+  HorarioIni:Date
+  HorarioFin:Date
+  Actividad: String
+  Horario: String
+  Unidad: String
+  Confirmado: String
+  ConfirmadoPor:String
+  ConfirmadoHora: Date
+  Asistida:String
+  HoraLlegada: String
+  ActividadReal:String
+  IdOdontologoReal:String
+  FechaReal: Date
+  AtencionReal: Date
+  Retraso: Int
+  IdUsuario:String
+  Cedula:String
+  Control:String
+  ObservacionLab: String
+  Proveedor:String
+  Laboratorio: String
+  Valor: Int
+  FechaEntrega:Date
+  Fijar: String
+  ConfirmadoFecha:Date
+  AsignadoHora: Date
+  Diagnostico: String
+  CodDiagnostico: Int
+  Tratamiento: String
+  CodTratamiento:String
+  CodActividadReal: String
+  Consecutivo:Int
+  Cia: String
+  Observacion:String
+  Nuevo: String
+  AnunciadoPor:String
+  IdEspecialista:String
+  TextoRemision:String
+  AsignadoFecha: Date
+  Observacion2: String
+  ObservacionCita: String
+  Reprogramar: String
+  Estado: String
+  Desevolucionar: Int
+  DatosDesevolucion:String
+  UsuarioDesevolucion:String
+  Duracion: String
+  FechaSalida: String
+  HoraSalida: Date
+  Nombres: String
+  Apellidos:String
+  Campo1: String
+  Campo2: String
+  Campo3: String
+  Campo4: String
+  Campo5:String
+  Campo6:String
+  Campo7:String
+  Campo8: String 
+  Campo9: String
+  Campo10: String
+  ConfirmadoAuditoria:String
+  FechaPte: Date 
+  eventosAdversos: [EventosAdversos],
+  remision: [Remision]
+  medicamentos: [Medicamentos]
+}
+
+input Medicamentos {
+  medicamentoId: Int  
+  observaciones: String
+}
+
+input Remision {
+  evolucionId: Int
+  pacienteId: Int
+  especialistaIdOrigen:Int
+  especialistaIdDestino: Int
+  Observaciones: String
+}
+
 input CitaFilter {
   Cedula: String
   Paciente: String
@@ -80,5 +175,9 @@ input CitOrderBy {
 
 type Query {
   getCitasHC(filter: CitaFilter, order: CitOrderBy): [CitaHC!]
-  
+}
+
+type Mutation {
+  saveEvolucion(citaHC: CitaHCInput): CitaHC
+  updateEvolucion(citaHC: CitaHCInput): CitaHC
 }
