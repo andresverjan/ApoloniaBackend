@@ -15,4 +15,19 @@ module.exports = {
       throw error;
     }
   },
+  updateParamGroup: async (args) => {
+    const { configParam } = args;
+    try {
+      await ConfiguracionParametro.update(configParam, {
+        where: {
+          id: configParam.id,
+        },
+      }).then((data) => {
+        console.log(data);
+      });
+      return `Grupo Parámetro con id = ${configParam.id} --> ACTUALIZADO`;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
