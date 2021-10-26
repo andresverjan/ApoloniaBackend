@@ -68,8 +68,26 @@ input EgresosInput {
   T17CREE: Float
 }
 
-type Query {
+input EgresosFilter {
+  T17Factura: String
+  T17FechaIni: Date
+  T17FechaFin: Date
+}
+input EgresosPagination {
+  pagina: Int!
+  limite: Int!
+}
+
+type ReponseEgresos {
   egresos: [Egreso]!
+  totalRegistros: Int!
+}
+
+type Query {
+  egresos(
+    filter: EgresosFilter
+    pagination: EgresosPagination
+  ): ReponseEgresos
 }
 
 type Mutation {
