@@ -17,12 +17,9 @@ module.exports = (sequelize, Sequelize) => {
       esporas: {
         type: Sequelize.STRING,
       },
-      dispMed: {
+      /*dispMed: {
         type: Sequelize.STRING,
-      },
-      tipEmp: {
-        type: Sequelize.STRING,
-      },
+      },*/
       timeMin: {
         type: Sequelize.INTEGER,
       },
@@ -34,9 +31,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       observ: {
         type: Sequelize.STRING,
-      },
-      cantidad: {
-        type: Sequelize.INTEGER,
       },
       disponible: {
         type: Sequelize.BOOLEAN,
