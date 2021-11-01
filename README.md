@@ -1,4 +1,4 @@
-# mrMangoBackend
+# Apolonia Backend
 
 1. Install yarn.
 2. from terminal run yarn  it will update all the packages from package.son
