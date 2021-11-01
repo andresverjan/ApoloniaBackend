@@ -100,6 +100,10 @@ db.esterilizaciones = require('../models/esterilizaciones')(
   sequelize,
   Sequelize,
 );
+db.dispositivos = require('../models/dispositivos')(
+  sequelize,
+  Sequelize,
+);
 db.citashc = require('../models/citasHC')(
   sequelize,
   Sequelize,
@@ -126,7 +130,6 @@ db.campos.belongsTo(db.application, {
   as: 'application',
 });
 
-/*db.tipocampos.hasMany(db.campos, { as: "fields" });*/
 db.campos.belongsTo(db.tipocampos, {
   foreignKey: 'tipoCampoId',
   as: 'tipocampos',
@@ -206,8 +209,6 @@ db.egresos = require('../models/egresos')(
   Sequelize,
 );
 
-
-
 /***EVOLUCIONES MODELS*/
 db.evolucionesRemision = require('../models/evoluciones/remision')(
   sequelize,
@@ -234,10 +235,6 @@ db.evolucionesEsterilizacion = require('../models/evoluciones/esterilizacion')(
   Sequelize,
 );
 
-
-
-
-
 db.rol_permiso.belongsTo(db.rol, {
   as: 'roles',
   foreignKey: 'rol_id',
@@ -245,6 +242,47 @@ db.rol_permiso.belongsTo(db.rol, {
 db.rol_permiso.belongsTo(db.permiso, {
   as: 'permisos',
   foreignKey: 'permiso_id',
+});
+
+db.esterilizacionesDispositivos = require('../models/esterilizacionDispositivo')(
+  sequelize,
+  Sequelize,
+);
+
+db.tipoEmpaque = require('../models/tipoEmpaque')(
+  sequelize,
+  Sequelize,
+);
+
+db.esterilizaciones.belongsToMany(db.dispositivos, {
+  through: 'esterilizacionesDispositivos',
+  as: 'dispositivos',
+  foreignKey: 'esterilizacionId',
+  primaryKey: true,
+});
+
+db.dispositivos.belongsToMany(db.esterilizaciones, {
+  through: 'esterilizacionesDispositivos',
+  as: 'esterilizaciones',
+  foreignKey: 'dispositivoId',
+  primaryKey: true,
+});
+
+db.esterilizacionesDispositivos.belongsTo(db.esterilizaciones, {
+  as: 'esterilizaciones',
+  foreignKey: 'esterilizacionId',
+});
+
+db.esterilizacionesDispositivos.belongsTo(db.dispositivos, {
+  as: 'dispositivos',
+  foreignKey: 'dispositivoId',
+});
+
+db.tipoEmpaque.hasMany(db.esterilizacionesDispositivos, { as: 'esterilizacionesDispositivos' });
+db.esterilizacionesDispositivos.belongsTo(db.tipoEmpaque, {
+  foreignKey: 'tiposEmpaqueEsterilizacionId',
+  onDelete: 'CASCADE',
+  as: 'tipoEmpaque'
 });
 
 db.egresosProgramados =

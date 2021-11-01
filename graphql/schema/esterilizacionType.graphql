@@ -6,14 +6,23 @@ type Esterilizacion {
   motivo: Int
   tipo: Int
   esporas: String
-  dispMed: Int
-  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
   observ: String
-  cantidad: Int
   disponible: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+type Dispositivo {
+  id: Int!
+  codigo: String
+  descripcion: String
+  nombre: String
+  createdBy:  String
+  active:     String
+  EMPRESA_ID: Int
   createdAt: Date
   updatedAt: Date
 }
@@ -24,25 +33,11 @@ input EsterilInput {
   motivo: Int
   tipo: Int
   esporas: String
-  dispMed: Int
-  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
   observ: String
-  cantidad: Int
 }
-
-#input EsterilizacionInput {
-#  T27Codigo: String
-#  T27Fecha: Date!
-#  T27Campo9: String!
-#  T27Campo24: String!
-#  T27Auditoria: String!
-#  T27Consecutivo: Int!
-#  CedulaPaciente: String!
-#  disponible: String!
-#}
 
 input EsterilizInputUpd {
   id: Int!
@@ -51,13 +46,26 @@ input EsterilizInputUpd {
   motivo: Int
   tipo: Int
   esporas: String
-  dispMed: Int
-  tipEmp: Int
   timeMin: Int
   temper: Int
   presion: Int
   observ: String
+}
+
+input DeviceInput {
+  id: Int!
+  tipoEmpaque: Int
   cantidad: Int
+}
+
+input SterilizationDevices {
+  sterilization: EsterilInput
+  devices: [DeviceInput]
+}
+
+input SterilizationUpd {
+  sterilization: EsterilizInputUpd
+  devices: [DeviceInput]
 }
 
 input EsterilizacionInputDelete {
@@ -82,11 +90,12 @@ type Reponse {
 
 type Query {
   esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): Reponse
+  devicesByEsterilizationId(id:Int): [Dispositivo!]
+  dispositivos(esterilizacionId: Int): [Dispositivo!]
 }
 
 type Mutation {
-  saveSterilizations(esteriliz: EsterilInput): Esterilizacion
-#  createEsterilizacion(esterilizacion: EsterilizacionInput): Esterilizacion
-  updateSterilizations(esterilizacion: EsterilizInputUpd): Esterilizacion
+  saveSterilizations(esterilizacion: SterilizationDevices): Esterilizacion
+  updateSterilizations(esterilizacion: SterilizationUpd): Esterilizacion
   deleteEsterilizacion(esterilizacion: EsterilizacionInputDelete): String
 }
