@@ -6,6 +6,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      fechaPago: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       T17Fecha: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -60,6 +64,10 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       T17UsuarioAnulado: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      T17Usuario: {
         type: Sequelize.STRING,
         allowNull: true,
       },
