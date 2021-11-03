@@ -24,7 +24,9 @@ jobs:
       - name: npm install, build, and test
         run: |
           echo building now...
-          npm install
+          echo "INSTALL ...."
+          npm install --global yarn
+          yarn install
           pwd
 
       - name: Upload artifact for deployment job

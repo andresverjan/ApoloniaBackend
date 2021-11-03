@@ -1,5 +1,6 @@
 const Express = require('express');
 const ExpressGraphQL = require('express-graphql');
+const compression = require('compression');
 const types = require('./graphql/schema/index');
 const genericResolver = require('./graphql/resolvers');
 var cors = require('cors');
@@ -8,6 +9,7 @@ const { buildSchema } = require('graphql');
 const schema = buildSchema(types);
 var app = Express();
 app.use('*', cors());
+app.use(compression());
 app.use(
   '/api',
   ExpressGraphQL({
