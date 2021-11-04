@@ -1,0 +1,14 @@
+"""
+Type de Additions, representa una adicion del sistema;
+"""
+type Result {
+  count: Int
+}
+ 
+type Query {
+  """
+  Obtener el numero de pacientes del sistema.
+  """
+  getNumPacientes: Result!
+  getHappyBirthdayList: [Paciente]
+}
