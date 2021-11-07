@@ -1,6 +1,7 @@
 scalar Date
 
 type EgresoProgramados {
+  nombre : String
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String! #PRIMARY KEY
@@ -40,6 +41,7 @@ input EgresosProgramadosFilter {
   T17FechaFin: Date
 }
 input EgresosProgramadosInput {
+  nombre : String
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String
@@ -73,6 +75,7 @@ input EgresosProgramadosInput {
   T17CREE: Float
 }
 input EgresosProgramadosUpdate {
+  nombre : String
   T17Nivel1: String
   T17Fecha: Date
   T17Factura: String!

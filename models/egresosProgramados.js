@@ -2,6 +2,10 @@ module.exports = (sequelize, Sequelize) => {
   const Egresos = sequelize.define(
     'EgresosProgramados',
     {
+      nombre: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       T17Nivel1: {
         type: Sequelize.STRING,
         allowNull: true,
