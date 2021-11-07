@@ -58,17 +58,15 @@ module.exports = {
 
   devicesByEsterilizationId: async (args) => {
     try {
-        return devices = await Dispositivo.findAll({
-            attributes: ['id','nombre'],
-            distinct: 'id',
+        return devices = await EsterilizacionDispositivo.findAll({
+            attributes: ['dispositivoId', 'dispositivos.nombre', 'cantidad', 'tiposEmpaqueEsterilizacionId'],
+            distinct: 'dispositivoId',
             include: {
-                model: Esterilizaciones,
-                through: 'esterilizacionesDispositivos', 
-                distinct: 'id',
-                as: 'esterilizaciones',
-                where: {
-                    id: { [Op.eq]: args.id }
-                }
+                model: Dispositivo,
+                as: 'dispositivos'
+            },
+            where: {
+              esterilizacionId: { [Op.eq]: args.id }
             },
             raw: true
         })

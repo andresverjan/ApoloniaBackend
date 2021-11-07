@@ -27,6 +27,13 @@ type Dispositivo {
   updatedAt: Date
 }
 
+type DeviceSterilization {
+  dispositivoId: Int!
+  nombre: String
+  tiposEmpaqueEsterilizacionId: Int
+  cantidad: Int
+}
+
 input EsterilInput {
   T27Fecha: Date
   sede: Int
@@ -90,7 +97,7 @@ type Reponse {
 
 type Query {
   esterilizaciones(filter: EsterilizacionFilter, pagination: Pagination): Reponse
-  devicesByEsterilizationId(id:Int): [Dispositivo!]
+  devicesByEsterilizationId(id:Int): [DeviceSterilization!]
   dispositivos(esterilizacionId: Int): [Dispositivo!]
 }
 
