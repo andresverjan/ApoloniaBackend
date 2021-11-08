@@ -87,7 +87,7 @@ module.exports = {
                 esterilizacionId: _app.id,
                 dispositivoId:  field.id,
                 cantidad:       field.cantidad,
-                tiposEmpaqueEsterilizacionId:  field.tipoEmpaque,
+                tiposEmpaqueEsterilizacionId:  field.tiposEmpaqueEsterilizacionId,
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString()
             }
@@ -112,7 +112,7 @@ module.exports = {
           return {
               esterilizacionId: sterilization.id,
               dispositivoId:    field.id,
-              tiposEmpaqueEsterilizacionId:    field.tipoEmpaque,
+              tiposEmpaqueEsterilizacionId:    field.tiposEmpaqueEsterilizacionId,
               cantidad:         field.cantidad,
               createdAt:        new Date().toISOString(),
               updatedAt:        new Date().toISOString()

@@ -61,7 +61,7 @@ input EsterilizInputUpd {
 
 input DeviceInput {
   id: Int!
-  tipoEmpaque: Int
+  tiposEmpaqueEsterilizacionId: Int
   cantidad: Int
 }
 
