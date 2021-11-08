@@ -28,7 +28,7 @@ type Dispositivo {
 }
 
 type DeviceSterilization {
-  dispositivoId: Int!
+  id: Int!
   nombre: String
   tiposEmpaqueEsterilizacionId: Int
   cantidad: Int
