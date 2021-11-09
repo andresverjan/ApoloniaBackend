@@ -1,0 +1,30 @@
+scalar Date
+type Empresa {
+  codigo: String
+  nombre: String
+  descripcion: String
+  primaryColor: String
+  secondaryColor: String
+  accentColor: String
+  warnColor: String
+  urlLogo: String
+  createdBy: Int
+  active: Int
+}
+
+input EgresosInput {
+  codigo: String
+  nombre: String
+  descripcion: String
+  primaryColor: String
+  secondaryColor: String
+  accentColor: String
+  warnColor: String
+  urlLogo: String
+  createdBy: Int
+  active: Int
+}
+
+type Query {
+  getEmpresaById(id:Int!): Empresa
+}

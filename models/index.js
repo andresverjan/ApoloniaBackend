@@ -300,4 +300,9 @@ db.proveedores = require('../models/proveedores')(
   Sequelize,
 );
 
+db.empresa = require('../models/empresa')(
+  sequelize,
+  Sequelize,
+);
+
 module.exports = db;
