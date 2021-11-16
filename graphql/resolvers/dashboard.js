@@ -4,6 +4,20 @@ const moment = require('moment');
 const { Op } = require('sequelize');
 
 module.exports = {
+    getPacienteSexo: async () => {
+        try {
+            return await Pacientes.findAll({
+                attributes: ['Sexo', [db.sequelize.fn('COUNT', db.sequelize.col('*')), 'consult']],        
+                group: ['paciente.Sexo'],
+            }).then((data) => {
+                return data.map(pacientes => {
+                    return pacientes.dataValues;
+                });
+            })
+        } catch (error) {
+            throw error;
+        }
+    },
   getNumPacientes: async (args) => {
     console.log("argumentos ");
     console.log(args);
