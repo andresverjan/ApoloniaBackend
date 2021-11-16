@@ -4,11 +4,22 @@ Type de Additions, representa una adicion del sistema;
 type Result {
   count: Int
 }
- 
+type ConsultSex{
+  consult: Int
+  Sexo: String
+}
+
 type Query {
   """
   Obtener el numero de pacientes del sistema.
   """
   getNumPacientes: Result!
+  """
+  Obtener fecha de cumpleaños de pacientes del sistema.
+  """
   getHappyBirthdayList: [Paciente]
+  """
+  Obtener el numero de hombres y mujeres del sistema.
+  """
+  getPacienteSexo: [ConsultSex]
 }
