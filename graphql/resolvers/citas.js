@@ -1,7 +1,10 @@
+const { Op } = require('sequelize');
 const db = require('../../models');
+const helpers = require('../../helpers');
 const CitaTrazabilidad = db.citaTrazabilidad;
 const Citas = db.citas;
 const Status = db.status;
+const Paciente = db.paciente;
 
 module.exports = {
   createCita: async (args) => {
@@ -87,6 +90,57 @@ module.exports = {
       return (list = await Status.findAll());
     } catch (error) {
       throw error;
+    }
+  },
+
+  citasByToday: async (args) => {
+    try {
+      let where = {};
+      var date = new Date();
+      date.setHours(23,59,0,0);
+
+      if (args.filter) {
+        where = helpers.getFilterFromObject(args.filter);
+        if (args.filter.estado &&  args.filter.estado != 6) {
+          where.where.push({
+            ['status']: {
+              [Op.in]: [1, 2, 3, 4, 5]
+            },
+          });
+        }
+        else {
+          where.where.push({
+            ['status']: {
+              [Op.eq]: [args.filter.estado]
+            },
+          });
+        }
+
+        where.where = where.where.filter(
+          (e) =>  !(e.hasOwnProperty('estado') === true)
+        );
+      } else {
+        where = helpers.getFilterFromObject({status: 1});
+      }
+
+      where.where.push({
+        ['start']: { [Op.gte]: new Date() },
+        ['end']: { [Op.lte]: date}
+      });
+
+      return await Paciente.findAll({
+        attributes: ['id', 'Cedula', 'Apellidos', 'Nombres', 'Sexo', 'Mail'],
+        distinct: 'id',
+        include: {
+            model: Citas,
+            as: 'citas',
+            where: where.where
+        },
+        raw: true
+      })
+      
+    } catch (error) {
+        throw error;
     }
   },
 };

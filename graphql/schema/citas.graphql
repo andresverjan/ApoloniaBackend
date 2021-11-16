@@ -55,10 +55,15 @@ input CitaInputDelete {
   id: Int!
 }
 
+input StatusFilter {
+  estado: Int
+}
+
 type Query {
   getCitasByOdontologoId(odontologoId: Int!): [Cita!]
   getCita(cita: CitaInputDelete!): Cita!
   statusCitas: [Status!]
+  citasByToday(filter: StatusFilter): [Paciente!]
 }
 
 type Mutation {
