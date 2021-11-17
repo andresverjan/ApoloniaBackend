@@ -6,10 +6,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
       },
       start: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       end: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       odontologoId: {
         type: Sequelize.INTEGER,
