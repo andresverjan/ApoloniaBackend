@@ -8,8 +8,6 @@ const Status = db.status;
 
 module.exports = {
   getNumPacientes: async (args) => {
-    console.log("argumentos ");
-    console.log(args);
     try {
       const count = await Pacientes.count();
       return { count };
@@ -46,7 +44,6 @@ module.exports = {
 
   getNumCitasAtendidasToday: async () => {
     let time = moment().startOf('day').format('DD');
-    console.log(time);
     try {
       let objectFilter = {};
       objectFilter.where = [];
@@ -58,7 +55,6 @@ module.exports = {
         where: objectFilter.where,
         attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
       }).then((data) => {
-        console.log(data);
         let response = {
           ...data.dataValues
         };
@@ -75,7 +71,6 @@ module.exports = {
   */
   getNumCitasAtendidasThisMonth: async () => {
     let citasMonth = moment().startOf('month').format('MM');
-    console.log(citasMonth);
     try {
       let objectFilter = {};
       objectFilter.where = [];
