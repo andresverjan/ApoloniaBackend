@@ -45,7 +45,8 @@ module.exports = {
   },
 
   getNumCitasAtendidasToday: async () => {
-    let time = moment().startOf('day').format('dd');
+    let time = moment().startOf('day').format('DD');
+    console.log(time);
     try {
       let objectFilter = {};
       objectFilter.where = [];
@@ -53,12 +54,11 @@ module.exports = {
         'status': '2',
         [Op.and]: db.sequelize.where(db.sequelize.fn('DAY', db.sequelize.col('start')), time)
       };
-
-
-      return citaAte = await Citas.findAll({
+      return await Citas.findOne({
         where: objectFilter.where,
         attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
       }).then((data) => {
+        console.log(data);
         let response = {
           ...data.dataValues
         };
