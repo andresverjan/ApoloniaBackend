@@ -36,4 +36,10 @@ type Query {
   Obtener el numero de citas atentidas en el mes actual
   """
   getNumCitasAtendidasByMonth: countCitasMes
+
+
+  """
+  Obtener el numero de citas atentidas por mes en el año actual.
+  """
+  getNumCitasAtendidasbyMonthThisYear: countCitasMes
 }

@@ -87,4 +87,30 @@ module.exports = {
   },
 
 
+    /*
+    * Permite obtener la cantidad de citas que se atendieron cada mes en el año actual
+    */
+    getNumCitasAtendidasbyMonthThisYear: async () => {
+      let year = moment().startOf('year').format('YYYY');
+      try {
+        let objectFilter = {};
+        objectFilter.where = [];
+        objectFilter.where = {
+          'status' : '2'
+        };
+        return await Citas.findAll({
+          where:  objectFilter.where,
+          attributes: [[db.sequelize.fn('MONTH', db.sequelize.col('start')), 'MONTH'],[db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
+          group:  ['MONTH']
+        }).then((data) => {
+          let response = {
+            ...data.dataValues
+          };
+          return response;
+        });
+      } catch (error) {
+        throw error;
+      }
+    },
+
 };
