@@ -8,6 +8,10 @@ type ConsultSex{
   consult: Int
   Sexo: String
 }
+type CitasAtendidas{
+  status: Int
+  start: String!
+}
 
 type Query {
   """
@@ -22,4 +26,5 @@ type Query {
   Obtener el numero de hombres y mujeres del sistema.
   """
   getPacienteSexo: [ConsultSex]
+  getCitasAtendidas: [CitasAtendidas]
 }
