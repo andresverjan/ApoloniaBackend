@@ -13,6 +13,10 @@ type CitasAtendidas{
   start: String!
 }
 
+type countCitasMes{
+  count: Int
+}
+
 type Query {
   """
   Obtener el numero de pacientes del sistema.
@@ -27,4 +31,9 @@ type Query {
   """
   getPacienteSexo: [ConsultSex]
   getCitasAtendidas: [CitasAtendidas]
+  
+  """
+  Obtener el numero de citas atentidas en el mes actual
+  """
+  getNumCitasAtendidasByMonth: countCitasMes
 }
