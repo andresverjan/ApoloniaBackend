@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const moment = require('moment');
 const db = require('../../models');
 const helpers = require('../../helpers');
 const CitaTrazabilidad = db.citaTrazabilidad;
@@ -97,23 +98,71 @@ module.exports = {
     try {
       let where = {};
       var date = new Date();
-      date.setHours(23,59,0,0);
+      date.setHours(18,59,0,0);
+
+      var dati = new Date();
+      dati.setHours(0,0,0,0);
 
       if (args.filter) {
         where = helpers.getFilterFromObject(args.filter);
-        if (args.filter.estado &&  args.filter.estado != 6) {
+
+        if (args.filter.fechend &&  args.filter.fechend != '' &&
+            args.filter.fechini &&  args.filter.fechini != '' && 
+            ( args.filter.fechend > args.filter.fechini )) {
           where.where.push({
-            ['status']: {
-              [Op.in]: [1, 2, 3, 4, 5]
-            },
+            ['start']: { [Op.gte]: moment(args.filter.fechini).toDate() },
+            ['end']: { [Op.lte]: moment(args.filter.fechend).toDate() }
+          });
+          where.where = where.where.filter(
+            (e) =>
+              !(
+                e.hasOwnProperty('fechini') === true ||
+                e.hasOwnProperty('fechend') === true
+              ),
+          );
+        } else {
+          where.where.push({
+            ['start']: { [Op.gte]: dati }, //new Date()
+            ['end']: { [Op.lte]: date}
           });
         }
-        else {
-          where.where.push({
-            ['status']: {
-              [Op.eq]: [args.filter.estado]
-            },
-          });
+  
+        switch (args.filter.estado) {
+          case 0:
+              console.log("It is a Sunday.");
+              break;
+          case 1:
+              console.log("It is a Monday.");
+              where.where.push({
+                ['status']: {
+                  [Op.eq]: [args.filter.estado]
+                },
+              });
+              break;
+          case 3:
+              console.log("It is a Wednesday.");
+              where.where.push({
+                ['status']: {
+                  [Op.eq]: [args.filter.estado]
+                },
+              });
+              break;
+          case 6:
+              console.log("It is a Saturday.");
+              where.where.push({
+                ['status']: {
+                  [Op.eq]: [args.filter.estado]
+                },
+              });
+              break;
+          default:
+              console.log("No such day exists!");
+              where.where.push({
+                ['status']: {
+                  [Op.in]: [2, 4, 5]
+                },
+              });
+              break;
         }
 
         where.where = where.where.filter(
@@ -121,15 +170,18 @@ module.exports = {
         );
       } else {
         where = helpers.getFilterFromObject({status: 1});
+        date.setHours(23,59,0,0);
+        where.where.push({
+          ['start']: { [Op.gte]: new Date() }, //dati
+          ['end']: { [Op.lte]: date}
+        });
       }
 
-      where.where.push({
-        ['start']: { [Op.gte]: new Date() },
-        ['end']: { [Op.lte]: date}
-      });
-
       return await Paciente.findAll({
-        attributes: ['id', 'Cedula', 'Apellidos', 'Nombres', 'Sexo', 'Mail'],
+        attributes: [ 'paciente.TipoDoc', 'paciente.Cedula', 'paciente.Apellidos', 
+          'paciente.Nombres', 'paciente.Sexo', 'paciente.Mail', 'citas.start', 
+          'citas.end', 'citas.odontologoId'
+        ],
         distinct: 'id',
         include: {
             model: Citas,
@@ -138,7 +190,6 @@ module.exports = {
         },
         raw: true
       })
-      
     } catch (error) {
         throw error;
     }

@@ -1,4 +1,5 @@
 #TODO: actualizar el modelo
+scalar Date
 type Cita {
   id: Int!
   title: String!
@@ -21,6 +22,8 @@ type Status {
   textColor: String
   borderColor: String
 }
+
+
 
 input CitaInput {
   title: String!
@@ -57,13 +60,28 @@ input CitaInputDelete {
 
 input StatusFilter {
   estado: Int
+  fechini: Date
+  fechend: Date
+}
+
+type CitaPrg {
+  Cedula: String!
+  TipoDoc: String
+  Apellidos: String
+  Nombres: String
+  Sexo: String
+  Mail: String
+  EPS: String
+  start: Date
+  end: Date
+  odontologoId: Int
 }
 
 type Query {
   getCitasByOdontologoId(odontologoId: Int!): [Cita!]
   getCita(cita: CitaInputDelete!): Cita!
   statusCitas: [Status!]
-  citasByToday(filter: StatusFilter): [Paciente!]
+  citasByToday(filter: StatusFilter): [CitaPrg!]
 }
 
 type Mutation {
