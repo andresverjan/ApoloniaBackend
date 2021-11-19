@@ -167,7 +167,7 @@ module.exports = {
         where = helpers.getFilterFromObject({status: 1});
         date.setHours(23,59,0,0);
         where.where.push({
-          ['start']: { [Op.gte]: new Date() }, //dati
+          ['start']: { [Op.gte]: new Date() },
           ['end']: { [Op.lte]: date}
         });
       }
