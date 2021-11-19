@@ -122,17 +122,15 @@ module.exports = {
           );
         } else {
           where.where.push({
-            ['start']: { [Op.gte]: dati }, //new Date()
+            ['start']: { [Op.gte]: dati },
             ['end']: { [Op.lte]: date}
           });
         }
   
         switch (args.filter.estado) {
           case 0:
-              console.log("It is a Sunday.");
               break;
           case 1:
-              console.log("It is a Monday.");
               where.where.push({
                 ['status']: {
                   [Op.eq]: [args.filter.estado]
@@ -140,7 +138,6 @@ module.exports = {
               });
               break;
           case 3:
-              console.log("It is a Wednesday.");
               where.where.push({
                 ['status']: {
                   [Op.eq]: [args.filter.estado]
@@ -148,7 +145,6 @@ module.exports = {
               });
               break;
           case 6:
-              console.log("It is a Saturday.");
               where.where.push({
                 ['status']: {
                   [Op.eq]: [args.filter.estado]
@@ -156,7 +152,6 @@ module.exports = {
               });
               break;
           default:
-              console.log("No such day exists!");
               where.where.push({
                 ['status']: {
                   [Op.in]: [1, 2, 4, 5]
