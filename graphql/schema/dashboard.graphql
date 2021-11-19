@@ -4,11 +4,50 @@ Type de Additions, representa una adicion del sistema;
 type Result {
   count: Int
 }
- 
+type ConsultSex{
+  consult: Int
+  Sexo: String
+}
+type CitasAtendidas{
+  status: Int
+  start: String!
+}
+
+type countCitas{
+  count: Int
+}
+
+type countCitasByMonth{
+  count: Int
+  MONTH: Int
+}
+
 type Query {
   """
   Obtener el numero de pacientes del sistema.
   """
   getNumPacientes: Result!
+  """
+  Obtener fecha de cumpleaños de pacientes del sistema.
+  """
   getHappyBirthdayList: [Paciente]
+  """
+  Obtener el numero de hombres y mujeres del sistema.
+  """
+  getPacienteSexo: [ConsultSex]
+
+  """
+  Obtener el numero de citas atentidas el dia de hoy
+  """
+  getNumCitasAtendidasToday: countCitas
+  
+  """
+  Obtener el numero de citas atentidas en el mes actual
+  """
+  getNumCitasAtendidasThisMonth: countCitas
+
+  """
+  Obtener el numero de citas atentidas por mes en el año actual.
+  """
+  getNumCitasAtendidasbyMonthThisYear: [countCitasByMonth]
 }
