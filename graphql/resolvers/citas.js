@@ -159,7 +159,7 @@ module.exports = {
               console.log("No such day exists!");
               where.where.push({
                 ['status']: {
-                  [Op.in]: [2, 4, 5]
+                  [Op.in]: [1, 2, 4, 5]
                 },
               });
               break;
