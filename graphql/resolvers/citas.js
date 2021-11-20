@@ -137,6 +137,13 @@ module.exports = {
                 },
               });
               break;
+          case 2:
+              where.where.push({
+                ['status']: {
+                  [Op.eq]: [args.filter.estado]
+                },
+              });
+              break;
           case 3:
               where.where.push({
                 ['status']: {

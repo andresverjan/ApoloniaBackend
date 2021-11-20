@@ -44,32 +44,8 @@ module.exports = {
     }
   },
 
-  getNumCitasAtendidasToday: async () => {
-    let time = moment().startOf('day').format('DD');
-    console.log(time);
-    try {
-      let objectFilter = {};
-      objectFilter.where = [];
-      objectFilter.where = {
-        'status': '2',
-        [Op.and]: db.sequelize.where(db.sequelize.fn('DAY', db.sequelize.col('start')), time)
-      };
-      return await Citas.findOne({
-        where: objectFilter.where,
-        attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
-      }).then((data) => {
-        console.log(data);
-        let response = {
-          ...data.dataValues
-        };
-        return response;
-      });
-    } catch (error) {
-      throw error;
-    }
-  },
 
-
+  
   /*
    * Permite obtener la cantidad de citas que se atendieron en el mes actual.
   */
