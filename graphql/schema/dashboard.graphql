@@ -22,10 +22,6 @@ type countCitasByMonth{
   MONTH: Int
 }
 
-type statusFilter {
-  status: Int
-}
-
 type Query {
   """
   Obtener el numero de pacientes del sistema.
