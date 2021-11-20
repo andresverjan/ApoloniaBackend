@@ -106,7 +106,7 @@ module.exports = {
     try {
       let where = {};
       var date = new Date();
-      date.setHours(18,59,0,0);
+      date.setHours(23,59,0,0);
 
       var dati = new Date();
       dati.setHours(0,0,0,0);

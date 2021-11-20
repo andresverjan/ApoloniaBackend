@@ -23,6 +23,7 @@ module.exports = {
       let objectFilter = {};
       objectFilter.where = [];
       objectFilter.where = db.sequelize.where(db.sequelize.fn('MONTH', db.sequelize.col('FechaNacimiento')), startOfMonth);
+      objectFilter.order = [db.sequelize.fn('DAY', db.sequelize.col('FechaNacimiento'))];
       return list = await Pacientes.findAll(objectFilter);
     } catch (error) {
       throw error;
@@ -88,8 +89,9 @@ module.exports = {
       };
       return await Citas.findAll({
         where: objectFilter.where,
-        attributes: [[db.sequelize.fn('MONTH', db.sequelize.col('start')), 'MONTH'], [db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
-        group: ['MONTH']
+        attributes: [[db.sequelize.fn('MONTH', db.sequelize.col('start')), 'MONTH'], [db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],          
+        group: ['MONTH'],        
+        order: [ db.sequelize.literal('MONTH ASC')],
       }).then((data) => {
         return data.map(obj => {
           return obj.dataValues;
