@@ -10,9 +10,15 @@ const Paciente = db.paciente;
 module.exports = {
   createCita: async (args) => {
     console.log('INGRESO A CREATE CITAS');
+
     try {
-      return await Citas.create(args.cita).then((data) => {
-        CitaTrazabilidad.create(args.cita).then((data) => {
+      let cita = args.cita;
+      let l  = moment(cita.start).utcOffset(0,false).toDate().toString();
+      console.log (l);
+          
+      console.log(cita);
+      return await Citas.create(cita).then((data) => {
+        CitaTrazabilidad.create(cita).then((data) => {
           console.log('Creating Trazabilidad.');
           console.log(data);
         });
@@ -65,7 +71,9 @@ module.exports = {
   getCitasByOdontologoId: async (args) => {
     try {
       const id = args.odontologoId;
+      let order = helpers.getOrderFromObject({start: 'ASC'});
       const list = await Citas.findAll({
+        order,
         where: { odontologoId: id },
       });
 
