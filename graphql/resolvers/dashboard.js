@@ -16,8 +16,11 @@ module.exports = {
     let objectFilter = {};
     objectFilter.where = [];
     objectFilter.where = {
-      'componenteTipo': componenteTipo
+      'componenteTipo': componenteTipo,
+      'active': '1',
+      'visible': '1'  
     };
+    objectFilter.order = [ db.sequelize.literal('orden ASC')]
     try {
       return await ConfigDashboard.findAll(objectFilter);
     } catch (error) {
