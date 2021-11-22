@@ -1,3 +1,17 @@
+type DashBoard {
+      codigo: String
+      Nombre: String
+      descripcion:String
+      componenteTipo:Int
+      color1:String
+      color2:String
+      color3:String
+      color4:String
+      orden:Int
+      icono:String
+      visible:Int
+}
+
 """
 Type de Additions, representa una adicion del sistema;
 """
@@ -23,6 +37,8 @@ type countCitasByMonth{
 }
 
 type Query {
+getDashBoardItemsByTipo(componenteTipo:Int): [DashBoard]
+
   """
   Obtener el numero de pacientes del sistema.
   """

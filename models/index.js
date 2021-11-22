@@ -195,6 +195,12 @@ db.status = require('../models/citaEstado')(
   sequelize,
   Sequelize,
 );
+
+db.configDashboard =
+  require('../models/configDashboard')(
+    sequelize,
+    Sequelize,
+  );
 db.configuracionParametros =
   require('../models/configuracionParametro')(
     sequelize,

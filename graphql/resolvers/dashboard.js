@@ -5,8 +5,26 @@ const { Op } = require('sequelize');
 const paciente = require("../../models/paciente");
 const Citas = db.citas;
 const Status = db.status;
+const ConfigDashboard = db.configDashboard;
 
 module.exports = {
+ 
+  getDashBoardItemsByTipo: async (args) => {
+    console.log("argumentos  getDashBoardItemsByTipo");
+    console.log(args);
+    let componenteTipo = args.componenteTipo;
+    let objectFilter = {};
+    objectFilter.where = [];
+    objectFilter.where = {
+      'componenteTipo': componenteTipo
+    };
+    try {
+      return await ConfigDashboard.findAll(objectFilter);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getNumPacientes: async (args) => {
     console.log("argumentos ");
     console.log(args);
