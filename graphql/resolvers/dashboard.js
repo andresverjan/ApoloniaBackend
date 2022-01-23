@@ -5,8 +5,29 @@ const { Op } = require('sequelize');
 const paciente = require("../../models/paciente");
 const Citas = db.citas;
 const Status = db.status;
+const ConfigDashboard = db.configDashboard;
 
 module.exports = {
+ 
+  getDashBoardItemsByTipo: async (args) => {
+    console.log("argumentos  getDashBoardItemsByTipo");
+    console.log(args);
+    let componenteTipo = args.componenteTipo;
+    let objectFilter = {};
+    objectFilter.where = [];
+    objectFilter.where = {
+      'componenteTipo': componenteTipo,
+      'active': '1',
+      'visible': '1'  
+    };
+    objectFilter.order = [ db.sequelize.literal('orden ASC')]
+    try {
+      return await ConfigDashboard.findAll(objectFilter);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getNumPacientes: async (args) => {
     console.log("argumentos ");
     console.log(args);
@@ -23,6 +44,7 @@ module.exports = {
       let objectFilter = {};
       objectFilter.where = [];
       objectFilter.where = db.sequelize.where(db.sequelize.fn('MONTH', db.sequelize.col('FechaNacimiento')), startOfMonth);
+      objectFilter.order = [db.sequelize.fn('DAY', db.sequelize.col('FechaNacimiento'))];
       return list = await Pacientes.findAll(objectFilter);
     } catch (error) {
       throw error;
@@ -44,32 +66,8 @@ module.exports = {
     }
   },
 
-  getNumCitasAtendidasToday: async () => {
-    let time = moment().startOf('day').format('DD');
-    console.log(time);
-    try {
-      let objectFilter = {};
-      objectFilter.where = [];
-      objectFilter.where = {
-        'status': '2',
-        [Op.and]: db.sequelize.where(db.sequelize.fn('DAY', db.sequelize.col('start')), time)
-      };
-      return await Citas.findOne({
-        where: objectFilter.where,
-        attributes: [[db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
-      }).then((data) => {
-        console.log(data);
-        let response = {
-          ...data.dataValues
-        };
-        return response;
-      });
-    } catch (error) {
-      throw error;
-    }
-  },
 
-
+  
   /*
    * Permite obtener la cantidad de citas que se atendieron en el mes actual.
   */
@@ -112,8 +110,9 @@ module.exports = {
       };
       return await Citas.findAll({
         where: objectFilter.where,
-        attributes: [[db.sequelize.fn('MONTH', db.sequelize.col('start')), 'MONTH'], [db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],
-        group: ['MONTH']
+        attributes: [[db.sequelize.fn('MONTH', db.sequelize.col('start')), 'MONTH'], [db.sequelize.fn('COUNT', db.sequelize.col('*')), 'count']],          
+        group: ['MONTH'],        
+        order: [ db.sequelize.literal('MONTH ASC')],
       }).then((data) => {
         return data.map(obj => {
           return obj.dataValues;

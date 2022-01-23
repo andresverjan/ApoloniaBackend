@@ -3,8 +3,8 @@ scalar Date
 type Cita {
   id: Int!
   title: String!
-  start: String!
-  end: String
+  start: Date!
+  end: Date
   odontologoId: Int!
   horaIngreso: String
   horaSalida: String

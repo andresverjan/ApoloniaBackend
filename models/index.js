@@ -8,7 +8,8 @@ const sequelize = new Sequelize(
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
     operatorsAliases: false,
-
+    dialectOptions: dbConfig.dialectOptions,
+    timezone: dbConfig.timezone,
     pool: {
       max: dbConfig.pool.max,
       min: dbConfig.pool.min,
@@ -198,6 +199,12 @@ db.status = require('../models/citaEstado')(
   sequelize,
   Sequelize,
 );
+
+db.configDashboard =
+  require('../models/configDashboard')(
+    sequelize,
+    Sequelize,
+  );
 db.configuracionParametros =
   require('../models/configuracionParametro')(
     sequelize,
