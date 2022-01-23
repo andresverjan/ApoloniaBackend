@@ -112,6 +112,10 @@ db.citaTrazabilidad = require('../models/citaTrazabilidad')(
   sequelize,
   Sequelize,
 );
+db.recordatorios = require('../models/recordatorios')(
+  sequelize,
+  Sequelize,
+);
 
 db.tutorials.hasMany(db.comment, { as: 'comments' });
 db.comment.belongsTo(db.tutorials, {
