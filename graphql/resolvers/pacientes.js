@@ -29,12 +29,5 @@ module.exports = {
     const { id } = args;
 
     return Pacientes.findOne({ where: { id } });
-  },
-  recordatorios: async () => {
-    try {
-      return (list = await Recordatorio.findAll());
-    } catch (error) {
-      throw error;
-    }
-  },
+  }
 };
