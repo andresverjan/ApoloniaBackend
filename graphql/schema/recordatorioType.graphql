@@ -1,0 +1,18 @@
+scalar Date
+type Recordatorio {
+  id: Int!
+  NOMBRE: String
+  NOTA: String
+  DESCRIPCION: String
+  FECHAHORARECORDAR: Date
+  ACTIVO: String
+  REPETIRDIARIO: String
+  REPETIRMENSUAL: String
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+type Query {
+  recordatorios: [Recordatorio!]
+}

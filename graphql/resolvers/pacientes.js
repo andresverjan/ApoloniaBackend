@@ -1,5 +1,6 @@
 const db = require('../../models');
 const Pacientes = db.paciente;
+const Recordatorio = db.recordatorios;
 
 const helpers = require('../../helpers');
 
@@ -28,5 +29,5 @@ module.exports = {
     const { id } = args;
 
     return Pacientes.findOne({ where: { id } });
-  },
+  }
 };
