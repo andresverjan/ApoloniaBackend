@@ -13,6 +13,22 @@ type Recordatorio {
   updatedAt: Date
 }
 
+input RecordatorioFilter {
+  NOMBRE: String
+  fechini: Date
+  fechend: Date
+}
+
+input Pagination {
+  pagina: Int!
+  limite: Int!
+}
+
+type Reponse {
+  lista: [Recordatorio]!
+  totalRegistros: Int!
+}
+
 type Query {
-  recordatorios: [Recordatorio!]
+  recordatorios(filter: RecordatorioFilter, pagination: Pagination): Reponse
 }
