@@ -24,11 +24,11 @@ input Pagination {
   limite: Int!
 }
 
-type Reponse {
+type Response {
   lista: [Recordatorio]!
   totalRegistros: Int!
 }
 
 type Query {
-  recordatorios(filter: RecordatorioFilter, pagination: Pagination): Reponse
+  recordatorios(filter: RecordatorioFilter, pagination: Pagination): Response
 }
