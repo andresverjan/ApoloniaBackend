@@ -29,20 +29,6 @@ type Paciente {
   updatedAt: Date
 }
 
-type Recordatorio {
-  id: Int!
-  NOMBRE: String
-  NOTA: String
-  DESCRIPCION: String
-  FECHAHORARECORDAR: Date
-  ACTIVO: String
-  REPETIRDIARIO: String
-  REPETIRMENSUAL: String
-  EMPRESA_ID: Int
-  createdAt: Date
-  updatedAt: Date
-}
-
 input PacienteInput {
   Cedula: String!
   TipoDoc: String
@@ -107,5 +93,4 @@ input PacienteOrderBy {
 type Query {
   pacientes(filter: PacienteFilter, order: PacienteOrderBy): [Paciente!]
   pacienteById(id: Int): Paciente!
-  recordatorios: [Recordatorio!]
 }
