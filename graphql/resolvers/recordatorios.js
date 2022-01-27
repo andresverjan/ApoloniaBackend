@@ -55,9 +55,7 @@ module.exports = {
   },
   saveRecordatorios: async (args) => {
     try {
-      console.log(args);
       const _resp = await Recordatorio.create(args.recordatorio).then((data) => {
-        console.log(data);
         return data;
       });
       return _resp;
@@ -66,7 +64,6 @@ module.exports = {
     }
   },
   updateRecordatorios: async (args) => {
-      console.log('INGRESO A updateRecordatorios');
       try {
         return await Recordatorio.update(args.recordatorio, {
           where: { id: args.recordatorio.id },
@@ -78,7 +75,6 @@ module.exports = {
       }
   },
   deleteRecordatorios: async (args) => {
-    console.log('INGRESO A deleteEtiquetas');
     const { id } = args.recordatorio;
     try {
       Recordatorio.destroy({
