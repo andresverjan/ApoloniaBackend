@@ -13,6 +13,37 @@ type Recordatorio {
   updatedAt: Date
 }
 
+input RecordatorioInput {
+  NOMBRE: String
+  NOTA: String
+  DESCRIPCION: String
+  FECHAHORARECORDAR: Date
+  ACTIVO: String
+  REPETIRDIARIO: String
+  REPETIRMENSUAL: String
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+input RecordatorioInputUpdate {
+  id: Int!
+  NOMBRE: String
+  NOTA: String
+  DESCRIPCION: String
+  FECHAHORARECORDAR: Date
+  ACTIVO: String
+  REPETIRDIARIO: String
+  REPETIRMENSUAL: String
+  EMPRESA_ID: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+input  RecordatorioInputUpdateDelete{
+   id: Int!
+}
+
 input RecordatorioFilter {
   NOMBRE: String
   fechini: Date
@@ -31,4 +62,10 @@ type Response {
 
 type Query {
   recordatorios(filter: RecordatorioFilter, pagination: Pagination): Response
+}
+
+type Mutation {
+  saveRecordatorios(recordatorio: RecordatorioInput): Recordatorio
+  updateRecordatorios(recordatorio: RecordatorioInputUpdate): Recordatorio
+  deleteRecordatorios(recordatorio: RecordatorioInputUpdateDelete): String
 }

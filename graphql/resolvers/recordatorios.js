@@ -53,4 +53,51 @@ module.exports = {
       throw error;
     }
   },
+  saveRecordatorios: async (args) => {
+    try {
+      console.log(args);
+      const _resp = await Recordatorio.create(args.recordatorio).then((data) => {
+        console.log(data);
+        return data;
+      });
+      return _resp;
+    } catch (error) {
+      throw error;
+    }
+  },
+  updateRecordatorios: async (args) => {
+      console.log('INGRESO A updateRecordatorios');
+      try {
+        return await Recordatorio.update(args.recordatorio, {
+          where: { id: args.recordatorio.id },
+        }).then((data) => {
+          console.log(data);
+        });
+      } catch (error) {
+        throw error;
+      }
+  },
+  deleteRecordatorios: async (args) => {
+    console.log('INGRESO A deleteEtiquetas');
+    const { id } = args.recordatorio;
+    try {
+      Recordatorio.destroy({
+        where: { id: id },
+      })
+        .then((num) => {
+          if (num == 1) {
+            console.log('Deleted successfully!');
+          } else {
+            console.log('Problemas borrando cita');
+          }
+        })
+        .catch((err) => {
+          console.log('Could not delete Cita with id=' + id);
+        });
+      return 'success';
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
