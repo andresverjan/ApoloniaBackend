@@ -1,43 +1,55 @@
 scalar Date
 type Recordatorio {
   id: Int!
-  NOMBRE: String
-  NOTA: String
-  DESCRIPCION: String
-  FECHAHORARECORDAR: Date
-  ACTIVO: String
-  REPETIRDIARIO: String
-  REPETIRMENSUAL: String
-  EMPRESA_ID: Int
+  nombre: String
+  repetir: Boolean
+  observaciones: String
+  active: Boolean
+  fechaRecordatorio: Date
+  repetirCadaTimes: Int
+  repetirCada: Int
+  endsNever: Boolean
+  endsOn: Date
+  endsAfter: Int
+  createdBy: Int
   createdAt: Date
   updatedAt: Date
+  EMPRESA_ID: Int
 }
 
 input RecordatorioInput {
-  NOMBRE: String
-  NOTA: String
-  DESCRIPCION: String
-  FECHAHORARECORDAR: Date
-  ACTIVO: String
-  REPETIRDIARIO: String
-  REPETIRMENSUAL: String
-  EMPRESA_ID: Int
+  nombre: String
+  repetir: Boolean
+  observaciones: String
+  active: Boolean
+  fechaRecordatorio: Date
+  repetirCadaTimes: Int
+  repetirCada: Int
+  endsNever: Boolean
+  endsOn: Date
+  endsAfter: Int
+  createdBy: Int
   createdAt: Date
   updatedAt: Date
+  EMPRESA_ID: Int
 }
 
 input RecordatorioInputUpdate {
   id: Int!
-  NOMBRE: String
-  NOTA: String
-  DESCRIPCION: String
-  FECHAHORARECORDAR: Date
-  ACTIVO: String
-  REPETIRDIARIO: String
-  REPETIRMENSUAL: String
-  EMPRESA_ID: Int
+  nombre: String
+  repetir: Boolean
+  observaciones: String
+  active: Boolean
+  fechaRecordatorio: Date
+  repetirCadaTimes: Int
+  repetirCada: Int
+  endsNever: Boolean
+  endsOn: Date
+  endsAfter: Int
+  createdBy: Int
   createdAt: Date
   updatedAt: Date
+  EMPRESA_ID: Int
 }
 
 input  RecordatorioInputUpdateDelete{
@@ -45,7 +57,7 @@ input  RecordatorioInputUpdateDelete{
 }
 
 input RecordatorioFilter {
-  NOMBRE: String
+  nombre: String
   fechini: Date
   fechend: Date
 }

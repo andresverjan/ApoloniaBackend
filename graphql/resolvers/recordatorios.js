@@ -16,7 +16,7 @@ module.exports = {
           args.filter.fechini &&  args.filter.fechini != ''
         ) {
           where.where.push({
-            ['FECHAHORARECORDAR']: {
+            ['fechaRecordatorio']: {
               [Op.between]: [
                 moment(args.filter.fechini).toDate(),
                 moment(args.filter.fechend).toDate(),
