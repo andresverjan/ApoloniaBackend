@@ -2,32 +2,43 @@ module.exports = (sequelize, Sequelize) => {
     const Recordatorio = sequelize.define(
       'recordatorios',
       {
-        NOMBRE: {
+        nombre: {
           type: Sequelize.STRING,
           allowNull: true
         },
-        NOTA: {
+        repetir: {
+          type: Sequelize.BOOLEAN,
+          default: false,
+        },
+        observaciones: {
           type: Sequelize.STRING,
           allowNull: true
         },
-        DESCRIPCION: {
-          type: Sequelize.STRING,
-          allowNull: true
+        active: {
+          type: Sequelize.BOOLEAN,
+          default: false
         },
-        FECHAHORARECORDAR: {
-            type: Sequelize.DATE
+        fechaRecordatorio: {
+          type: Sequelize.DATE
         },
-        ACTIVO: {
-            type: Sequelize.STRING,
-            default: 'S',
+        repetirCadaTimes: {
+          type: Sequelize.INTEGER
         },
-        REPETIRDIARIO: {
-            type: Sequelize.STRING,
-            default: 'S',
+        repetirCada: {
+          type: Sequelize.INTEGER
         },
-        REPETIRMENSUAL: {
-            type: Sequelize.STRING,
-            default: 'S',
+        endsNever: {
+          type: Sequelize.BOOLEAN,
+          default: false,
+        },
+        endsOn: {
+          type: Sequelize.DATE
+        },
+        endsAfter: {
+          type: Sequelize.INTEGER
+        },
+        createdBy: {
+          type: Sequelize.INTEGER
         },
         EMPRESA_ID: {
             type: Sequelize.INTEGER,
