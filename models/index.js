@@ -117,6 +117,8 @@ db.recordatorios = require('../models/recordatorios')(
   sequelize,
   Sequelize,
 );
+db.stocks = require('../models/stocks')(sequelize, Sequelize);
+db.ventas = require('../models/ventas')(sequelize,Sequelize);
 
 db.tutorials.hasMany(db.comment, { as: 'comments' });
 db.comment.belongsTo(db.tutorials, {
@@ -150,17 +152,42 @@ db.rol_permiso = require('../models/rolpermiso')(
   Sequelize,
 );
 db.rol.belongsToMany(db.permiso, {
-  through: 'rol_permiso', //db.rol_permiso
+  through: 'rol_permiso',
   as: 'permisos',
   foreignKey: 'rol_id',
   primaryKey: true,
 });
 
 db.permiso.belongsToMany(db.rol, {
-  through: 'rol_permiso', //db.rol_permiso
+  through: 'rol_permiso',
   as: 'roles',
   foreignKey: 'permiso_id',
   primaryKey: true,
+});
+
+db.venta_stock = require('../models/ventaStock')(
+  sequelize,
+  Sequelize,
+);
+db.ventas.belongsToMany(db.stocks, {
+  through: 'venta_stock',
+  as: 'stocks',
+  foreignKey: 'stock_id',
+  primaryKey: true,
+});
+
+db.stocks.belongsToMany(db.ventas, {
+  through: 'venta_stock',
+  as: 'ventas',
+  foreignKey: 'venta_id',
+  primaryKey: true,
+});
+
+db.users.hasMany(db.ventas, { as: 'ventas' });
+db.ventas.belongsTo(db.users, {
+  foreignKey: 'usuario_id',
+  onUpdate: 'CASCADE',
+  as: 'usuarios',
 });
 
 db.odontologos.hasMany(db.citas, {
@@ -315,5 +342,14 @@ db.empresa = require('../models/empresa')(
   sequelize,
   Sequelize,
 );
+
+db.venta_stock.belongsTo(db.stocks, {
+  as: 'stocks',
+  foreignKey: 'stock_id'
+});
+db.venta_stock.belongsTo(db.ventas, {
+  as: 'ventas',
+  foreignKey: 'venta_id'
+});
 
 module.exports = db;

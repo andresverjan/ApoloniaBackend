@@ -1,0 +1,92 @@
+scalar Date
+type Venta {
+  id:           Int!
+  fecha_venta:  Date
+  forma_pago:   Int
+  usuario_id:   Int
+  punto_id:     Int
+  ciudad_id:    Int
+  iva:          Int
+  empresa_id:   Int
+  valor_total_venta: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+type Producto {
+  id: Int!
+  codigo:       String
+  nombre:       String
+  descripcion:  String
+  quantity:     Int
+  activo:       Boolean
+  eliminado:    Boolean
+  valor:        Int
+  iva:          Int
+  EMPRESA_ID:   Int
+  createdAt:    Date
+  updatedAt:    Date
+}
+
+input VentaInput {
+  fecha_venta:  Date
+  forma_pago:   Int
+  usuario_id:   Int
+  punto_id:     Int
+  ciudad_id:    Int
+  iva:          Int
+  empresa_id:   Int
+  valor_total_venta:    Int
+  createdAt:            Date
+  updatedAt:            Date
+}
+
+input VentaInputUpd {
+  id:           Int!
+  fecha_venta:  Date
+  forma_pago:   Int
+  usuario_id:   Int
+  punto_id:     Int
+  ciudad_id:    Int
+  iva:          Int
+  empresa_id:   Int
+  valor_total_venta: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+input VentaProductos {
+  venta: VentaInput
+  producto: [Producto]
+}
+
+input VentaUpd {
+  venta: VentaInputUpd
+  producto: [Producto]
+}
+
+input Pagination {
+  pagina: Int!
+  limite: Int!
+}
+
+input VentaFilter {
+  forma_pago: Int
+  fechini: Date
+  fechend: Date
+}
+
+type Reponse {
+  sales: [Venta]!
+  totalRegistros: Int!
+}
+
+type Query {
+  ventas(filter: VentaFilter, pagination: Pagination): Reponse
+  productosById(id:Int): [Producto!]
+}
+
+type Mutation {
+  saveVenta(venta: VentaProductos): Venta
+  updateVenta(venta: VentaUpd): Venta
+}

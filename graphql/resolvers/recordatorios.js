@@ -33,8 +33,8 @@ module.exports = {
         );
       }
 
-      let lista = await Recordatorio.findAll(where);
-      const totalRegistros = lista.length;
+      /*let lista = await Recordatorio.findAll(where);
+      const totalRegistros = lista.length;*/
 
       if (args.pagination) {
         let { limite: limit, pagina } = args.pagination;
@@ -44,7 +44,41 @@ module.exports = {
       }      
     
       try {
-        lista = await Recordatorio.findAll(where);
+        let lista = await Recordatorio.findAll(where);
+        const totalRegistros = lista.length;
+        return { totalRegistros,  lista };
+      } catch (error) {
+        throw error;
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+  recordatorioToday: async (args) => {
+    try {
+      let where = {};
+      
+      if (args.pagination) {
+        let { limite: limit, pagina } = args.pagination;
+        pagina =  pagina-1;
+        const offset = limit * pagina;
+        where = { ...where, limit, offset };
+      }      
+    
+      try {
+        console.log("--+--", moment.utc(new Date(), 'DD-MM-YYYY').tz('America/Bogota').format("YYYY-MM-DD HH:mm:ss"))
+        console.log("--//--", moment.utc(new Date(), 'DD-MM-YYYY').tz('America/Bogota').add(1, 'd').format("YYYY-MM-DD HH:mm:ss"))
+        let lista = await Recordatorio.findAll({
+          where: {
+            fechaRecordatorio: {
+              [Op.between]: [
+                moment.utc(new Date(), 'DD-MM-YYYY').tz('America/Bogota').format("YYYY-MM-DD HH:mm:ss"),
+                moment.utc(new Date(), 'DD-MM-YYYY').tz('America/Bogota').add(1, 'd').format("YYYY-MM-DD HH:mm:ss")
+              ]
+            }
+          }
+        });
+        const totalRegistros = lista.length;
         return { totalRegistros,  lista };
       } catch (error) {
         throw error;
