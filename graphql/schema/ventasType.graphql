@@ -28,6 +28,14 @@ type Producto {
   updatedAt:    Date
 }
 
+type ProductosVenta {
+  id: Int!
+  codigo: String
+  nombre: String
+  cantidad: Int
+  valor:    Int
+}
+
 input VentaInput {
   fecha_venta:  Date
   forma_pago:   Int
@@ -56,13 +64,13 @@ input VentaInputUpd {
 }
 
 input VentaProductos {
-  venta: VentaInput
-  producto: [Producto]
+  sale: VentaInput
+  products: [Producto]
 }
 
 input VentaUpd {
-  venta: VentaInputUpd
-  producto: [Producto]
+  sale: VentaInputUpd
+  products: [Producto]
 }
 
 input Pagination {
@@ -83,7 +91,7 @@ type Reponse {
 
 type Query {
   ventas(filter: VentaFilter, pagination: Pagination): Reponse
-  productosById(id:Int): [Producto!]
+  productosByVentaId(id:Int): [ProductosVenta!]
 }
 
 type Mutation {

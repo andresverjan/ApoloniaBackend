@@ -48,31 +48,20 @@ module.exports = {
         }
     },
 
-    productosById: async (args) => {
+    productosByVentaId: async (args) => {
         try {
-            return newFields = await Stocks.findAll({
-                attributes: ['id'],
-                distinct: 'id',
+            return newFields = await VentaStock.findAll({
+                attributes: ['stocks.id', 'stocks.codigo', 'stocks.nombre', 'cantidad', 'stocks.valor'],
+                distinct: 'stocks.id',
                 include: {
-                    model: Ventas,
-                    through: 'venta_stock', 
-                    distinct: 'id',
-                    as: 'ventas',
-                    where: {
-                        id: { [Op.eq]: args.venta_id }
-                    }
+                    model: Stocks,
+                    as: 'stocks'                    
+                },
+                where: {
+                    venta_id: { [Op.eq]: args.id }
                 },
                 raw: true
-            })
-            .then((goes) => goes.map((i) => i.id))
-            .then((ids) => Stocks.findAll({
-                attributes: ['id', 'nombre'],     
-                where: {
-                    id: { [Op.notIn]: ids }
-                }
-            })).catch(err => {
-                throw err;
-            });             
+            })             
         } catch (error) {
             throw error;
         }
@@ -80,12 +69,12 @@ module.exports = {
 
     saveVenta: async (args) => {
         try {
-          const { sale, product } = args.venta;
+          const { sale, products } = args.venta;
           let saleId = 0;
           
           await Ventas.create(sale).then((_app) => {
             saleId = _app.id;
-            let newFields = product.map(field => {
+            let newFields = products.map(field => {
                 return {
                     venta_id:   _app.id,
                     stock_id:   field.id,
@@ -109,8 +98,8 @@ module.exports = {
 
     updateVenta: async (args) => {
         try {
-            const { sale, product } = args.venta;
-            let newFields = product.map(field => {
+            const { sale, products } = args.venta;
+            let newFields = products.map(field => {
                 return {
                     venta_id:   _app.id,
                     stock_id:   field.id,
@@ -127,8 +116,9 @@ module.exports = {
                                     usuario_id: sale.usuario_id,
                                     punto_id: sale.punto_id,
                                     ciudad_id: sale.ciudad_id,
-                                    updatedAt: new Date().toISOString()}, 
-                                    { where: { id: sale.id }}).then(() => {
+                                    updatedAt: new Date().toISOString()
+                                }, 
+                                { where: { id: sale.id }}).then(() => {
 
                 VentaStock.destroy({ where : { venta_id: sale.id }}).then(() => {
                     VentaStock.bulkCreate(newFields, { validate: true }).then(() => {})
