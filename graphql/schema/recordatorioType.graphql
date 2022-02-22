@@ -74,6 +74,7 @@ type Response {
 
 type Query {
   recordatorios(filter: RecordatorioFilter, pagination: Pagination): Response
+  recordatorioToday(pagination: Pagination): Response
 }
 
 type Mutation {

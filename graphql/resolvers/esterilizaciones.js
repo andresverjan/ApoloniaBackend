@@ -35,8 +35,8 @@ module.exports = {
         );
       }
       
-      let list = await Esterilizaciones.findAll(where);
-      const totalRegistros = list.length;
+      /*let list = await Esterilizaciones.findAll(where);
+      const totalRegistros = list.length;*/
 
       if (args.pagination) {
         let { limite: limit, pagina } = args.pagination;
@@ -46,7 +46,8 @@ module.exports = {
       }      
     
       try {
-        list = await Esterilizaciones.findAll(where);
+        let list = await Esterilizaciones.findAll(where);
+        const totalRegistros = list.length;
         return { totalRegistros,  list };
       } catch (error) {
         throw error;
