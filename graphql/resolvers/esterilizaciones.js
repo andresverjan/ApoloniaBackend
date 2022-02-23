@@ -35,9 +35,6 @@ module.exports = {
         );
       }
       
-      /*let list = await Esterilizaciones.findAll(where);
-      const totalRegistros = list.length;*/
-
       if (args.pagination) {
         let { limite: limit, pagina } = args.pagination;
         pagina =  pagina-1;

@@ -63,14 +63,19 @@ input VentaInputUpd {
   updatedAt: Date
 }
 
+input ProductInput {
+  id: Int!
+  cantidad: Int
+}
+
 input VentaProductos {
   sale: VentaInput
-  products: [Producto]
+  products: [ProductInput]
 }
 
 input VentaUpd {
   sale: VentaInputUpd
-  products: [Producto]
+  products: [ProductInput]
 }
 
 input Pagination {
