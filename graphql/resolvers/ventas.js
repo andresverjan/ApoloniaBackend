@@ -137,5 +137,35 @@ module.exports = {
         } catch (error) {
             throw error;
         }
+    },
+
+    productos: async (args) => {
+        try {
+          return newFields = await Stocks.findAll({
+              attributes: ['id'],
+              distinct: 'id',
+              include: {
+                  model: Ventas,
+                  through: 'venta_stock', 
+                  distinct: 'id',
+                  as: 'ventas',
+                  where: {
+                      id: { [Op.eq]: args.ventaId }
+                  }
+              },
+              raw: true
+          })
+          .then((goes) => goes.map((i) => i.id))
+          .then((ids) => Stocks.findAll({
+              attributes: ['id', 'codigo', 'nombre'],     
+              where: {
+                  id: { [Op.notIn]: ids }
+              }
+          })).catch(err => {
+              throw err;
+          });             
+        } catch (error) {
+            throw error;
+        }
     }
 };
