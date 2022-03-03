@@ -9,6 +9,7 @@ type Venta {
   iva:          Int
   empresa_id:   Int
   valor_total_venta: Int
+  estado: String
   createdAt: Date
   updatedAt: Date
 }
@@ -84,7 +85,7 @@ input Pagination {
 }
 
 input VentaFilter {
-  forma_pago: Int
+  estado: String
   fechini: Date
   fechend: Date
 }
