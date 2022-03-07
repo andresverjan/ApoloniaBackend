@@ -26,6 +26,11 @@ input EgresosInput {
   accentColor: String
   warnColor: String
   urlLogo: String
+  NIT: String
+  direccion: String
+  telefono: String
+  celular: String
+  ciudad: String
   createdBy: Int
   active: Int
 }

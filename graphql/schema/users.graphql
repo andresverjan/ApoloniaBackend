@@ -28,6 +28,7 @@ type User {
   PERMISOS: [Menu]
   IDIOMA: Idioma
   ETIQUETAS: [Etiquetas]
+  CEDULA: String
 }
 
 type Idioma {
@@ -99,6 +100,7 @@ input UserInputUpdate {
   COUNTRY: String
   CODIGOINTERNACIONAL: String
   BANDERA: String
+  CEDULA: String
 }
 input IdiomInputUpdate {
   USUARIO_CORREO: String!
