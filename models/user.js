@@ -98,6 +98,9 @@ module.exports = (sequelize, Sequelize) => {
       MCA_BLOQUEADO_INTENTOS: {
         type: Sequelize.STRING,
       },
+      CEDULA: {
+        type: Sequelize.STRING,
+      },
     },
     {
       freezeTableName: true,
