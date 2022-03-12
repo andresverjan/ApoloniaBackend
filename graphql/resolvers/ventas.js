@@ -113,7 +113,7 @@ module.exports = {
                                     forma_pago: sale.forma_pago,
                                     valor_total_venta: sale.valor_total_venta,
                                     iva: sale.iva,
-                                    usuario_id: sale.usuario_id,
+//                                    usuarioId: sale.usuarioId,
                                     punto_id: sale.punto_id,
                                     ciudad_id: sale.ciudad_id,
                                     updatedAt: new Date().toISOString()

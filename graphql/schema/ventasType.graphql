@@ -3,7 +3,7 @@ type Venta {
   id:           Int!
   fecha_venta:  Date
   forma_pago:   Int
-  usuario_id:   Int
+  usuarioId:    Int
   punto_id:     Int
   ciudad_id:    Int
   iva:          Int
@@ -40,7 +40,7 @@ type ProductosVenta {
 input VentaInput {
   fecha_venta:  Date
   forma_pago:   Int
-  usuario_id:   Int
+#  usuarioId:    Int
   punto_id:     Int
   ciudad_id:    Int
   iva:          Int
@@ -54,7 +54,7 @@ input VentaInputUpd {
   id:           Int!
   fecha_venta:  Date
   forma_pago:   Int
-  usuario_id:   Int
+#  usuarioId:    Int
   punto_id:     Int
   ciudad_id:    Int
   iva:          Int

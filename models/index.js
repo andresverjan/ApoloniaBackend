@@ -185,7 +185,7 @@ db.stocks.belongsToMany(db.ventas, {
 
 db.users.hasMany(db.ventas, { as: 'ventas' });
 db.ventas.belongsTo(db.users, {
-  foreignKey: 'usuario_id',
+  foreignKey: 'usuarioId',
   onUpdate: 'CASCADE',
   as: 'usuarios',
 });
