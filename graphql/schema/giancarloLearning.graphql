@@ -1,0 +1,36 @@
+type giancarloLearning{
+    id : Int!
+    nombre : String!
+    apellido : String
+    cedula : String
+    email : String
+    fechaNacimiento : String
+    activo : Int
+    eliminado : Int
+    sexo : String
+    edad : Int
+    mascotaFavorita : String
+    createdAt : Date
+    updatedAt : Date
+}
+
+input giancarloLearninginput{
+    id : Int!
+    nombre : String!
+    apellido : String
+    cedula : String
+    email : String
+    fechaNacimiento : String
+    activo : Int
+    eliminado : Int
+    sexo : String
+    edad : Int
+    mascotaFavorita : String
+    createdAt : Date
+    updatedAt : Date
+}
+
+type Query{
+    giancarloLearning : [giancarloLearning!]
+}
+
