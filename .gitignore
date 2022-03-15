@@ -27,6 +27,9 @@ package-lock.json
 
 /node_modules
 /yarn-error.log
+.pnp.cjs
+.yarn/
+.yarnrc.yml
 
 /public/assets
 .byebug_history
