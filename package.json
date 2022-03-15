@@ -17,6 +17,7 @@
   "dependencies": {
     "@graphql-toolkit/file-loading": "^0.10.6",
     "@graphql-toolkit/schema-merging": "^0.10.6",
+    "@hubspot/api-client": "^6.0.1-beta3",
     "btoa": "^1.2.1",
     "btoa-atob": "^0.1.2",
     "compression": "^1.7.4",
@@ -32,6 +33,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.4.16",
+    "open": "^8.4.0",
     "request": "^2.88.2",
     "sequelize": "^6.3.5",
     "xoauth2": "^1.2.0"
