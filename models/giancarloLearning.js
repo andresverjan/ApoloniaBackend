@@ -1,5 +1,3 @@
-const sequelize = require("sequelize");
-
 module.exports = (sequelize, Sequelize) => {
     const giancarloLearning = sequelize.define("giancarloLearning",{
         nombre : {
@@ -18,27 +16,20 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         activo : {
-            type: Sequelize.INT
+            type: Sequelize.INTEGER
         },
         eliminado : {
-            type: Sequelize.INT
+            type: Sequelize.INTEGER
         },
         sexo : {
             type: Sequelize.STRING
         },
         edad : {
-            type: Sequelize.INT
+            type: Sequelize.INTEGER
         },
         mascotaFavorita : {
             type: Sequelize.STRING
-        },
-        createdAt : {
-            type: Sequelize.DATE
-        },
-        updatedAt : {
-            type: Sequelize.DATE
         }
-
 
     });
     return giancarloLearning;
