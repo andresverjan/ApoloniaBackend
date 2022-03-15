@@ -12,12 +12,11 @@ const hubspot = require('@hubspot/api-client')
 
 const developerApiKey = '9d2d376d-abb2-472f-9271-9d65fa9eeec1';
 const hubspotClient = new hubspot.Client({ apiKey: developerApiKey })
-const clientId = 'f066f238-b872-497a-907a-769f1f3404fd'
-const clientSecret= '3815edb2-4fc3-4c5c-9483-1ea81a1e14d7'
+const clientId = '9e946e8e-2c1e-4a13-bbc2-86016f8058a1'
+const clientSecret= '71f11326-41fa-4305-a726-89cc9a07f519'
 const redirectUri = 'http://localhost:3000/oauth-callback'
 
-const scope = "tickets crm.lists.read crm.objects.contacts.read crm.objects.custom.read crm.objects.custom.write crm.schemas.contacts.read crm.objects.deals.read";
-
+const scope = "oauth crm.objects.contacts.read crm.schemas.contacts.read crm.objects.deals.read crm.schemas.deals.read";
 
 const uri = hubspotClient.oauth.getAuthorizationUrl(clientId, redirectUri, scope)
 open(uri);
