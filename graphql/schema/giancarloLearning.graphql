@@ -1,5 +1,5 @@
 type giancarloLearning{
-    id : Int!
+    id : Int
     nombre : String!
     apellido : String
     cedula : String
@@ -14,8 +14,25 @@ type giancarloLearning{
     updatedAt : Date
 }
 
-input giancarloLearninginput{
-    id : Int
+input giancarloLearningInput{
+    nombre : String!
+    apellido : String
+    cedula : String
+    email : String
+    fechaNacimiento : String
+    activo : Int
+    eliminado : Int
+    sexo : String
+    edad : Int
+    mascotaFavorita : String
+}
+
+type giancarloLearningDelete{
+    id: String!
+}
+
+type giancarloLearningUpdate{
+    id : Int!
     nombre : String!
     apellido : String
     cedula : String
@@ -34,3 +51,8 @@ type Query{
     giancarloLearning : [giancarloLearning!]
 }
 
+type Mutation {
+    createGiancarloLearning(tablaObject: giancarloLearningInput): giancarloLearning
+    deleteGiancarloLearning(tablaObject: giancarloLearningDelete): giancarloLearning
+    updateGiancarloLearning(tablaObject: giancarloLearningUpdate): giancarloLearning
+}
