@@ -5,7 +5,7 @@ module.exports = {
     giancarloLearning: async (args) => {
         console.log("INGRESO TABLA");
         try{
-            return(lista = await Gl.findAll());
+            return(list = await Gl.findAll());
         }catch(error){
             throw error;
         }

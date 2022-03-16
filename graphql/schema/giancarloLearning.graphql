@@ -15,7 +15,7 @@ type giancarloLearning{
 }
 
 input giancarloLearninginput{
-    id : Int!
+    id : Int
     nombre : String!
     apellido : String
     cedula : String
