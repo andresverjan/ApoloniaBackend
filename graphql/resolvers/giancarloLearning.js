@@ -1,11 +1,11 @@
 const db = require("../../models");
-const Gl = db.giancarloLearning;
+const Gl = db.giancarloLearning; //GL es la tabla o modelo
 
 module.exports = {
     giancarloLearning: async (args) => {
         console.log("INGRESO TABLA");
         try{
-            return(list = await Gl.findAll());
+            return(list = await Gl.findAll()); 
         }catch(error){
             throw error;
         }
@@ -48,8 +48,8 @@ module.exports = {
     updateGiancarloLearning: async (args) => {
         console.log("INGRESO giancarloLearningUpdate");
         try {
-            return await Gl.update(args.tablaObject, {
-                where: {id: args.tablaObject.id},
+            return await Gl.update(args.tablaObject, { //Nueva data
+                where: {id: args.tablaObject.id}, //Donde el id es actualizado por el nuevo
             }).then((data) => {
                 console.log(data);
             })
