@@ -27,11 +27,11 @@ input giancarloLearningInput{
     mascotaFavorita : String
 }
 
-type giancarloLearningDelete{
-    id: String!
+input giancarloLearningDelete{
+    id: Int!
 }
 
-type giancarloLearningUpdate{
+input giancarloLearningUpdate{
     id : Int!
     nombre : String!
     apellido : String
