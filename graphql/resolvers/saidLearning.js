@@ -1,9 +1,10 @@
+const { response } = require("express");
 const db = require("../../models");
 const Said = db.saidLearning;
 const Op = db.Sequelize.Op;
 
 module.exports = {
-    said: async (args) => {
+  saidLearning: async (args) => {
       console.log("INGRESO A SAIDLEARNING");
       try {
         return (list = await Said.findAll());
@@ -13,31 +14,33 @@ module.exports = {
     },
     deleteSaid: async (args) => {
       console.log("INGRESO A deleteSaid");
-      const { id } = args.saidsito;
+      const { id } = args.saidLearning;
       try {
-        Said.destroy({
+        var result= await Said.destroy({
           where: { id: id },
         })
           .then((num) => {
             if (num == 1) {
               console.log("SaidLearning was deleted successfully!");
+              return true;
             } else {
               console.log(
                 `Cannot delete SaidLearning with id=${id}. Maybe Tutorial was not found!`
               );
+              return false;
             }
           })
           .catch((err) => {
             console.log("Could not delete Tutorial with id=" + id);
           });
-        return (list = await Said.findAll());
+        return result;
       } catch (error) {
         throw error;
       }
     },
     createSaid: async (args) => {
       try {
-        return await Said.create(args.saidsito).then((data) => {
+        return await Said.create(args.saidLearning).then((data) => {
           console.log(data);
         });
       } catch (error) {
@@ -47,8 +50,8 @@ module.exports = {
     updateSaid: async (args) => {
       console.log("INGRESO A updateSaid");
       try {
-        return await Said.update(args.saidsito, {
-          where: { id: args.saidsito.id },
+        return await Said.update(args.saidLearning, {
+          where: { id: args.saidLearning.id },
         }).then((data) => {
           console.log(data);
         });

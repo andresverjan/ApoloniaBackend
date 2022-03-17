@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Said = sequelize.define("saidLearning", {
+    const SAID = sequelize.define("saidLearning", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -31,6 +31,10 @@ module.exports = (sequelize, Sequelize) => {
       eliminado: {
         type: Sequelize.INTEGER
       }
-    });
-    return Said;
+    },
+    {
+      freezeTableName: true,
+    },
+    );
+    return SAID;
   };

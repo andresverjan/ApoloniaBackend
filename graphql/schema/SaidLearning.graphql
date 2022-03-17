@@ -1,4 +1,4 @@
-type Said {
+type SaidLearning {
   id : Int
   nombreAnimal : String!
   nombreDueno : String
@@ -9,11 +9,9 @@ type Said {
   fechaNacimiento : Date
   activo : Int
   eliminado : Int
-  createdAt : Date
-  updatedAt : Date
 }
 
-input SaidInput{
+input SaidLearningInput{
   nombreAnimal : String!
   nombreDueno : String
   Raza : String
@@ -25,11 +23,11 @@ input SaidInput{
   eliminado : Int
 }
 
-input SaidInputDelete {
+input SaidLearningInputDelete {
   id: Int!
 }
 
-input SaidInputUpdate{
+input SaidLearningInputUpdate{
   id : Int
   nombreAnimal : String!
   nombreDueno : String
@@ -40,16 +38,14 @@ input SaidInputUpdate{
   sectorVivienda : Int
   activo : Int
   eliminado : Int
-  createdAt : Date
-  updatedAt : Date
 }
 
 type Query {
-  said: [Said!]
+  saidLearning: [SaidLearning!]
 }
 
 type Mutation {
-  createSaid(saidsito: SaidInput): Said
-  deleteSaid(saidsito: SaidInputDelete): Said
-  updateSaid(saidsito: SaidInputUpdate): Said
+  createSaid(saidLearning: SaidLearningInput): SaidLearning
+  deleteSaid(saidLearning: SaidLearningInputDelete): Boolean!
+  updateSaid(saidLearning: SaidLearningInputUpdate): SaidLearning
 }
