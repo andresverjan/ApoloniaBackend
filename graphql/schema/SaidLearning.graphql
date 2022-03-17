@@ -6,7 +6,7 @@ type Said {
   NumIdentificacion : String
   email : String
   sectorVivienda : Int
-  fechaNacimiento : String
+  fechaNacimiento : Date
   activo : Int
   eliminado : Int
   createdAt : Date
@@ -20,26 +20,28 @@ input SaidInput{
   NumIdentificacion : String
   email : String
   sectorVivienda : Int
-  fechaNacimiento : String
-  activo : Int
-  eliminado : Int
-}
-
-input SaidInputUpdate{
-  id : Int!
-  nombreAnimal : String!
-  nombreDueno : String
-  Raza : String
-  NumIdentificacion : String
-  fechaNacimiento : String
-  email : String
-  sectorVivienda : Int
+  fechaNacimiento : Date
   activo : Int
   eliminado : Int
 }
 
 input SaidInputDelete {
-  id: String!
+  id: Int!
+}
+
+input SaidInputUpdate{
+  id : Int
+  nombreAnimal : String!
+  nombreDueno : String
+  Raza : String
+  NumIdentificacion : String
+  fechaNacimiento : Date
+  email : String
+  sectorVivienda : Int
+  activo : Int
+  eliminado : Int
+  createdAt : Date
+  updatedAt : Date
 }
 
 type Query {
