@@ -58,6 +58,10 @@ db.idiomas = require('../models/idioma')(
   sequelize,
   Sequelize,
 );
+db.saidLearning = require('../models/saidLearning')(
+  sequelize,
+  Sequelize,
+);
 db.iconos = require('../models/icono')(
   sequelize,
   Sequelize,
