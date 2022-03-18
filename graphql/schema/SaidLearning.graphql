@@ -40,8 +40,18 @@ input SaidLearningInputUpdate{
   eliminado : Int
 }
 
+input SaidLearningFilter {
+  id : Int
+  nombreAnimal : String
+}
+
+input SaidLearningOrderBy {
+  id : Int
+  nombreAnimal : String!  
+} 
+
 type Query {
-  saidLearning: [SaidLearning!]
+  saidLearning(filter: SaidLearningFilter, order: SaidLearningOrderBy): [SaidLearning!]
 }
 
 type Mutation {

@@ -2,12 +2,21 @@ const { response } = require("express");
 const db = require("../../models");
 const Said = db.saidLearning;
 const Op = db.Sequelize.Op;
+const helpers = require("../../helpers");
+
 
 module.exports = {
   saidLearning: async (args) => {
       console.log("INGRESO A SAIDLEARNING");
       try {
-        return (list = await Said.findAll());
+        let where = {};
+            if (args.filter != null && args.filter != undefined) {
+                where = helpers.getFilterFromObject(args.filter);
+            }
+            if (args.order != null && args.order != undefined) {
+                where.order = helpers.getOrderFromObject(args.order);
+            }
+        return (list = await Said.findAll(where));
       } catch (error) {
         throw error;
       }
