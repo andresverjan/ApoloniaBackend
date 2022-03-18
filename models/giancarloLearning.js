@@ -34,7 +34,9 @@ module.exports = (sequelize, Sequelize) => {
         mascotaFavorita : {
             type: Sequelize.STRING
         }
-
+    },{
+        timestamps: false,
+        freezeTableName: true,
     });
     return giancarloLearning;
 };
