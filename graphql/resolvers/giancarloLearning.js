@@ -1,11 +1,18 @@
 const db = require("../../models");
 const Gl = db.giancarloLearning; //GL es la tabla o modelo
-
+const helpers = require("../../helpers");
 module.exports = {
     giancarloLearning: async (args) => {
         console.log("INGRESO TABLA");
         try{
-            return(list = await Gl.findAll()); 
+            let where = {};
+            if(args.filter != null && args.filter != undefined){
+                where = helpers.getFilterFromObject(args.filter);
+            }
+            if (args.order != null && args.order != undefined) {
+                where.order = helpers.getOrderFromObject(args.order);
+            }
+            return(list = await Gl.findAll(where)); 
         }catch(error){
             throw error;
         }

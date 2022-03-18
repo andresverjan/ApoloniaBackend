@@ -10,8 +10,6 @@ type giancarloLearning{
     sexo : String
     edad : Int
     mascotaFavorita : String
-    createdAt : Date
-    updatedAt : Date
 }
 
 input giancarloLearningInput{
@@ -43,12 +41,19 @@ input giancarloLearningUpdate{
     sexo : String
     edad : Int
     mascotaFavorita : String
-    createdAt : Date
-    updatedAt : Date
+}
+
+input giancarloLearningFilter{
+    nombre: String
+}
+
+input giancarloLearningOrderBy{
+    nombre: String
+    apellido: String
 }
 
 type Query{
-    giancarloLearning : [giancarloLearning!]
+    giancarloLearning(filter: giancarloLearningFilter, order: giancarloLearningOrderBy) : [giancarloLearning!]
 }
 
 type Mutation {

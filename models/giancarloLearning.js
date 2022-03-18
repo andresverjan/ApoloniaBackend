@@ -35,8 +35,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         }
     },{
-        timestamps: false,
-        freezeTableName: true,
-    });
+        freezeTableName: true
+    },);
     return giancarloLearning;
 };
