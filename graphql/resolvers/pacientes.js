@@ -19,7 +19,6 @@ module.exports = {
           args.order,
         );
       }
-      console.log("R-T-R-T-R-T-R-T---->", where)
       return (list = await Pacientes.findAll(where));
     } catch (error) {
       throw error;
