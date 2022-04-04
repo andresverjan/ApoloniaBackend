@@ -15,7 +15,26 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
 
-
+      NIT: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      direccion: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      telefono: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      celular: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      ciudad: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
 
       primaryColor: {
         type: Sequelize.STRING,
