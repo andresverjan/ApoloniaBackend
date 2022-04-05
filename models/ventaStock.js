@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
         cantidad: {
           type: Sequelize.INTEGER,
           allowNull: false
+        },
+        sub_total: {
+          type: Sequelize.INTEGER,
+          allowNull: false
         }
     }, 
     {   

@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         iva: {
           type: Sequelize.INTEGER
         },
-        usuario_id: {
+        usuarioId: {
             type: Sequelize.INTEGER,
             allowNull: false
         },
