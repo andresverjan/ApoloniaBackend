@@ -6,15 +6,39 @@ const session = require('express-session');
 const opn = require('open');
 const app = express();
 
+
+const soap = require('soap');
+var url = 'https://37370.magayacloud.com/api/CSSoapService?wsdl';
+var args = {
+  user: 'innoboapiuser',
+  pass: 'InnoboAPI*2468'
+};
+let endpoint = 'https://37370.magayacloud.com/api/Invoke?Handler=CSSoapService';
+soap.createClient(url, function(err, client) {
+    client.StartSession(args, function(err, result) {
+        console.log(err);
+        console.log("RESULT!!!");
+        console.log(result);
+        console.log(result.return);
+        console.log(result.access_key);
+        if (result.return == 'no_error') {
+         console.log("AUTEHTICADO CORRECTAMENTE!!!");         
+        }else {
+          console.log("Problemas  Autenticando el usuario");
+        }
+    });
+}, endpoint);
+
+
 const PORT = 3000;
 
 const refreshTokenStore = {};
 const accessTokenCache = new NodeCache({ deleteOnExpire: true });
 
-if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
+/*if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
     throw new Error('Missing CLIENT_ID or CLIENT_SECRET environment variable.')
 }
-
+*/
 //===========================================================================//
 //  HUBSPOT APP CONFIGURATION
 //
